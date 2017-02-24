@@ -1,19 +1,21 @@
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import {
   Text,
   View,
   StyleSheet,
   TouchableWithoutFeedback,
-  TextInput
-} from "react-native";
-
-import * as firebase from "firebase";
+  TextInput,
+  ScrollView,
+  Dimensions
+} from 'react-native';
+import * as firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 
-import Database from "../firebase/database";
+import Database from '../firebase/database';
+import LeafItem from '../components/leaf-item';
+
 
 export default class LeafList extends Component {
-
   constructor(props) {
     super(props);
 
@@ -21,73 +23,73 @@ export default class LeafList extends Component {
       uid: "",
       mobile: "",
       mobileForm: "",
-      leafs: {},
+      leafs: [{
+        id: 'prunus-selix',
+        name: 'PRUNUS HOVNIS',
+        photos: ['https://cdn.pixabay.com/photo/2015/08/27/13/59/leaf-910532_960_720.jpg']
+      },
+        {
+          id: 'hovnus-selix',
+          name: 'HOVNUS HOVNIS',
+          photos: ['https://cdn.pixabay.com/photo/2015/08/27/13/59/leaf-910532_960_720.jpg']
+        }],
       loading: false,
-      loaded: true
+      loaded: false
     };
-
-    this.logout = this.logout.bind(this);
-    this.saveMobile = this.saveMobile.bind(this);
-  }
-
-  async logout() {
-    try {
-      await firebase.auth().signOut();
-
-      this.props.navigator.push({
-        name: "Login"
-      })
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   async componentDidMount() {
     try {
+      this.setState({loading: true});
       let user = await firebase.auth().currentUser;
       Database.getUserLeafList(user.uid, (leafs) => {
         console.log(leafs);
-
         this.setState({
-          leafs: leafs
+          leafs: leafs,
+          loading: false,
+          loaded: true
         });
       });
-
     } catch (error) {
       console.log(error);
     }
-
   }
 
-  saveMobile() {
-    if (this.state.uid && this.state.mobileForm) {
-      Database.setUserMobile(this.state.uid, this.state.mobileForm);
-    }
-  }
-
-  goToDetail(leaf) {
-    Actions.detail({ leaf: leaf });
+  static goToDetail(leaf) {
+    Actions.detail({leaf: leaf});
   }
 
   render() {
     let leafItems = Object.keys(this.state.leafs).map((key) => {
       if (this.state.leafs) {
         let leaf = this.state.leafs[key];
-        return <Text key={key} onPress={() => { this.goToDetail(leaf) }}>{leaf.name}</Text>;
+        return (
+          <LeafItem key={leaf.name} data={leaf} onPress={() => {
+            this.goToDetail(leaf)
+          }}/>
+        );
       }
     });
 
     return (
-      <TouchableWithoutFeedback>
-        <View style={styles.container}>
-          {leafItems}
+      <ScrollView style={styles.container}>
+        { this.state.loading &&
+        <Text style={styles.textLoading}>LOADING...</Text>
+        }
 
-          <Text style={styles.textLoading}>LOADING...</Text>
-
+        { !this.state.loading && this.state.loaded && this.state.leafs.length === 0 &&
+        <View>
           <Text style={styles.textBlank}>CAMERA LOGO / BUTTON</Text>
           <Text style={styles.textBlank}>ANALYZE YOUR FIRST LEAF</Text>
         </View>
-      </TouchableWithoutFeedback>
+        }
+        {
+          /*this.state.loaded && */this.state.leafs.length > 0 &&
+        <View style={styles.itemsWrapper}>
+          {leafItems}
+        </View>
+        }
+      </ScrollView>
     );
   }
 }
@@ -95,7 +97,7 @@ export default class LeafList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 150,
+    paddingTop: 80,
     backgroundColor: '#070709'
   },
 
@@ -107,5 +109,13 @@ const styles = StyleSheet.create({
   textBlank: {
     color: '#fff',
     textAlign: 'center'
-  }
+  },
+
+  itemsWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    marginHorizontal: 10
+  },
+
+  leafItem: {}
 });

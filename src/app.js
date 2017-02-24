@@ -50,14 +50,14 @@ export default class LeafMgrApp extends Component {
         <Router>
           <Scene key="root">
 
-            <Scene key="auth" hideNavBar initial={this.state.initialView === 'auth'}>
+            <Scene key="auth" hideNavBar initial={false}>
               <Scene key="login" component={Login} title="Login" initial={true}/>
             </Scene>
 
             {/*this.state.initialView === 'account'*/}
             <Scene
               key="account"
-              initial={this.state.initialView === 'account'}
+              initial={true}
               tabs={true}
               tabBarStyle={styles.tabBarStyle}>
 

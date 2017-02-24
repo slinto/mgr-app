@@ -8,15 +8,12 @@ import {
   ScrollView,
   NativeModules
 } from 'react-native';
-
 const RNAppInfo = NativeModules.RNAppInfo;
-
 import * as firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
-import {Button} from 'react-native-elements';
+import {Button, ListItem} from 'react-native-elements';
 
 import Database from '../firebase/database';
-import {ListItem} from 'react-native-elements'
 
 export default class Profile extends Component {
 
@@ -46,10 +43,8 @@ export default class Profile extends Component {
 
   async componentDidMount() {
     try {
-      // Get User Credentials
       let user = await firebase.auth().currentUser;
 
-      // Listen for Mobile Changes
       Database.listenUserMobile(user.uid, (mobileNumber) => {
         this.setState({
           mobile: mobileNumber,
@@ -64,11 +59,9 @@ export default class Profile extends Component {
     } catch (error) {
       console.log(error);
     }
-
   }
 
   saveMobile() {
-    // Set Mobile
     if (this.state.uid && this.state.mobileForm) {
       Database.setUserMobile(this.state.uid, this.state.mobileForm);
     }
@@ -145,7 +138,7 @@ export default class Profile extends Component {
             placeholder="Mobile Number"
           />
 
-          <Button onPress={this.saveMobile} title="save" />
+          <Button onPress={this.saveMobile} title="save"/>
         </View>
 
       </ScrollView>
