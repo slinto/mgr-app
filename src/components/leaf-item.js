@@ -46,14 +46,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)'
+    backgroundColor: 'rgba(0, 0, 0, 0.4)'
   },
   heading: {
     color: '#fff',
     textAlign: 'center',
     fontWeight: '700',
-    fontSize: 18,
-    marginHorizontal: 10
+    fontSize: 19,
+    marginHorizontal: 10,
+    marginBottom: 5
   },
   text: {
     color: '#fff',

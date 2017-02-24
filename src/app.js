@@ -11,13 +11,13 @@ import {
 import * as firebase from "firebase";
 import {Scene, Router} from 'react-native-router-flux';
 
+import Firebase from "./firebase/firebase";
+import TabIcon from './components/tab-icon';
 import Profile from "./views/profile";
 import LeafList from "./views/leaf-list";
 import LeafDetail from "./views/leaf-detail";
 import Login from "./views/login";
-import Firebase from "./firebase/firebase";
-
-import TabIcon from './components/tab-icon';
+import Form from "./views/form";
 
 export default class LeafMgrApp extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export default class LeafMgrApp extends Component {
   render() {
     if (this.state.userLoaded) {
       return (
-        <Router>
+        <Router style={{ backgroundColor: '#070709' }}>
           <Scene key="root">
 
             <Scene key="auth" hideNavBar initial={false}>
@@ -77,13 +77,30 @@ export default class LeafMgrApp extends Component {
 
               <Scene
                 key="profile"
-                component={Profile}
                 title="Profile"
                 icon={TabIcon}
                 navigationBarStyle={styles.navBar}
                 titleStyle={styles.navText}
                 backButtonTextStyle={styles.navText}
-                rightButtonStyle={styles.navText}/>
+                barButtonIconStyle={styles.tintColor}
+                rightButtonStyle={styles.navText}>
+
+                <Scene
+                  key="profile_detail"
+                  component={Profile}
+                  title="Profile"/>
+
+                <Scene
+                  key="feedback"
+                  component={Form}
+                  title="Leave a feedback"/>
+
+                <Scene
+                  key="bug"
+                  component={Form}
+                  title="Report a bug"/>
+
+              </Scene>
             </Scene>
 
           </Scene>
@@ -100,7 +117,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#F5FCFF',
+      backgroundColor: '#070709',
     },
 
     welcome: {

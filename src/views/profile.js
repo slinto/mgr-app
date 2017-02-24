@@ -30,17 +30,6 @@ export default class Profile extends Component {
     this.saveMobile = this.saveMobile.bind(this);
   }
 
-  async logout() {
-    try {
-      await firebase.auth().signOut();
-
-      Actions.auth();
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async componentDidMount() {
     try {
       let user = await firebase.auth().currentUser;
@@ -59,6 +48,23 @@ export default class Profile extends Component {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async logout() {
+    try {
+      await firebase.auth().signOut();
+      Actions.auth();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  goToFeedback() {
+    Actions.feedback({ msg: 'Write your message here...' });
+  }
+
+  goToBug() {
+    Actions.bug({ msg: 'Write your bug here...' });
   }
 
   saveMobile() {
@@ -102,12 +108,12 @@ export default class Profile extends Component {
           rightTitleStyle={styles.listItemRightTitle}
         />
 
-
         <ListItem
           title='Leave a feedback'
           containerStyle={[styles.listItem, styles.marginTop]}
           titleStyle={styles.listItemTitleGreen}
           chevronColor='#c2f3d3'
+          onPress={this.goToFeedback}
         />
 
         <ListItem
@@ -115,6 +121,7 @@ export default class Profile extends Component {
           containerStyle={styles.listItem}
           titleStyle={styles.listItemTitleGreen}
           chevronColor='#c2f3d3'
+          onPress={this.goToBug}
         />
 
         <ListItem
