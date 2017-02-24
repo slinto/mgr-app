@@ -6,6 +6,9 @@ import {
 } from 'react-native';
 import React, {Component} from 'react';
 
+import Colors from '../config/colors';
+
+
 export default class Form extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +25,7 @@ export default class Form extends Component {
           multiline={true}
           editable={true}
           placeholder={this.props.msg}
-          placeholderTextColor='#a7a5b0'
+          placeholderTextColor={Colors.greySub}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}/>
       </ScrollView>
@@ -33,12 +36,12 @@ export default class Form extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 90,
-    backgroundColor: '#070709'
+    backgroundColor: Colors.darkMain
   },
   textInput: {
     height: 200,
-    backgroundColor: '#15141a',
-    color: '#fff',
+    backgroundColor: Colors.darkSub,
+    color: Colors.whiteMain,
     fontSize: 15,
     padding: 15
   }

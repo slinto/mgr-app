@@ -14,6 +14,8 @@ import {Actions} from 'react-native-router-flux';
 import {Button, ListItem} from 'react-native-elements';
 
 import Database from '../firebase/database';
+import Colors from '../config/colors';
+
 
 export default class Profile extends Component {
 
@@ -112,7 +114,7 @@ export default class Profile extends Component {
           title='Leave a feedback'
           containerStyle={[styles.listItem, styles.marginTop]}
           titleStyle={styles.listItemTitleGreen}
-          chevronColor='#c2f3d3'
+          chevronColor={Colors.greenMain}
           onPress={this.goToFeedback}
         />
 
@@ -120,7 +122,7 @@ export default class Profile extends Component {
           title='Report a bug'
           containerStyle={styles.listItem}
           titleStyle={styles.listItemTitleGreen}
-          chevronColor='#c2f3d3'
+          chevronColor={Colors.greenMain}
           onPress={this.goToBug}
         />
 
@@ -128,7 +130,7 @@ export default class Profile extends Component {
           title='Log out'
           containerStyle={[styles.listItem, styles.marginTop]}
           titleStyle={styles.listItemTitleGreen}
-          chevronColor='#c2f3d3'
+          chevronColor={Colors.greenMain}
           onPress={this.logout}
         />
 
@@ -157,46 +159,46 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 60,
-    backgroundColor: '#070709'
+    backgroundColor: Colors.darkMain
   },
 
   heading: {
     textAlign: "center",
-    color: '#fff'
+    color: Colors.whiteMain
   },
 
   logout: {
     padding: 50,
-    backgroundColor: '#fff'
+    backgroundColor: Colors.whiteMain
   },
 
   form: {
     padding: 50,
-    backgroundColor: '#fff'
+    backgroundColor: Colors.whiteMain
   },
 
   listItem: {
-    backgroundColor: '#15141a',
+    backgroundColor: Colors.darkSub,
     borderBottomColor: '#070709'
   },
 
   listItemTitle: {
-    color: '#fff',
+    color: Colors.whiteMain,
     marginLeft: 5
   },
 
   listItemTitleGreen: {
-    color: '#c2f3d3',
+    color: Colors.greenMain,
     marginLeft: 5
   },
 
   listItemRightTitle: {
-    color: '#c2f3d3',
+    color: Colors.greenMain,
     marginRight: 10
   },
 
   divider: {
-    color: '#fff',
+    color: Colors.whiteMain,
     fontSize: 13,
     marginTop: 30,
     marginLeft: 15,
@@ -209,7 +211,7 @@ const styles = StyleSheet.create({
 
   version: {
     fontSize: 12,
-    color: '#b1b1b3',
+    color: Colors.greySub,
     marginTop: 15,
     marginLeft: 15
   }

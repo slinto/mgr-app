@@ -9,10 +9,11 @@ import {
   ScrollView
 } from "react-native";
 import React, {Component} from "react";
-
 import * as firebase from "firebase";
 import {Actions} from 'react-native-router-flux';
 import {Button} from 'react-native-elements';
+
+import Colors from '../config/colors';
 
 
 export default class Login extends Component {

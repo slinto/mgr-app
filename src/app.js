@@ -11,6 +11,7 @@ import {
 import * as firebase from "firebase";
 import {Scene, Router} from 'react-native-router-flux';
 
+import Colors from './config/colors';
 import Firebase from "./firebase/firebase";
 import TabIcon from './components/tab-icon';
 import Profile from "./views/profile";
@@ -117,38 +118,26 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#070709',
-    },
-
-    welcome: {
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10,
-    },
-
-    instructions: {
-      textAlign: 'center',
-      color: '#333333',
-      marginBottom: 5,
+      backgroundColor: Colors.darkMain,
     },
 
     navBar: {
-      backgroundColor: '#15141a',
-      borderBottomColor: '#48474d'
+      backgroundColor: Colors.darkSub,
+      borderBottomColor: Colors.greyMain
     },
 
     tintColor: {
-      tintColor: '#c6efd1'
+      tintColor: Colors.greenMain
     },
 
     navText: {
-      color: '#fff',
+      color: Colors.whiteMain,
     },
 
     tabBarStyle: {
       borderTopWidth: .5,
-      borderColor: '#48474d',
-      backgroundColor: '#15141a',
+      borderColor: Colors.greyMain,
+      backgroundColor: Colors.darkSub,
       opacity: 1
     }
   })

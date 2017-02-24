@@ -8,6 +8,7 @@ import {
   Dimensions
 } from 'react-native';
 
+import Colors from '../config/colors';
 
 export default class LeafItem extends React.Component {
   SIZE;
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   wrapper: {
     margin: 10,
     borderRadius: 5,
-    backgroundColor: '#4CBC70'
+    backgroundColor: Colors.greenSub
   },
   image: {
     borderRadius: 5,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.4)'
   },
   heading: {
-    color: '#fff',
+    color: Colors.whiteMain,
     textAlign: 'center',
     fontWeight: '700',
     fontSize: 19,
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   text: {
-    color: '#fff',
+    color: Colors.whiteMain,
     textAlign: 'center',
     fontSize: 11
   }

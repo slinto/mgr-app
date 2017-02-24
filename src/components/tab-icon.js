@@ -4,8 +4,9 @@ import {
   View,
   StyleSheet
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
+import Colors from './../config/colors';
 
 export default class TabIcon extends React.Component {
 
@@ -20,8 +21,8 @@ export default class TabIcon extends React.Component {
   render() {
     return (
       <View>
-        <Icon name={this.getIconName()} style={[styles.icon, {color: this.props.selected ? '#c6efd1' : '#454454'}]} />
-        <Text style={[styles.text, {color: this.props.selected ? '#c6efd1' : '#454454'}]}>
+        <Icon name={this.getIconName()} style={[styles.icon, {color: this.props.selected ? Colors.greenMain : Colors.greyMain}]} />
+        <Text style={[styles.text, {color: this.props.selected ? Colors.greenMain : Colors.greyMain}]}>
           {this.props.title}
         </Text>
       </View>
