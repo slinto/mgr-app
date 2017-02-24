@@ -13,9 +13,6 @@ import {
 
 import * as firebase from "firebase";
 
-import Button from "apsl-react-native-button";
-// import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-
 import Database from "../firebase/database";
 
 export default class LeafDetail extends Component {
@@ -79,7 +76,7 @@ export default class LeafDetail extends Component {
     return (
       <TouchableWithoutFeedback>
         <View style={styles.container}>
-          <Text style={styles.heading}>Leaf Detail id: {this.props.id}</Text>
+          <Text style={styles.heading}>Leaf Detail: {this.props.leaf.name}</Text>
         </View>
       </TouchableWithoutFeedback>
     );

@@ -1,7 +1,3 @@
-/**
- * @class Home
- */
-
 import React, {Component} from "react";
 import {
   Text,
@@ -14,9 +10,6 @@ import {
 import * as firebase from "firebase";
 import {Actions} from 'react-native-router-flux';
 
-import Button from "apsl-react-native-button";
-// import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-
 import Database from "../firebase/database";
 
 export default class LeafList extends Component {
@@ -27,7 +20,10 @@ export default class LeafList extends Component {
     this.state = {
       uid: "",
       mobile: "",
-      mobileForm: ""
+      mobileForm: "",
+      leafs: {},
+      loading: false,
+      loaded: true
     };
 
     this.logout = this.logout.bind(this);
@@ -48,19 +44,13 @@ export default class LeafList extends Component {
 
   async componentDidMount() {
     try {
-      // Get User Credentials
       let user = await firebase.auth().currentUser;
+      Database.getUserLeafList(user.uid, (leafs) => {
+        console.log(leafs);
 
-      // Listen for Mobile Changes
-      Database.listenUserMobile(user.uid, (mobileNumber) => {
         this.setState({
-          mobile: mobileNumber,
-          mobileForm: mobileNumber
+          leafs: leafs
         });
-      });
-
-      this.setState({
-        uid: user.uid
       });
 
     } catch (error) {
@@ -70,22 +60,32 @@ export default class LeafList extends Component {
   }
 
   saveMobile() {
-    // Set Mobile
     if (this.state.uid && this.state.mobileForm) {
       Database.setUserMobile(this.state.uid, this.state.mobileForm);
     }
   }
 
-  goToDetail() {
-    console.log('go');
-    Actions.detail({ id: 10 });
+  goToDetail(leaf) {
+    Actions.detail({ leaf: leaf });
   }
 
   render() {
+    let leafItems = Object.keys(this.state.leafs).map((key) => {
+      if (this.state.leafs) {
+        let leaf = this.state.leafs[key];
+        return <Text key={key} onPress={() => { this.goToDetail(leaf) }}>{leaf.name}</Text>;
+      }
+    });
+
     return (
       <TouchableWithoutFeedback>
         <View style={styles.container}>
-          <Text style={styles.heading} onPress={this.goToDetail}>Go to detail</Text>
+          {leafItems}
+
+          <Text style={styles.textLoading}>LOADING...</Text>
+
+          <Text style={styles.textBlank}>CAMERA LOGO / BUTTON</Text>
+          <Text style={styles.textBlank}>ANALYZE YOUR FIRST LEAF</Text>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -95,18 +95,17 @@ export default class LeafList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 150
+    paddingTop: 150,
+    backgroundColor: '#070709'
   },
 
-  heading: {
-    textAlign: "center"
+  textLoading: {
+    color: '#fff',
+    textAlign: 'center'
   },
 
-  logout: {
-    padding: 50
-  },
-
-  form: {
-    padding: 50
+  textBlank: {
+    color: '#fff',
+    textAlign: 'center'
   }
 });

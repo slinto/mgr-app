@@ -1,22 +1,19 @@
-/**
- * @class Login
- */
-
 import {
   AppRegistry,
   TextInput,
   Text,
   View,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Image,
+  ScrollView
 } from "react-native";
 import React, {Component} from "react";
 
 import * as firebase from "firebase";
-import { Actions } from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
+import {Button} from 'react-native-elements';
 
-import Button from "apsl-react-native-button";
-// import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
 export default class Login extends Component {
   constructor(props) {
@@ -41,9 +38,6 @@ export default class Login extends Component {
       });
 
       setTimeout(() => {
-        // this.props.navigator.push({
-        //   name: "Home"
-        // })
         Actions.account();
       }, 1500);
 
@@ -52,6 +46,10 @@ export default class Login extends Component {
         response: error.toString()
       })
     }
+  }
+
+  async loginWithFacebook() {
+    console.log('loginWithFacebook');
   }
 
   async login() {
@@ -63,10 +61,7 @@ export default class Login extends Component {
       });
 
       setTimeout(() => {
-        Actions.account();
-        // this.props.navigator.push({
-        //   name: "Home"
-        // })
+        Actions.account({type: 'reset'});
       }, 1500);
 
     } catch (error) {
@@ -79,65 +74,117 @@ export default class Login extends Component {
 
   render() {
     return (
-      <TouchableWithoutFeedback>
-        <View>
-          <View style={styles.formGroup}>
-            <Text style={styles.title}>Leaf Project</Text>
+      <Image
+        source={require('../../assets/img/background.png')}
+        style={styles.container}>
 
-            <TextInput
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={(email) => this.setState({email})}
-              value={this.state.email}
-              placeholder="email"
-            />
-
-            <TextInput
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={(password) => this.setState({password})}
-              value={this.state.password}
-              placeholder="password"
-              secureTextEntry={true}
-            />
-
-            <View style={styles.submit}>
-              <Button onPress={this.signup} textStyle={{fontSize: 18}}>
-                Sign up
-              </Button>
-              <Button onPress={this.login} textStyle={{fontSize: 18}}>
-                Login
-              </Button>
-            </View>
-          </View>
-          <View>
-            <Text style={styles.response}>{this.state.response}</Text>
-          </View>
+        <View style={styles.logoWrapper}>
+          <Image style={styles.logo} source={require('../../assets/img/logo.png')}/>
+          <Text style={styles.h1}>
+            LEAF PROJECT
+          </Text>
+          <Text style={styles.h2}>
+            Learn nature.
+          </Text>
         </View>
-      </TouchableWithoutFeedback>
+
+        <View style={styles.buttonsWrapper}>
+          <Button
+            onPress={this.loginWithFacebook}
+            buttonStyle={styles.button}
+            title='Login with facebook'
+            backgroundColor='#3b5998'
+            icon={{name: 'facebook', type: 'font-awesome'}}>
+          </Button>
+
+          <Text style={styles.divider}>- or -</Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="E-mail"
+            placeholderTextColor="rgba(255,255,255,0.8)"
+            value={this.state.email}
+            onChangeText={(email) => this.setState({email})}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="rgba(255,255,255,0.8)"
+            secureTextEntry={true}
+            value={this.state.password}
+            onChangeText={(password) => this.setState({password})}
+          />
+
+          <Button
+            onPress={this.login}
+            buttonStyle={styles.button}
+            backgroundColor='#2DDE98'
+            title='Log In'>
+          </Button>
+
+        </View>
+      </Image>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  formGroup: {
-    padding: 50
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'stretch',
+    backgroundColor: 'transparent'
   },
 
-  title: {
-    paddingBottom: 16,
-    textAlign: "center",
-    color: "#000",
-    fontSize: 35,
-    fontWeight: "bold",
-    opacity: 0.8,
+  logoWrapper: {
+    alignItems: 'center'
   },
 
-  submit: {
-    paddingTop: 30
+  logo: {
+    marginTop: 30,
+    marginBottom: 15
   },
 
-  response: {
-    textAlign: "center",
-    paddingTop: 0,
-    padding: 50
+  h1: {
+    fontSize: 25,
+    fontWeight: '700',
+    marginTop: 10,
+    color: '#fff'
+  },
+
+  h2: {
+    fontSize: 20,
+    fontStyle: 'italic',
+    color: '#fff'
+  },
+
+  button: {
+    height: 50,
+    borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 15,
+    opacity: 0.9,
+    borderWidth: 0,
+  },
+
+  divider: {
+    color: 'rgba(255,255,255,0.8)',
+    textAlign: 'center',
+    marginTop: 15
+  },
+
+  input: {
+    color: 'rgba(255,255,255,0.8)',
+    height: 50,
+    borderColor: 'rgba(255,255,255,0.8)',
+    borderWidth: 1,
+    marginHorizontal: 15,
+    borderRadius: 5,
+    marginTop: 15,
+    padding: 15
   }
 });

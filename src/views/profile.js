@@ -1,22 +1,22 @@
-/**
- * @class Home
- */
-
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import {
   Text,
   View,
   StyleSheet,
   TouchableWithoutFeedback,
-  TextInput
-} from "react-native";
+  TextInput,
+  ScrollView,
+  NativeModules
+} from 'react-native';
 
-import * as firebase from "firebase";
+const RNAppInfo = NativeModules.RNAppInfo;
 
-import Button from "apsl-react-native-button";
-// import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import * as firebase from 'firebase';
+import {Actions} from 'react-native-router-flux';
+import {Button} from 'react-native-elements';
 
-import Database from "../firebase/database";
+import Database from '../firebase/database';
+import {ListItem} from 'react-native-elements'
 
 export default class Profile extends Component {
 
@@ -31,16 +31,14 @@ export default class Profile extends Component {
 
     this.logout = this.logout.bind(this);
     this.saveMobile = this.saveMobile.bind(this);
-
   }
 
   async logout() {
     try {
       await firebase.auth().signOut();
 
-      this.props.navigator.push({
-        name: "Login"
-      })
+      Actions.auth();
+
     } catch (error) {
       console.log(error);
     }
@@ -78,30 +76,79 @@ export default class Profile extends Component {
 
   render() {
     return (
-      <TouchableWithoutFeedback>
-        <View style={styles.container}>
-          <Text style={styles.heading}>Hello UserId: {this.state.uid}</Text>
-          <Text style={styles.heading}>Mobile Number (From Database): {this.state.mobile}</Text>
-          <View style={styles.form}>
+      <ScrollView style={styles.container}>
 
-            <TextInput
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={(mobileForm) => this.setState({mobileForm})}
-              value={this.state.mobileForm}
-              placeholder="Mobile Number"
-            />
+        <Text style={styles.divider}>USER</Text>
 
-            <Button onPress={this.saveMobile} textStyle={{fontSize: 18}}>
-              Save
-            </Button>
-          </View>
-          <View style={styles.logout}>
-            <Button onPress={this.logout} textStyle={{fontSize: 18}}>
-              Logout
-            </Button>
-          </View>
+        <ListItem
+          title='e-mail'
+          rightTitle='hello@slinto.sk'
+          hideChevron={true}
+          containerStyle={styles.listItem}
+          titleStyle={styles.listItemTitle}
+          rightTitleStyle={styles.listItemRightTitle}
+        />
+
+        <ListItem
+          title='e-mail'
+          rightTitle='hello@slinto.sk'
+          hideChevron={true}
+          containerStyle={styles.listItem}
+          titleStyle={styles.listItemTitle}
+          rightTitleStyle={styles.listItemRightTitle}
+        />
+
+        <Text style={styles.divider}>APPLICATION</Text>
+
+        <ListItem
+          title='e-mail'
+          rightTitle='hello@slinto.sk'
+          hideChevron={true}
+          containerStyle={styles.listItem}
+          titleStyle={styles.listItemTitle}
+          rightTitleStyle={styles.listItemRightTitle}
+        />
+
+
+        <ListItem
+          title='Leave a feedback'
+          containerStyle={[styles.listItem, styles.marginTop]}
+          titleStyle={styles.listItemTitleGreen}
+          chevronColor='#c2f3d3'
+        />
+
+        <ListItem
+          title='Report a bug'
+          containerStyle={styles.listItem}
+          titleStyle={styles.listItemTitleGreen}
+          chevronColor='#c2f3d3'
+        />
+
+        <ListItem
+          title='Log out'
+          containerStyle={[styles.listItem, styles.marginTop]}
+          titleStyle={styles.listItemTitleGreen}
+          chevronColor='#c2f3d3'
+          onPress={this.logout}
+        />
+
+        <Text style={styles.version}>Version {RNAppInfo.shortVersion}</Text>
+
+        {/* TODO: REMOVE THIS */}
+        <Text style={styles.heading}>Hello UserId: {this.state.uid}</Text>
+        <Text style={styles.heading}>Mobile Number (From Database): {this.state.mobile}</Text>
+        <View style={styles.form}>
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(mobileForm) => this.setState({mobileForm})}
+            value={this.state.mobileForm}
+            placeholder="Mobile Number"
+          />
+
+          <Button onPress={this.saveMobile} title="save" />
         </View>
-      </TouchableWithoutFeedback>
+
+      </ScrollView>
     );
   }
 }
@@ -109,18 +156,63 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 150
+    paddingTop: 60,
+    backgroundColor: '#070709'
   },
 
   heading: {
-    textAlign: "center"
+    textAlign: "center",
+    color: '#fff'
   },
 
   logout: {
-    padding: 50
+    padding: 50,
+    backgroundColor: '#fff'
   },
 
   form: {
-    padding: 50
+    padding: 50,
+    backgroundColor: '#fff'
+  },
+
+  listItem: {
+    backgroundColor: '#15141a',
+    borderBottomColor: '#070709'
+  },
+
+  listItemTitle: {
+    color: '#fff',
+    marginLeft: 5
+  },
+
+  listItemTitleGreen: {
+    color: '#c2f3d3',
+    marginLeft: 5
+  },
+
+  listItemRightTitle: {
+    color: '#c2f3d3',
+    marginRight: 10
+  },
+
+  divider: {
+    color: '#fff',
+    fontSize: 13,
+    marginTop: 30,
+    marginLeft: 15,
+    marginBottom: 5
+  },
+
+  marginTop: {
+    marginTop: 30
+  },
+
+  version: {
+    fontSize: 12,
+    color: '#b1b1b3',
+    marginTop: 15,
+    marginLeft: 15
   }
+
 });
+
