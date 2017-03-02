@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import * as firebase from "firebase";
-import {Scene, Router} from 'react-native-router-flux';
+import {Actions, Scene, Router} from 'react-native-router-flux';
 
 import Colors from './config/colors';
 import Firebase from "./firebase/firebase";
@@ -49,72 +49,75 @@ export default class LeafMgrApp extends Component {
 
   render() {
     if (this.state.userLoaded) {
-      return (
-        <Router style={{ backgroundColor: Colors.darkMain }}>
-          <Scene key="root">
 
-            <Scene key="auth" hideNavBar initial={false}>
-              <Scene key="welcome" component={Welcome} title="Welcome" />
-              <Scene key="registration" component={Registration} title="Registration" />
-              <Scene key="login" component={Login} title="Login"/>
-            </Scene>
+      let scenes = Actions.create(
+        <Scene key="root">
 
-            {/*this.state.initialView === 'account'*/}
-            <Scene
-              key="account"
-              initial={true}
-              tabs={true}
-              tabBarStyle={{borderTopColor:'#00bb00',borderTopWidth:1,backgroundColor:'white'}}>
-
-              <Scene
-                key="leaf"
-                initial={true}
-                title="Leaf List"
-                icon={TabIcon}
-                navigationBarStyle={styles.navBar}
-                titleStyle={styles.navText}
-                backButtonTextStyle={styles.navText}
-                barButtonIconStyle={styles.tintColor}
-                rightButtonStyle={styles.navText}>
-                <Scene key="list" component={LeafList} title="Leaf List" initial={true}/>
-                <Scene key="detail" component={LeafDetail} title="Leaf Detail"/>
-              </Scene>
-
-              <Scene
-                key="profile"
-                title="Profile"
-                icon={TabIcon}
-                navigationBarStyle={styles.navBar}
-                titleStyle={styles.navText}
-                backButtonTextStyle={styles.navText}
-                barButtonIconStyle={styles.tintColor}
-                rightButtonStyle={styles.navText}>
-
-                <Scene
-                  key="profile_detail"
-                  component={Profile}
-                  title="Profile"/>
-
-                <Scene
-                  key="feedback"
-                  component={Form}
-                  title="Leave a feedback"
-                  rightTitle="SEND"
-                  rightButtonTextStyle={{ color: Colors.greenMain }}
-                  onRight={() => {
-                    console.log('SEND');
-                  }}/>
-
-                <Scene
-                  key="bug"
-                  component={Form}
-                  title="Report a bug"/>
-
-              </Scene>
-            </Scene>
-
+          <Scene key="auth" hideNavBar initial={this.state.initialView === 'auth'}>
+            <Scene key="welcome" component={Welcome} title="Welcome" />
+            <Scene key="registration" component={Registration} title="Registration" />
+            <Scene key="login" component={Login} title="Login"/>
           </Scene>
-        </Router>
+
+          {/*this.state.initialView === 'account'*/}
+          <Scene
+            key="account"
+            initial={this.state.initialView === 'account'}
+            tabs={true}
+            tabBarStyle={{borderTopColor:'#00bb00',borderTopWidth:1,backgroundColor:'white'}}>
+
+            <Scene
+              key="leaf"
+              initial={true}
+              title="Leaf List"
+              icon={TabIcon}
+              navigationBarStyle={styles.navBar}
+              titleStyle={styles.navText}
+              backButtonTextStyle={styles.navText}
+              barButtonIconStyle={styles.tintColor}
+              rightButtonStyle={styles.navText}>
+              <Scene key="list" component={LeafList} title="Leaf List" initial={true}/>
+              <Scene key="detail" component={LeafDetail} title="Leaf Detail"/>
+            </Scene>
+
+            <Scene
+              key="profile"
+              title="Profile"
+              icon={TabIcon}
+              navigationBarStyle={styles.navBar}
+              titleStyle={styles.navText}
+              backButtonTextStyle={styles.navText}
+              barButtonIconStyle={styles.tintColor}
+              rightButtonStyle={styles.navText}>
+
+              <Scene
+                key="profile_detail"
+                component={Profile}
+                title="Profile"/>
+
+              <Scene
+                key="feedback"
+                component={Form}
+                title="Leave a feedback"
+                rightTitle="SEND"
+                rightButtonTextStyle={{ color: Colors.greenMain }}
+                onRight={() => {
+                  console.log('SEND');
+                }}/>
+
+              <Scene
+                key="bug"
+                component={Form}
+                title="Report a bug"/>
+
+            </Scene>
+          </Scene>
+
+        </Scene>
+      );
+
+      return (
+        <Router scenes={scenes} style={{ backgroundColor: Colors.darkMain }}/>
       );
     } else {
       return null;
