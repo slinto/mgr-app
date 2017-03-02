@@ -13,8 +13,8 @@ import * as firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 import {Button, ListItem} from 'react-native-elements';
 
-import Database from '../firebase/database';
-import Colors from '../config/colors';
+import Database from '../../firebase/database';
+import Colors from '../../config/colors';
 
 
 export default class Profile extends Component {
@@ -115,6 +115,7 @@ export default class Profile extends Component {
           containerStyle={[styles.listItem, styles.marginTop]}
           titleStyle={styles.listItemTitleGreen}
           chevronColor={Colors.greenMain}
+          underlayColor={Colors.darkActive}
           onPress={this.goToFeedback}
         />
 
@@ -123,6 +124,7 @@ export default class Profile extends Component {
           containerStyle={styles.listItem}
           titleStyle={styles.listItemTitleGreen}
           chevronColor={Colors.greenMain}
+          underlayColor={Colors.darkActive}
           onPress={this.goToBug}
         />
 
@@ -131,6 +133,7 @@ export default class Profile extends Component {
           containerStyle={[styles.listItem, styles.marginTop]}
           titleStyle={styles.listItemTitleGreen}
           chevronColor={Colors.greenMain}
+          underlayColor={Colors.darkActive}
           onPress={this.logout}
         />
 
@@ -179,7 +182,7 @@ const styles = StyleSheet.create({
 
   listItem: {
     backgroundColor: Colors.darkSub,
-    borderBottomColor: '#070709'
+    borderBottomColor: Colors.darkMain
   },
 
   listItemTitle: {

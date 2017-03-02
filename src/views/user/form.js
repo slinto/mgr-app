@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import React, {Component} from 'react';
 
-import Colors from '../config/colors';
+import Colors from '../../config/colors';
 
 
 export default class Form extends Component {

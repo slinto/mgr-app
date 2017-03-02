@@ -13,7 +13,7 @@ import * as firebase from "firebase";
 import {Actions} from 'react-native-router-flux';
 import {Button} from 'react-native-elements';
 
-import Colors from '../config/colors';
+import Colors from '../../config/colors';
 
 
 export default class Login extends Component {
@@ -49,6 +49,11 @@ export default class Login extends Component {
     }
   }
 
+  goBack() {
+    console.log('back');
+    Actions.pop();
+  }
+
   async loginWithFacebook() {
     console.log('loginWithFacebook');
   }
@@ -76,55 +81,58 @@ export default class Login extends Component {
   render() {
     return (
       <Image
-        source={require('../../assets/img/background.png')}
+        source={require('../../../assets/img/background.png')}
         style={styles.container}>
+        <ScrollView>
+          <View style={styles.logoWrapper}>
+            <Image style={styles.logo} source={require('../../../assets/img/logo.png')}/>
+            <Text style={styles.h1}>
+              LEAF PROJECT
+            </Text>
+            <Text style={styles.h2}>
+              Learn nature.
+            </Text>
+          </View>
 
-        <View style={styles.logoWrapper}>
-          <Image style={styles.logo} source={require('../../assets/img/logo.png')}/>
-          <Text style={styles.h1}>
-            LEAF PROJECT
-          </Text>
-          <Text style={styles.h2}>
-            Learn nature.
-          </Text>
-        </View>
+          <View style={styles.buttonsWrapper}>
+            <Button
+              onPress={this.loginWithFacebook}
+              buttonStyle={styles.button}
+              title='Login with facebook'
+              backgroundColor='#3b5998'
+              icon={{name: 'facebook', type: 'font-awesome'}}>
+            </Button>
 
-        <View style={styles.buttonsWrapper}>
-          <Button
-            onPress={this.loginWithFacebook}
-            buttonStyle={styles.button}
-            title='Login with facebook'
-            backgroundColor='#3b5998'
-            icon={{name: 'facebook', type: 'font-awesome'}}>
-          </Button>
+            <Text style={styles.divider}>- or -</Text>
 
-          <Text style={styles.divider}>- or -</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="E-mail"
+              placeholderTextColor="rgba(255,255,255,0.8)"
+              value={this.state.email}
+              onChangeText={(email) => this.setState({email})}
+            />
 
-          <TextInput
-            style={styles.input}
-            placeholder="E-mail"
-            placeholderTextColor="rgba(255,255,255,0.8)"
-            value={this.state.email}
-            onChangeText={(email) => this.setState({email})}
-          />
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              placeholderTextColor="rgba(255,255,255,0.8)"
+              secureTextEntry={true}
+              value={this.state.password}
+              onChangeText={(password) => this.setState({password})}
+            />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="rgba(255,255,255,0.8)"
-            secureTextEntry={true}
-            value={this.state.password}
-            onChangeText={(password) => this.setState({password})}
-          />
+            <Button
+              onPress={this.login}
+              buttonStyle={styles.button}
+              backgroundColor='#2DDE98'
+              title='Log In'>
+            </Button>
 
-          <Button
-            onPress={this.login}
-            buttonStyle={styles.button}
-            backgroundColor='#2DDE98'
-            title='Log In'>
-          </Button>
+            <Text style={styles.goBack} onPress={this.goBack}>Go back</Text>
 
-        </View>
+          </View>
+        </ScrollView>
       </Image>
     );
   }
@@ -187,5 +195,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 15,
     padding: 15
+  },
+
+  goBack: {
+    color: Colors.whiteMain,
+    marginTop: 20,
+    textAlign: 'center'
   }
 });

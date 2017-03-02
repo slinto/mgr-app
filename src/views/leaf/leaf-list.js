@@ -11,8 +11,8 @@ import {
 import * as firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 
-import Database from '../firebase/database';
-import LeafItem from '../components/leaf-item';
+import Database from '../../firebase/database';
+import LeafItem from '../../components/leaf-item';
 
 
 export default class LeafList extends Component {

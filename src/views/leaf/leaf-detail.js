@@ -12,8 +12,8 @@ import {
 } from "react-native";
 import * as firebase from "firebase";
 
-import Database from "../firebase/database";
-import Colors from '../config/colors';
+import Database from "../../firebase/database";
+import Colors from '../../config/colors';
 
 
 export default class LeafDetail extends Component {

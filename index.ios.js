@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,

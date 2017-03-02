@@ -14,11 +14,13 @@ import {Scene, Router} from 'react-native-router-flux';
 import Colors from './config/colors';
 import Firebase from "./firebase/firebase";
 import TabIcon from './components/tab-icon';
-import Profile from "./views/profile";
-import LeafList from "./views/leaf-list";
-import LeafDetail from "./views/leaf-detail";
-import Login from "./views/login";
-import Form from "./views/form";
+import Profile from "./views/user/profile";
+import LeafList from "./views/leaf/leaf-list";
+import LeafDetail from "./views/leaf/leaf-detail";
+import Login from "./views/auth/login";
+import Welcome from "./views/auth/welcome";
+import Registration from "./views/auth/registration";
+import Form from "./views/user/form";
 
 export default class LeafMgrApp extends Component {
   constructor(props) {
@@ -48,11 +50,13 @@ export default class LeafMgrApp extends Component {
   render() {
     if (this.state.userLoaded) {
       return (
-        <Router style={{ backgroundColor: '#070709' }}>
+        <Router style={{ backgroundColor: Colors.darkMain }}>
           <Scene key="root">
 
             <Scene key="auth" hideNavBar initial={false}>
-              <Scene key="login" component={Login} title="Login" initial={true}/>
+              <Scene key="welcome" component={Welcome} title="Welcome" />
+              <Scene key="registration" component={Registration} title="Registration" />
+              <Scene key="login" component={Login} title="Login"/>
             </Scene>
 
             {/*this.state.initialView === 'account'*/}
@@ -60,7 +64,7 @@ export default class LeafMgrApp extends Component {
               key="account"
               initial={true}
               tabs={true}
-              tabBarStyle={styles.tabBarStyle}>
+              tabBarStyle={{borderTopColor:'#00bb00',borderTopWidth:1,backgroundColor:'white'}}>
 
               <Scene
                 key="leaf"
@@ -94,7 +98,12 @@ export default class LeafMgrApp extends Component {
                 <Scene
                   key="feedback"
                   component={Form}
-                  title="Leave a feedback"/>
+                  title="Leave a feedback"
+                  rightTitle="SEND"
+                  rightButtonTextStyle={{ color: Colors.greenMain }}
+                  onRight={() => {
+                    console.log('SEND');
+                  }}/>
 
                 <Scene
                   key="bug"
@@ -135,10 +144,9 @@ const styles = StyleSheet.create({
     },
 
     tabBarStyle: {
-      borderTopWidth: .5,
+      borderTopWidth: 1,
       borderColor: Colors.greyMain,
       backgroundColor: Colors.darkSub,
       opacity: 1
     }
-  })
-  ;
+  });
