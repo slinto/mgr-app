@@ -51,7 +51,7 @@ export default class LeafMgrApp extends Component {
     if (this.state.userLoaded) {
 
       let scenes = Actions.create(
-        <Scene key="root">
+        <Scene key="root" >
 
           <Scene key="auth" hideNavBar initial={this.state.initialView === 'auth'}>
             <Scene key="welcome" component={Welcome} title="Welcome"/>
@@ -75,8 +75,8 @@ export default class LeafMgrApp extends Component {
               backButtonTextStyle={styles.navText}
               barButtonIconStyle={styles.tintColor}
               rightButtonStyle={styles.navText}>
-              <Scene key="list" component={LeafList} title="Leaf List" initial={true}/>
-              <Scene key="detail" component={LeafDetail} title="Leaf Detail"/>
+              <Scene key="list" component={LeafList} title="Leaf List" initial={true} style={{ backgroundColor: Colors.darkMain}}/>
+              <Scene key="detail" component={LeafDetail} title="Leaf Detail" style={{ backgroundColor: Colors.darkMain}}/>
             </Scene>
 
             <Scene
@@ -92,7 +92,8 @@ export default class LeafMgrApp extends Component {
               <Scene
                 key="profile_detail"
                 component={Profile}
-                title="Profile"/>
+                title="Profile"
+                style={{ backgroundColor: Colors.darkMain}}/>
 
               <Scene
                 key="feedback"
@@ -100,6 +101,7 @@ export default class LeafMgrApp extends Component {
                 title="Leave a feedback"
                 rightTitle="SEND"
                 rightButtonTextStyle={{color: Colors.greenMain}}
+                style={{ backgroundColor: Colors.darkMain}}
                 onRight={() => {
                   console.log('SEND');
                 }}/>
@@ -107,6 +109,7 @@ export default class LeafMgrApp extends Component {
               <Scene
                 key="bug"
                 component={Form}
+                style={{ backgroundColor: Colors.darkMain}}
                 title="Report a bug"/>
 
             </Scene>
@@ -116,7 +119,7 @@ export default class LeafMgrApp extends Component {
       );
 
       return (
-        <Router scenes={scenes} style={{backgroundColor: Colors.darkMain}}/>
+        <Router scenes={scenes} />
       );
     } else {
       return null;
@@ -129,12 +132,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: Colors.darkMain,
+    backgroundColor: Colors.darkMain,
   },
 
   navBar: {
     backgroundColor: Colors.darkSub,
-    borderBottomColor: Colors.greyMain
+    borderBottomWidth: 0
   },
 
   tintColor: {
@@ -146,9 +149,8 @@ const styles = StyleSheet.create({
   },
 
   tabBarStyle: {
-    borderTopWidth: .5,
-    borderColor: '#b7b7b7',
-    backgroundColor: 'white',
+    borderTopWidth: 0,
+    backgroundColor: Colors.darkSub,
     opacity: 1
   }
 });

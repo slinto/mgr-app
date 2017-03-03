@@ -89,14 +89,14 @@ export default class LeafDetail extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 80,
+    paddingTop: 90,
     backgroundColor: '#070709'
   },
 
   textWrapper: {
     paddingHorizontal: 20,
     paddingVertical: 10,
-    marginBottom: 20,
+    marginBottom: 30,
     backgroundColor: '#15141a',
   },
 });
