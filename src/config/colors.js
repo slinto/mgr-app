@@ -6,5 +6,6 @@ export default {
   greySub: '#a7a5b0',
   greenMain: '#a3eeae',
   greenSub: '#2DDE98',
-  whiteMain: '#fff'
+  whiteMain: '#fff',
+  warning: '#2DDE98'
 }

@@ -120,6 +120,7 @@ export default class Registration extends Component {
             </Button>
 
             <Text style={styles.goBack} onPress={this.goBack}>Go back</Text>
+            <Text style={styles.response}>{this.state.response}</Text>
 
           </View>
         </ScrollView>
@@ -195,6 +196,13 @@ const styles = StyleSheet.create({
   goBack: {
     color: Colors.whiteMain,
     marginTop: 20,
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+
+  response: {
+    color: Colors.warning,
+    marginTop: 20,
+    textAlign: 'center',
+    fontWeight: '700'
   }
 });

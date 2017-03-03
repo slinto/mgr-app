@@ -112,6 +112,7 @@ export default class Login extends Component {
             </Button>
 
             <Text style={styles.goBack} onPress={this.goBack}>Go back</Text>
+            <Text style={styles.response}>{this.state.response}</Text>
 
           </View>
         </ScrollView>
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2DDE98',
     opacity: 0.2
   },
-  
+
   divider: {
     color: 'rgba(255,255,255,0.8)',
     textAlign: 'center',
@@ -188,5 +189,12 @@ const styles = StyleSheet.create({
     color: Colors.whiteMain,
     marginTop: 20,
     textAlign: 'center'
+  },
+
+  response: {
+    color: Colors.warning,
+    marginTop: 20,
+    textAlign: 'center',
+    fontWeight: '700'
   }
 });
