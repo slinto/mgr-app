@@ -127,7 +127,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'stretch',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    alignSelf: 'stretch',
+    width: null,
   },
 
   logoWrapper: {

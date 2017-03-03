@@ -37,7 +37,7 @@ export default class Welcome extends Component {
       <Image
         source={require('../../../assets/img/background.png')}
         style={styles.container}>
-        <ScrollView>
+
           <View style={styles.logoWrapper}>
             <Image style={styles.logo} source={require('../../../assets/img/logo.png')}/>
             <Text style={styles.h1}>
@@ -66,7 +66,7 @@ export default class Welcome extends Component {
 
 
           </View>
-        </ScrollView>
+
       </Image>
     );
   }
@@ -78,7 +78,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'stretch',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    alignSelf: 'stretch',
+    width: null,
   },
 
   logoWrapper: {
@@ -103,6 +105,10 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
 
+  buttonsWrapper: {
+    margin: 0
+  },
+
   button: {
     height: 50,
     borderRadius: 5,
@@ -112,28 +118,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     opacity: 0.9,
     borderWidth: 0,
-  },
-
-  divider: {
-    color: 'rgba(255,255,255,0.8)',
-    textAlign: 'center',
-    marginTop: 15
-  },
-
-  input: {
-    color: 'rgba(255,255,255,0.8)',
-    height: 50,
-    borderColor: 'rgba(255,255,255,0.8)',
-    borderWidth: 1,
-    marginHorizontal: 15,
-    borderRadius: 5,
-    marginTop: 15,
-    padding: 15
-  },
-
-  goBack: {
-    color: Colors.whiteMain,
-    marginTop: 20,
-    textAlign: 'center'
+    alignSelf: 'stretch',
   }
 });

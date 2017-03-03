@@ -54,9 +54,9 @@ export default class LeafMgrApp extends Component {
         <Scene key="root" >
 
           <Scene key="auth" hideNavBar initial={this.state.initialView === 'auth'}>
-            <Scene key="welcome" component={Welcome} title="Welcome"/>
-            <Scene key="registration" component={Registration} title="Registration"/>
-            <Scene key="login" component={Login} title="Login"/>
+            <Scene key="welcome" component={Welcome} title="Welcome" style={{ backgroundColor: Colors.darkMain}}/>
+            <Scene key="registration" component={Registration} title="Registration" style={{ backgroundColor: Colors.darkMain}}/>
+            <Scene key="login" component={Login} title="Login" style={{ backgroundColor: Colors.darkMain}}/>
           </Scene>
 
           <Scene
@@ -99,12 +99,7 @@ export default class LeafMgrApp extends Component {
                 key="feedback"
                 component={Form}
                 title="Leave a feedback"
-                rightTitle="SEND"
-                rightButtonTextStyle={{color: Colors.greenMain}}
-                style={{ backgroundColor: Colors.darkMain}}
-                onRight={() => {
-                  console.log('SEND');
-                }}/>
+                style={{ backgroundColor: Colors.darkMain}}/>
 
               <Scene
                 key="bug"
