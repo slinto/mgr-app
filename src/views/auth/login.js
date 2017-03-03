@@ -26,27 +26,7 @@ export default class Login extends Component {
       response: ""
     };
 
-    this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
-  }
-
-  async signup() {
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
-
-      this.setState({
-        response: "account created"
-      });
-
-      setTimeout(() => {
-        Actions.account();
-      }, 1500);
-
-    } catch (error) {
-      this.setState({
-        response: error.toString()
-      })
-    }
   }
 
   goBack() {
@@ -125,6 +105,8 @@ export default class Login extends Component {
             <Button
               onPress={this.login}
               buttonStyle={styles.button}
+              disabled={!(this.state.email.length > 0 && this.state.password.length > 0)}
+              disabledStyle={styles.buttonDisabled}
               backgroundColor='#2DDE98'
               title='Log In'>
             </Button>
@@ -180,6 +162,11 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
 
+  buttonDisabled: {
+    backgroundColor: '#2DDE98',
+    opacity: 0.2
+  },
+  
   divider: {
     color: 'rgba(255,255,255,0.8)',
     textAlign: 'center',

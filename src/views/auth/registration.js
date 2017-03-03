@@ -22,20 +22,17 @@ export default class Registration extends Component {
 
     this.state = {
       email: '',
-      nickname: '',
       password: '',
       password2: '',
       response: ''
     };
 
     this.signup = this.signup.bind(this);
-    this.login = this.login.bind(this);
   }
 
   async signup() {
     try {
       await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
-
       this.setState({
         response: "account created"
       });
@@ -59,25 +56,6 @@ export default class Registration extends Component {
     console.log('loginWithFacebook');
   }
 
-  async login() {
-    try {
-      await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
-
-      this.setState({
-        response: "Logged In!"
-      });
-
-      setTimeout(() => {
-        Actions.account({type: 'reset'});
-      }, 1500);
-
-    } catch (error) {
-      this.setState({
-        response: error.toString()
-      })
-    }
-
-  }
 
   render() {
     return (
@@ -108,14 +86,6 @@ export default class Registration extends Component {
 
             <TextInput
               style={styles.input}
-              placeholder="Nickname"
-              placeholderTextColor="rgba(255,255,255,0.8)"
-              value={this.state.nickname}
-              onChangeText={(nickname) => this.setState({nickname})}
-            />
-
-            <TextInput
-              style={styles.input}
               placeholder="E-mail"
               placeholderTextColor="rgba(255,255,255,0.8)"
               value={this.state.email}
@@ -143,6 +113,8 @@ export default class Registration extends Component {
             <Button
               onPress={this.login}
               buttonStyle={styles.button}
+              disabled={!(this.state.email.length > 0 && this.state.password.length > 0 && this.state.password === this.state.password2)}
+              disabledStyle={styles.buttonDisabled}
               backgroundColor='#2DDE98'
               title='Sign in'>
             </Button>
@@ -196,6 +168,11 @@ const styles = StyleSheet.create({
     marginTop: 15,
     opacity: 0.9,
     borderWidth: 0,
+  },
+
+  buttonDisabled: {
+    backgroundColor: '#2DDE98',
+    opacity: 0.2
   },
 
   divider: {
