@@ -38,7 +38,6 @@ export default class Database {
   }
 
   //---------------------
-
   static getUserLeafList(userId, callback) {
     let path = `/user/${userId}/leafs`;
 
@@ -46,4 +45,14 @@ export default class Database {
       callback(snapshot.val());
     });
   }
+
+  //--------------------
+  static getTreeDetail(leafId, callback) {
+    let path = `/tree/${leafId}`;
+
+    firebase.database().ref(path).on('value', (snapshot) => {
+      callback(snapshot.val());
+    });
+  }
+
 }

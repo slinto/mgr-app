@@ -7,57 +7,42 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableWithoutFeedback,
-  TextInput
+  ScrollView
 } from "react-native";
 import * as firebase from "firebase";
 
 import Database from "../../firebase/database";
 import Colors from '../../config/colors';
+import LeafDetailItem from '../../components/leaf-detail-item';
+import Gallery from '../../components/gallery';
 
 
 export default class LeafDetail extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      uid: "",
-      mobile: "",
-      mobileForm: ""
+      tree: {},
+      loading: false,
+      loaded: false
     };
 
-    this.logout = this.logout.bind(this);
-    this.saveMobile = this.saveMobile.bind(this);
-  }
+    console.log(this.props.leaf);
 
-  async logout() {
-    try {
-      await firebase.auth().signOut();
-
-      this.props.navigator.push({
-        name: "Login"
-      })
-    } catch (error) {
-      console.log(error);
-    }
+    // this.logout = this.logout.bind(this);
   }
 
   async componentDidMount() {
     try {
-      // Get User Credentials
-      let user = await firebase.auth().currentUser;
+      this.setState({loading: true});
+      Database.getTreeDetail(this.props.leaf.id, (tree) => {
+        console.log(tree);
 
-      // Listen for Mobile Changes
-      Database.listenUserMobile(user.uid, (mobileNumber) => {
         this.setState({
-          mobile: mobileNumber,
-          mobileForm: mobileNumber
+          tree: tree,
+          loaded: true,
+          loading: false
         });
-      });
-
-      this.setState({
-        uid: user.uid
       });
 
     } catch (error) {
@@ -66,20 +51,37 @@ export default class LeafDetail extends Component {
 
   }
 
-  saveMobile() {
-    // Set Mobile
-    if (this.state.uid && this.state.mobileForm) {
-      Database.setUserMobile(this.state.uid, this.state.mobileForm);
-    }
-  }
-
   render() {
     return (
-      <TouchableWithoutFeedback>
-        <View style={styles.container}>
-          <Text style={styles.heading}>Leaf Detail: {this.props.leaf.name}</Text>
+      <ScrollView style={styles.container}>
+
+        { this.state.loaded &&
+        <View>
+          <View style={styles.textWrapper}>
+            <LeafDetailItem left="NAME"
+                            right={this.state.tree.name}/>
+
+            <LeafDetailItem left="FAMILIA"
+                            right={this.state.tree.familia}/>
+
+            <LeafDetailItem left="TREE HEIGHT"
+                            right={this.state.tree.treeHeight.value}
+                            rightAddon={this.state.tree.treeHeight.unit}/>
+
+            <LeafDetailItem left="LEAF SIZE"
+                            right={this.state.tree.leafSize.value}
+                            rightAddon={this.state.tree.leafSize.unit}/>
+
+            <LeafDetailItem left="OCCURANCE"
+                            right={this.state.tree.occurance}/>
+          </View>
+
+          <Gallery title='YOUR PHOTOS' photos={this.props.leaf.photos}/>
+
         </View>
-      </TouchableWithoutFeedback>
+        }
+
+      </ScrollView>
     );
   }
 }
@@ -87,18 +89,14 @@ export default class LeafDetail extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 150
+    paddingTop: 80,
+    backgroundColor: '#070709'
   },
 
-  heading: {
-    textAlign: "center"
+  textWrapper: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginBottom: 20,
+    backgroundColor: '#15141a',
   },
-
-  logout: {
-    padding: 50
-  },
-
-  form: {
-    padding: 50
-  }
 });

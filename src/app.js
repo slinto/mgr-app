@@ -54,17 +54,16 @@ export default class LeafMgrApp extends Component {
         <Scene key="root">
 
           <Scene key="auth" hideNavBar initial={this.state.initialView === 'auth'}>
-            <Scene key="welcome" component={Welcome} title="Welcome" />
-            <Scene key="registration" component={Registration} title="Registration" />
+            <Scene key="welcome" component={Welcome} title="Welcome"/>
+            <Scene key="registration" component={Registration} title="Registration"/>
             <Scene key="login" component={Login} title="Login"/>
           </Scene>
 
-          {/*this.state.initialView === 'account'*/}
           <Scene
             key="account"
             initial={this.state.initialView === 'account'}
             tabs={true}
-            tabBarStyle={{borderTopColor:'#00bb00',borderTopWidth:1,backgroundColor:'white'}}>
+            tabBarStyle={styles.tabBarStyle}>
 
             <Scene
               key="leaf"
@@ -100,7 +99,7 @@ export default class LeafMgrApp extends Component {
                 component={Form}
                 title="Leave a feedback"
                 rightTitle="SEND"
-                rightButtonTextStyle={{ color: Colors.greenMain }}
+                rightButtonTextStyle={{color: Colors.greenMain}}
                 onRight={() => {
                   console.log('SEND');
                 }}/>
@@ -117,7 +116,7 @@ export default class LeafMgrApp extends Component {
       );
 
       return (
-        <Router scenes={scenes} style={{ backgroundColor: Colors.darkMain }}/>
+        <Router scenes={scenes} style={{backgroundColor: Colors.darkMain}}/>
       );
     } else {
       return null;
@@ -126,30 +125,30 @@ export default class LeafMgrApp extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: Colors.darkMain,
-    },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: Colors.darkMain,
+  },
 
-    navBar: {
-      backgroundColor: Colors.darkSub,
-      borderBottomColor: Colors.greyMain
-    },
+  navBar: {
+    backgroundColor: Colors.darkSub,
+    borderBottomColor: Colors.greyMain
+  },
 
-    tintColor: {
-      tintColor: Colors.greenMain
-    },
+  tintColor: {
+    tintColor: Colors.greenMain
+  },
 
-    navText: {
-      color: Colors.whiteMain,
-    },
+  navText: {
+    color: Colors.whiteMain,
+  },
 
-    tabBarStyle: {
-      borderTopWidth: 1,
-      borderColor: Colors.greyMain,
-      backgroundColor: Colors.darkSub,
-      opacity: 1
-    }
-  });
+  tabBarStyle: {
+    borderTopWidth: .5,
+    borderColor: '#b7b7b7',
+    backgroundColor: 'white',
+    opacity: 1
+  }
+});

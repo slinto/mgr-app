@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableWithoutFeedback,
   TextInput,
   ScrollView,
   Dimensions
@@ -23,16 +22,7 @@ export default class LeafList extends Component {
       uid: "",
       mobile: "",
       mobileForm: "",
-      leafs: [{
-        id: 'prunus-selix',
-        name: 'PRUNUS HOVNIS',
-        photos: ['https://cdn.pixabay.com/photo/2015/08/27/13/59/leaf-910532_960_720.jpg']
-      },
-        {
-          id: 'hovnus-selix',
-          name: 'HOVNUS HOVNIS',
-          photos: ['https://cdn.pixabay.com/photo/2015/08/27/13/59/leaf-910532_960_720.jpg']
-        }],
+      leafs: [],
       loading: false,
       loaded: false
     };
@@ -55,8 +45,8 @@ export default class LeafList extends Component {
     }
   }
 
-  static goToDetail(leaf) {
-    Actions.detail({leaf: leaf});
+  goToDetail(leaf) {
+    Actions.detail({leaf: leaf, title: leaf.name});
   }
 
   render() {
@@ -84,10 +74,10 @@ export default class LeafList extends Component {
         </View>
         }
         {
-          /*this.state.loaded && */this.state.leafs.length > 0 &&
-        <View style={styles.itemsWrapper}>
-          {leafItems}
-        </View>
+          this.state.loaded && this.state.leafs.length > 0 &&
+          <View style={styles.itemsWrapper}>
+            {leafItems}
+          </View>
         }
       </ScrollView>
     );

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   wrapper: {
     margin: 10,
     borderRadius: 5,
-    backgroundColor: Colors.greenSub
+    // backgroundColor: Colors.greenSub
   },
   image: {
     borderRadius: 5,
