@@ -11,7 +11,7 @@ import {
 const RNAppInfo = NativeModules.RNAppInfo;
 import * as firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
-import {Button, ListItem} from 'react-native-elements';
+import {ListItem} from 'react-native-elements';
 
 import Database from '../../firebase/database';
 import Colors from '../../config/colors';
@@ -24,6 +24,7 @@ export default class Profile extends Component {
 
     this.state = {
       uid: "",
+      user: '',
       mobile: "",
       mobileForm: ""
     };
@@ -35,16 +36,17 @@ export default class Profile extends Component {
   async componentDidMount() {
     try {
       let user = await firebase.auth().currentUser;
-
-      Database.listenUserMobile(user.uid, (mobileNumber) => {
-        this.setState({
-          mobile: mobileNumber,
-          mobileForm: mobileNumber
-        });
-      });
+      //
+      // Database.listenUserMobile(user.uid, (mobileNumber) => {
+      //   this.setState({
+      //     mobile: mobileNumber,
+      //     mobileForm: mobileNumber
+      //   });
+      // });
 
       this.setState({
-        uid: user.uid
+        uid: user.uid,
+        user: user
       });
 
     } catch (error) {
@@ -82,8 +84,8 @@ export default class Profile extends Component {
         <Text style={styles.divider}>USER</Text>
 
         <ListItem
-          title='e-mail'
-          rightTitle='hello@slinto.sk'
+          title='E-mail'
+          rightTitle={this.state.user.email}
           hideChevron={true}
           containerStyle={styles.listItem}
           titleStyle={styles.listItemTitle}
@@ -91,24 +93,24 @@ export default class Profile extends Component {
         />
 
         <ListItem
-          title='e-mail'
-          rightTitle='hello@slinto.sk'
+          title='Password'
+          rightTitle='****'
           hideChevron={true}
           containerStyle={styles.listItem}
           titleStyle={styles.listItemTitle}
           rightTitleStyle={styles.listItemRightTitle}
         />
 
-        <Text style={styles.divider}>APPLICATION</Text>
+        {/*<Text style={styles.divider}>APPLICATION</Text>*/}
 
-        <ListItem
-          title='e-mail'
-          rightTitle='hello@slinto.sk'
-          hideChevron={true}
-          containerStyle={styles.listItem}
-          titleStyle={styles.listItemTitle}
-          rightTitleStyle={styles.listItemRightTitle}
-        />
+        {/*<ListItem*/}
+          {/*title='Language'*/}
+          {/*rightTitle='EN_'*/}
+          {/*hideChevron={true}*/}
+          {/*containerStyle={styles.listItem}*/}
+          {/*titleStyle={styles.listItemTitle}*/}
+          {/*rightTitleStyle={styles.listItemRightTitle}*/}
+        {/*/>*/}
 
         <ListItem
           title='Leave a feedback'
@@ -140,18 +142,18 @@ export default class Profile extends Component {
         <Text style={styles.version}>Version {RNAppInfo.shortVersion}</Text>
 
         {/* TODO: REMOVE THIS */}
-        <Text style={styles.heading}>Hello UserId: {this.state.uid}</Text>
-        <Text style={styles.heading}>Mobile Number (From Database): {this.state.mobile}</Text>
-        <View style={styles.form}>
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(mobileForm) => this.setState({mobileForm})}
-            value={this.state.mobileForm}
-            placeholder="Mobile Number"
-          />
+        {/*<Text style={styles.heading}>Hello UserId: {this.state.uid}</Text>*/}
+        {/*<Text style={styles.heading}>Mobile Number (From Database): {this.state.mobile}</Text>*/}
+        {/*<View style={styles.form}>*/}
+          {/*<TextInput*/}
+            {/*style={{height: 40, borderColor: 'gray', borderWidth: 1}}*/}
+            {/*onChangeText={(mobileForm) => this.setState({mobileForm})}*/}
+            {/*value={this.state.mobileForm}*/}
+            {/*placeholder="Mobile Number"*/}
+          {/*/>*/}
 
-          <Button onPress={this.saveMobile} title="save"/>
-        </View>
+          {/*<Button onPress={this.saveMobile} title="save"/>*/}
+        {/*</View>*/}
 
       </ScrollView>
     );
