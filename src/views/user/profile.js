@@ -12,10 +12,12 @@ const RNAppInfo = NativeModules.RNAppInfo;
 import * as firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 import {ListItem} from 'react-native-elements';
+import ReactNativeI18n from 'react-native-i18n';
 
 import Database from '../../firebase/database';
 import Colors from '../../config/colors';
 
+const deviceLocale = ReactNativeI18n.currentLocale();
 
 export default class Profile extends Component {
 
@@ -101,16 +103,17 @@ export default class Profile extends Component {
           rightTitleStyle={styles.listItemRightTitle}
         />
 
-        {/*<Text style={styles.divider}>APPLICATION</Text>*/}
+        <Text style={styles.divider}>APPLICATION</Text>
 
-        {/*<ListItem*/}
-          {/*title='Language'*/}
-          {/*rightTitle='EN_'*/}
-          {/*hideChevron={true}*/}
-          {/*containerStyle={styles.listItem}*/}
-          {/*titleStyle={styles.listItemTitle}*/}
-          {/*rightTitleStyle={styles.listItemRightTitle}*/}
-        {/*/>*/}
+        <ListItem
+          title='Language'
+          rightTitle={deviceLocale}
+          chevronColor={Colors.greenMain}
+          containerStyle={[styles.listItem, styles.rightWithChevron]}
+          titleStyle={styles.listItemTitle}
+          underlayColor={Colors.darkActive}
+          rightTitleStyle={styles.listItemRightTitle}
+        />
 
         <ListItem
           title='Leave a feedback'
@@ -212,6 +215,10 @@ const styles = StyleSheet.create({
 
   marginTop: {
     marginTop: 30
+  },
+
+  rightWithChevron: {
+    paddingRight: 12
   },
 
   version: {
