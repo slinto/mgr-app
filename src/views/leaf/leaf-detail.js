@@ -58,6 +58,9 @@ export default class LeafDetail extends Component {
         { this.state.loaded &&
         <View>
           <View style={styles.textWrapper}>
+            <LeafDetailItem left="LATIN. NAME"
+                            right={this.state.tree.name}/>
+
             <LeafDetailItem left="NAME"
                             right={this.state.tree.name}/>
 
