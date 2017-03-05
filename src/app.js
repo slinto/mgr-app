@@ -18,6 +18,7 @@ import Profile from "./views/user/profile";
 import LeafList from "./views/leaf/leaf-list";
 import LeafDetail from "./views/leaf/leaf-detail";
 import Login from "./views/auth/login";
+import PasswordReset from "./views/auth/password-reset";
 import Welcome from "./views/auth/welcome";
 import Registration from "./views/auth/registration";
 import Form from "./views/user/form";
@@ -57,6 +58,7 @@ export default class LeafMgrApp extends Component {
             <Scene key="welcome" component={Welcome} title="Welcome" style={{ backgroundColor: Colors.darkMain}}/>
             <Scene key="registration" component={Registration} title="Registration" style={{ backgroundColor: Colors.darkMain}}/>
             <Scene key="login" component={Login} title="Login" style={{ backgroundColor: Colors.darkMain}}/>
+            <Scene key="passwordReset" component={PasswordReset} title="Password Reset" style={{ backgroundColor: Colors.darkMain}}/>
           </Scene>
 
           <Scene

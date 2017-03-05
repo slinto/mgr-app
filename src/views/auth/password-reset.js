@@ -16,41 +16,32 @@ import {Button} from 'react-native-elements';
 import Colors from '../../config/colors';
 
 
-export default class Login extends Component {
+export default class PasswordReset extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: "hello@slinto.sk",
-      password: "Tomco313",
       response: ""
     };
 
-    this.login = this.login.bind(this);
+    this.resetPassword = this.resetPassword.bind(this);
   }
 
   goBack() {
     Actions.pop();
   }
 
-  async loginWithFacebook() {
-    console.log('loginWithFacebook');
-  }
-
-  resetPassword() {
-    Actions.passwordReset();
-  }
-
-  async login() {
+  async resetPassword() {
     try {
-      await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
+      await firebase.auth().sendPasswordResetEmail(this.state.email);
 
       this.setState({
-        response: "Logged In!"
+        response: "Your new password is in your mail."
       });
 
       setTimeout(() => {
-        Actions.account({type: 'reset'});
+        Actions.pop();
       }, 1500);
 
     } catch (error) {
@@ -78,15 +69,9 @@ export default class Login extends Component {
           </View>
 
           <View style={styles.buttonsWrapper}>
-            <Button
-              onPress={this.loginWithFacebook}
-              buttonStyle={styles.button}
-              title='Login with facebook'
-              backgroundColor='#3b5998'
-              icon={{name: 'facebook', type: 'font-awesome'}}>
-            </Button>
-
-            <Text style={styles.divider}>- or -</Text>
+            <Text style={styles.h3}>
+              Forgotten password?
+            </Text>
 
             <TextInput
               style={styles.input}
@@ -96,25 +81,15 @@ export default class Login extends Component {
               onChangeText={(email) => this.setState({email})}
             />
 
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              placeholderTextColor="rgba(255,255,255,0.8)"
-              secureTextEntry={true}
-              value={this.state.password}
-              onChangeText={(password) => this.setState({password})}
-            />
-
             <Button
-              onPress={this.login}
+              onPress={this.resetPassword}
               buttonStyle={styles.button}
-              disabled={!(this.state.email.length > 0 && this.state.password.length > 0)}
+              disabled={!(this.state.email.length > 0)}
               disabledStyle={styles.buttonDisabled}
               backgroundColor='#2DDE98'
-              title='Log In'>
+              title='Reset password'>
             </Button>
 
-            <Text style={[styles.goBack, styles.marginBottom]} onPress={this.resetPassword}>Password reset</Text>
             <Text style={styles.goBack} onPress={this.goBack}>Go back</Text>
             <Text style={styles.response}>{this.state.response}</Text>
 
@@ -156,6 +131,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontStyle: 'italic',
     color: '#fff'
+  },
+
+  h3: {
+    marginTop: 30,
+    fontSize: 16,
+    color: '#fff',
+    textAlign: 'center'
   },
 
   button: {
