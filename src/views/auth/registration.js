@@ -30,6 +30,10 @@ export default class Registration extends Component {
     this.signup = this.signup.bind(this);
   }
 
+  componentWillMount() {
+    this.imagePreload = (<Image source={require('../../../assets/img/background.png')}/>);
+  }
+
   async signup() {
     try {
       await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);

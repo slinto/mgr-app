@@ -15,6 +15,8 @@ export default class TabIcon extends React.Component {
       return 'list';
     } else if (this.props.name === 'profile') {
       return 'user';
+    } else if (this.props.name === 'camera') {
+      return 'camera';
     }
   }
 

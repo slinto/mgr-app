@@ -24,6 +24,10 @@ export default class Welcome extends Component {
     };
   }
 
+  componentWillMount() {
+    this.imagePreload = (<Image source={require('../../../assets/img/background.png')}/>);
+  }
+
   goToLogin() {
     Actions.login();
   }
@@ -63,7 +67,6 @@ export default class Welcome extends Component {
               backgroundColor={Colors.greenSub}
               title='I have a account'>
             </Button>
-
 
           </View>
 

@@ -22,6 +22,8 @@ import PasswordReset from "./views/auth/password-reset";
 import Welcome from "./views/auth/welcome";
 import Registration from "./views/auth/registration";
 import Form from "./views/user/form";
+import CameraSnap from "./views/camera/camera-snap";
+import CameraPreview from "./views/camera/camera-preview";
 
 export default class LeafMgrApp extends Component {
   constructor(props) {
@@ -79,6 +81,19 @@ export default class LeafMgrApp extends Component {
               rightButtonStyle={styles.navText}>
               <Scene key="list" component={LeafList} title="Leaf List" initial={true} style={{ backgroundColor: Colors.darkMain}}/>
               <Scene key="detail" component={LeafDetail} title="Leaf Detail" style={{ backgroundColor: Colors.darkMain}}/>
+            </Scene>
+
+            <Scene
+              key="camera"
+              title="Camera"
+              icon={TabIcon}
+              navigationBarStyle={styles.navBar}
+              titleStyle={styles.navText}
+              backButtonTextStyle={styles.navText}
+              barButtonIconStyle={styles.tintColor}
+              rightButtonStyle={styles.navText}>
+              <Scene key="cameraSnap" component={CameraSnap} title="CameraSnap" hideNavBar hideTabBar initial={true} style={{ backgroundColor: Colors.darkMain}}/>
+              <Scene key="cameraPreview" component={CameraPreview} title="Preview" style={{ backgroundColor: Colors.darkMain}}/>
             </Scene>
 
             <Scene

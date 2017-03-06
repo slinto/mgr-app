@@ -28,6 +28,10 @@ export default class PasswordReset extends Component {
     this.resetPassword = this.resetPassword.bind(this);
   }
 
+  componentWillMount() {
+    this.imagePreload = (<Image source={require('../../../assets/img/background.png')}/>);
+  }
+
   goBack() {
     Actions.pop();
   }

@@ -29,6 +29,10 @@ export default class Login extends Component {
     this.login = this.login.bind(this);
   }
 
+  componentWillMount() {
+    this.imagePreload = (<Image source={require('../../../assets/img/background.png')}/>);
+  }
+
   goBack() {
     Actions.pop();
   }
