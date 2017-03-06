@@ -25,7 +25,6 @@ export default class CameraSnap extends Component {
   }
 
   takePicture() {
-    console.log('takePicture');
     this.camera.capture()
       .then((data) => {
         console.log(data)
@@ -42,6 +41,7 @@ export default class CameraSnap extends Component {
     return (
       <View style={styles.container}>
         <Camera
+          defaultTouchToFocus
           ref={(cam) => {
             this.camera = cam;
           }}

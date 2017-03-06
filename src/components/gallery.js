@@ -10,7 +10,6 @@ import {
 import Colors from '../config/colors';
 
 export default class Gallery extends React.Component {
-
   render() {
     let images = this.props.photos.map((photoUri) => {
       // TODO: KEY

@@ -7,7 +7,8 @@ import {
   Text,
   View,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  Image
 } from "react-native";
 import * as firebase from "firebase";
 
@@ -27,8 +28,6 @@ export default class LeafDetail extends Component {
       loaded: false
     };
 
-    console.log(this.props.leaf);
-
     // this.logout = this.logout.bind(this);
   }
 
@@ -43,12 +42,12 @@ export default class LeafDetail extends Component {
           loaded: true,
           loading: false
         });
+
       });
 
     } catch (error) {
       console.log(error);
     }
-
   }
 
   render() {
