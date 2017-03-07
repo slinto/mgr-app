@@ -28,14 +28,15 @@ import CameraPreview from "./views/camera/camera-preview";
 export default class LeafMgrApp extends Component {
   constructor(props) {
     super(props);
-    Firebase.initialise();
+    Firebase.initialize();
+    StatusBar.setBarStyle('light-content', true);
     this.getInitialView();
     this.state = {
       userLoaded: false,
       initialView: null
     };
+
     this.getInitialView = this.getInitialView.bind(this);
-    StatusBar.setBarStyle('light-content', true);
   }
 
   getInitialView() {
