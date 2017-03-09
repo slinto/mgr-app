@@ -14,7 +14,6 @@ export default class CameraPreview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
     };
 
     this.goBack = this.goBack.bind(this);
@@ -26,31 +25,18 @@ export default class CameraPreview extends Component {
   }
 
   sendToAnalyze() {
-    this.setState({
-      loading: true
-    });
+    Actions.cameraWaiting({ imgUri: this.props.cameraData.path });
   }
 
   render() {
     return (
       <View style={styles.container}>
-
-        { !this.state.loading &&
         <Image source={{uri: this.props.cameraData.path}} style={styles.image}>
           <View style={styles.buttonsWrapper}>
             <Text style={styles.button} onPress={this.goBack}>RETAKE</Text>
             <Text style={styles.button} onPress={this.sendToAnalyze}>ANALYZE!</Text>
           </View>
         </Image>
-        }
-
-        { this.state.loading &&
-        <View style={styles.loadingContainer}>
-          <Text style={styles.loadingH1}>Please wait!</Text>
-          <Text style={styles.loadingH2}>We're analyze your leaf.</Text>
-        </View>
-        }
-
       </View>
     );
   }
@@ -81,23 +67,5 @@ const styles = StyleSheet.create({
     color: Colors.greenMain,
     fontSize: 16,
     backgroundColor: 'transparent'
-  },
-
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.greenMain
-  },
-
-  loadingH1: {
-    fontSize: 18,
-    color: '#000',
-    textAlign: 'center'
-  },
-
-  loadingH2: {
-    color: '#000',
-    textAlign: 'center'
   }
 });
