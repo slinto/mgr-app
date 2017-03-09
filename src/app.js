@@ -24,6 +24,7 @@ import Registration from "./views/auth/registration";
 import Form from "./views/user/form";
 import CameraSnap from "./views/camera/camera-snap";
 import CameraPreview from "./views/camera/camera-preview";
+import CameraWaiting from "./views/camera/camera-waiting";
 
 export default class LeafMgrApp extends Component {
   constructor(props) {
@@ -95,6 +96,7 @@ export default class LeafMgrApp extends Component {
               rightButtonStyle={styles.navText}>
               <Scene key="cameraSnap" component={CameraSnap} title="CameraSnap" hideNavBar hideTabBar initial={true} style={{ backgroundColor: Colors.darkMain}}/>
               <Scene key="cameraPreview" component={CameraPreview} title="Preview" style={{ backgroundColor: Colors.darkMain}}/>
+              <Scene key="cameraWaiting" component={CameraWaiting} title="Waiting" style={{ backgroundColor: Colors.greenMain}}/>
             </Scene>
 
             <Scene
