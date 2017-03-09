@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint --fix *.js"
   },
   "dependencies": {
     "firebase": "3.6.10",
@@ -14,15 +15,21 @@
     "react-native-elements": "0.9.7",
     "react-native-fetch-blob": "^0.10.2",
     "react-native-i18n": "1.0.0",
-    "react-native-offline-mode": "^0.1.5",
+    "react-native-offline-mode": "0.1.5",
     "react-native-router-flux": "3.37.0",
     "react-native-vector-icons": "4.0.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
+    "babel-eslint": "^6.1.0",
     "babel-preset-react-native": "1.9.1",
     "jest": "19.0.0",
-    "react-test-renderer": "15.4.2"
+    "react-test-renderer": "15.4.2",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "9.0.1",
+    "eslint-plugin-import": "1.9.2",
+    "eslint-plugin-jsx-a11y": "1.5.3",
+    "eslint-plugin-react": "^5.2.2"
   },
   "jest": {
     "preset": "react-native"
