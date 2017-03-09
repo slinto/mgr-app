@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-import {
-  Platform
-} from 'react-native';
+import { Platform } from 'react-native';
 import * as firebase from 'firebase';
 import RNFetchBlob from 'react-native-fetch-blob';
 
@@ -23,23 +20,21 @@ export default class FirebaseStorage {
       const imageRef = storage.ref('leafs').child(`${sessionId}.jpg`);
 
       fs.readFile(uploadUri, 'base64')
-        .then((data) => {
-          return Blob.build(data, {type: `${mime};BASE64`})
-        })
+        .then((data) => Blob.build(data, { type: `${mime};BASE64` }))
         .then((blob) => {
-          uploadBlob = blob
-          return imageRef.put(blob, {contentType: mime})
+          uploadBlob = blob;
+          return imageRef.put(blob, { contentType: mime });
         })
         .then(() => {
-          uploadBlob.close()
-          return imageRef.getDownloadURL()
+          uploadBlob.close();
+          return imageRef.getDownloadURL();
         })
         .then((url) => {
-          resolve(url)
+          resolve(url);
         })
         .catch((error) => {
-          reject(error)
-        })
-    })
+          reject(error);
+        });
+    });
   }
 }

@@ -1,11 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Text,
-  Image,
   View,
-  StyleSheet,
-  TouchableHighlight,
-  Dimensions
+  StyleSheet
 } from 'react-native';
 
 import Colors from '../config/colors';
@@ -38,9 +35,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5
   },
+
   left: {
     color: Colors.whiteMain,
   },
+
   right: {
     color: Colors.whiteMain,
     textAlign: 'right'

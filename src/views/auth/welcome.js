@@ -1,27 +1,19 @@
 import {
-  AppRegistry,
-  TextInput,
   Text,
   View,
   StyleSheet,
-  TouchableWithoutFeedback,
-  Image,
-  ScrollView
-} from "react-native";
-import React, {Component} from "react";
-import * as firebase from "firebase";
-import {Actions} from 'react-native-router-flux';
-import {Button} from 'react-native-elements';
-
+  Image
+} from 'react-native';
+import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-elements';
 import Colors from '../../config/colors';
-
 
 export default class Welcome extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   componentWillMount() {
@@ -42,33 +34,33 @@ export default class Welcome extends Component {
         source={require('../../../assets/img/background.png')}
         style={styles.container}>
 
-          <View style={styles.logoWrapper}>
-            <Image style={styles.logo} source={require('../../../assets/img/logo.png')}/>
-            <Text style={styles.h1}>
-              LEAF PROJECT
-            </Text>
-            <Text style={styles.h2}>
-              Learn nature.
-            </Text>
-          </View>
+        <View style={styles.logoWrapper}>
+          <Image style={styles.logo} source={require('../../../assets/img/logo.png')}/>
+          <Text style={styles.h1}>
+            LEAF PROJECT
+          </Text>
+          <Text style={styles.h2}>
+            Learn nature.
+          </Text>
+        </View>
 
-          <View style={styles.buttonsWrapper}>
+        <View style={styles.buttonsWrapper}>
 
-            <Button
-              buttonStyle={styles.button}
-              backgroundColor={Colors.greySub}
-              onPress={this.goToRegistration}
-              title='Create an account'>
-            </Button>
+          <Button
+            buttonStyle={styles.button}
+            backgroundColor={Colors.greySub}
+            onPress={this.goToRegistration}
+            title='Create an account'>
+          </Button>
 
-            <Button
-              buttonStyle={styles.button}
-              onPress={this.goToLogin}
-              backgroundColor={Colors.greenSub}
-              title='I have a account'>
-            </Button>
+          <Button
+            buttonStyle={styles.button}
+            onPress={this.goToLogin}
+            backgroundColor={Colors.greenSub}
+            title='I have a account'>
+          </Button>
 
-          </View>
+        </View>
 
       </Image>
     );

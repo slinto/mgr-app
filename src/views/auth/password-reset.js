@@ -7,14 +7,12 @@ import {
   TouchableWithoutFeedback,
   Image,
   ScrollView
-} from "react-native";
-import React, {Component} from "react";
-import * as firebase from "firebase";
-import {Actions} from 'react-native-router-flux';
-import {Button} from 'react-native-elements';
-
+} from 'react-native';
+import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-elements';
 import Colors from '../../config/colors';
-
 
 export default class PasswordReset extends Component {
   constructor(props) {
@@ -82,7 +80,7 @@ export default class PasswordReset extends Component {
               placeholder="E-mail"
               placeholderTextColor="rgba(255,255,255,0.8)"
               value={this.state.email}
-              onChangeText={(email) => this.setState({email})}
+              onChangeText={(email) => this.setState({ email })}
             />
 
             <Button

@@ -1,8 +1,4 @@
-/**
- * @class Database
- */
-
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 export default class Database {
 
@@ -13,11 +9,9 @@ export default class Database {
    * @returns {firebase.Promise<any>|!firebase.Promise.<void>}
    */
   static setUserMobile(userId, mobile) {
-    let userMobilePath = "/user/" + userId + "/details";
+    const userMobilePath = `/user/${userId}/details`;
 
-    return firebase.database().ref(userMobilePath).set({
-      mobile: mobile
-    })
+    return firebase.database().ref(userMobilePath).set({ mobile });
   }
 
   /**
@@ -26,20 +20,20 @@ export default class Database {
    * @param callback Users mobile number
    */
   static listenUserMobile(userId, callback) {
-    let userMobilePath = "/user/" + userId + "/details";
+    const userMobilePath = `/user/${userId}/details`;
 
     firebase.database().ref(userMobilePath).on('value', (snapshot) => {
-      var mobile = "";
+      let mobile = '';
       if (snapshot.val()) {
-        mobile = snapshot.val().mobile
+        mobile = snapshot.val().mobile;
       }
-      callback(mobile)
+      callback(mobile);
     });
   }
 
   //---------------------
   static getUserLeafList(userId, callback) {
-    let path = `/user/${userId}/leafs`;
+    const path = `/user/${userId}/leafs`;
 
     firebase.database().ref(path).on('value', (snapshot) => {
       callback(snapshot.val());
@@ -48,11 +42,10 @@ export default class Database {
 
   //--------------------
   static getTreeDetail(leafId, callback) {
-    let path = `/tree/${leafId}`;
+    const path = `/tree/${leafId}`;
 
     firebase.database().ref(path).on('value', (snapshot) => {
       callback(snapshot.val());
     });
   }
-
 }

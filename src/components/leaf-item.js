@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   Image,
@@ -20,9 +20,10 @@ export default class LeafItem extends React.Component {
   render() {
     const leaf = this.props.data;
     return (
-      <TouchableHighlight style={[styles.wrapper, {width: this.SIZE, height: this.SIZE}]} onPress={this.props.onPress}>
-        <Image style={[styles.image, {width: this.SIZE, height: this.SIZE}]} source={{uri: leaf.photos[0]}}>
-          <View style={[styles.imageOverlay, {width: this.SIZE, height: this.SIZE}]}>
+      <TouchableHighlight style={[styles.wrapper, { width: this.SIZE, height: this.SIZE }]}
+                          onPress={this.props.onPress}>
+        <Image style={[styles.image, { width: this.SIZE, height: this.SIZE }]} source={{ uri: leaf.photos[0] }}>
+          <View style={[styles.imageOverlay, { width: this.SIZE, height: this.SIZE }]}>
             <Text style={styles.heading}>{leaf.name}</Text>
             <Text style={styles.text}>{leaf.photos.length} PHOTOS</Text>
           </View>
@@ -36,12 +37,13 @@ export default class LeafItem extends React.Component {
 const styles = StyleSheet.create({
   wrapper: {
     margin: 10,
-    borderRadius: 5,
-    // backgroundColor: Colors.greenSub
+    borderRadius: 5
   },
+
   image: {
     borderRadius: 5,
   },
+
   imageOverlay: {
     flex: 1,
     flexDirection: 'column',
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.4)'
   },
+
   heading: {
     color: Colors.whiteMain,
     textAlign: 'center',
@@ -57,6 +60,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 5
   },
+
   text: {
     color: Colors.whiteMain,
     textAlign: 'center',

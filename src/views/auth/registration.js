@@ -7,14 +7,12 @@ import {
   TouchableWithoutFeedback,
   Image,
   ScrollView
-} from "react-native";
-import React, {Component} from "react";
-import * as firebase from "firebase";
-import {Actions} from 'react-native-router-flux';
-import {Button} from 'react-native-elements';
-
+} from 'react-native';
+import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-elements';
 import Colors from '../../config/colors';
-
 
 export default class Registration extends Component {
   constructor(props) {
@@ -83,7 +81,7 @@ export default class Registration extends Component {
               buttonStyle={styles.button}
               title='Sign in with facebook'
               backgroundColor='#3b5998'
-              icon={{name: 'facebook', type: 'font-awesome'}}>
+              icon={{ name: 'facebook', type: 'font-awesome' }}>
             </Button>
 
             <Text style={styles.divider}>- or -</Text>
@@ -93,7 +91,7 @@ export default class Registration extends Component {
               placeholder="E-mail"
               placeholderTextColor="rgba(255,255,255,0.8)"
               value={this.state.email}
-              onChangeText={(email) => this.setState({email})}
+              onChangeText={(email) => this.setState({ email })}
             />
 
             <TextInput
@@ -102,7 +100,7 @@ export default class Registration extends Component {
               placeholderTextColor="rgba(255,255,255,0.8)"
               secureTextEntry={true}
               value={this.state.password}
-              onChangeText={(password) => this.setState({password})}
+              onChangeText={(password) => this.setState({ password })}
             />
 
             <TextInput
@@ -111,7 +109,7 @@ export default class Registration extends Component {
               placeholderTextColor="rgba(255,255,255,0.8)"
               secureTextEntry={true}
               value={this.state.password2}
-              onChangeText={(password2) => this.setState({password2})}
+              onChangeText={(password2) => this.setState({ password2 })}
             />
 
             <Button

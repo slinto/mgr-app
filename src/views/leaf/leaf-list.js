@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -8,11 +8,9 @@ import {
   Dimensions
 } from 'react-native';
 import * as firebase from 'firebase';
-import {Actions} from 'react-native-router-flux';
-
+import { Actions } from 'react-native-router-flux';
 import Database from '../../firebase/database';
 import LeafItem from '../../components/leaf-item';
-
 
 export default class LeafList extends Component {
   constructor(props) {
@@ -30,7 +28,7 @@ export default class LeafList extends Component {
 
   async componentDidMount() {
     try {
-      this.setState({loading: true});
+      this.setState({ loading: true });
       let user = await firebase.auth().currentUser;
       Database.getUserLeafList(user.uid, (leafs) => {
         console.log(leafs);
@@ -46,7 +44,7 @@ export default class LeafList extends Component {
   }
 
   goToDetail(leaf) {
-    Actions.detail({leaf: leaf, title: leaf.name});
+    Actions.detail({ leaf: leaf, title: leaf.name });
   }
 
   render() {

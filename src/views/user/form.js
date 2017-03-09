@@ -4,12 +4,10 @@ import {
   ScrollView,
   TextInput
 } from 'react-native';
-import React, {Component} from 'react';
-import {Actions} from 'react-native-router-flux';
-import {Button} from 'react-native-elements'
-
+import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-elements';
 import Colors from '../../config/colors';
-
 
 export default class Form extends Component {
   constructor(props) {
@@ -41,7 +39,7 @@ export default class Form extends Component {
           editable={true}
           placeholder={this.props.msg}
           placeholderTextColor={Colors.greySub}
-          onChangeText={(text) => this.setState({text})}
+          onChangeText={(text) => this.setState({ text })}
           value={this.state.text}/>
 
         <Button

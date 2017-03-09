@@ -1,30 +1,26 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
-  Text,
-  View,
-  Navigator,
   StatusBar
 } from 'react-native';
 
-import * as firebase from "firebase";
-import {Actions, Scene, Router} from 'react-native-router-flux';
+import * as firebase from 'firebase';
+import { Actions, Scene, Router } from 'react-native-router-flux';
 
 import Colors from './config/colors';
-import Firebase from "./firebase/firebase";
+import Firebase from './firebase/firebase';
 import TabIcon from './components/tab-icon';
-import Profile from "./views/user/profile";
-import LeafList from "./views/leaf/leaf-list";
-import LeafDetail from "./views/leaf/leaf-detail";
-import Login from "./views/auth/login";
-import PasswordReset from "./views/auth/password-reset";
-import Welcome from "./views/auth/welcome";
-import Registration from "./views/auth/registration";
-import Form from "./views/user/form";
-import CameraSnap from "./views/camera/camera-snap";
-import CameraPreview from "./views/camera/camera-preview";
-import CameraWaiting from "./views/camera/camera-waiting";
+import Profile from './views/user/profile';
+import LeafList from './views/leaf/leaf-list';
+import LeafDetail from './views/leaf/leaf-detail';
+import Login from './views/auth/login';
+import PasswordReset from './views/auth/password-reset';
+import Welcome from './views/auth/welcome';
+import Registration from './views/auth/registration';
+import Form from './views/user/form';
+import CameraSnap from './views/camera/camera-snap';
+import CameraPreview from './views/camera/camera-preview';
+import CameraWaiting from './views/camera/camera-waiting';
 
 export default class LeafMgrApp extends Component {
   constructor(props) {
@@ -42,13 +38,12 @@ export default class LeafMgrApp extends Component {
 
   getInitialView() {
     firebase.auth().onAuthStateChanged((user) => {
-      let initialView = user ? "account" : "auth";
-      console.log(user);
+      const initialView = user ? 'account' : 'auth';
 
       this.setState({
         userLoaded: true,
-        initialView: initialView
-      })
+        initialView
+      });
     });
   }
 
@@ -56,33 +51,65 @@ export default class LeafMgrApp extends Component {
     if (this.state.userLoaded) {
 
       let scenes = Actions.create(
-        <Scene key="root" >
+        <Scene key="root">
 
           <Scene key="auth" hideNavBar initial={this.state.initialView === 'auth'}>
-            <Scene key="welcome" component={Welcome} title="Welcome" style={{ backgroundColor: Colors.darkMain}}/>
-            <Scene key="registration" component={Registration} title="Registration" style={{ backgroundColor: Colors.darkMain}}/>
-            <Scene key="login" component={Login} title="Login" style={{ backgroundColor: Colors.darkMain}}/>
-            <Scene key="passwordReset" component={PasswordReset} title="Password Reset" style={{ backgroundColor: Colors.darkMain}}/>
+            <Scene
+              key="welcome"
+              component={Welcome}
+              title="Welcome"
+              style={{ backgroundColor: Colors.darkMain }}
+            />
+            <Scene
+              key="registration"
+              component={Registration}
+              title="Registration"
+              style={{ backgroundColor: Colors.darkMain }}
+            />
+            <Scene
+              key="login"
+              component={Login}
+              title="Login"
+              style={{ backgroundColor: Colors.darkMain }}
+            />
+            <Scene
+              key="passwordReset"
+              component={PasswordReset}
+              title="Password Reset"
+              style={{ backgroundColor: Colors.darkMain }}
+            />
           </Scene>
 
           <Scene
             key="account"
             initial={this.state.initialView === 'account'}
-            tabs={true}
-            tabBarStyle={styles.tabBarStyle}>
-
+            tabs
+            tabBarStyle={styles.tabBarStyle}
+          >
             <Scene
               key="leaf"
-              initial={true}
+              initial
               title="Leaf List"
               icon={TabIcon}
               navigationBarStyle={styles.navBar}
               titleStyle={styles.navText}
               backButtonTextStyle={styles.navText}
               barButtonIconStyle={styles.tintColor}
-              rightButtonStyle={styles.navText}>
-              <Scene key="list" component={LeafList} title="Leaf List" initial={true} style={{ backgroundColor: Colors.darkMain}}/>
-              <Scene key="detail" component={LeafDetail} title="Leaf Detail" style={{ backgroundColor: Colors.darkMain}}/>
+              rightButtonStyle={styles.navText}
+            >
+              <Scene
+                key="list"
+                component={LeafList}
+                title="Leaf List"
+                initial
+                style={{ backgroundColor: Colors.darkMain }}
+              />
+              <Scene
+                key="detail"
+                component={LeafDetail}
+                title="Leaf Detail"
+                style={{ backgroundColor: Colors.darkMain }}
+              />
             </Scene>
 
             <Scene
@@ -93,10 +120,29 @@ export default class LeafMgrApp extends Component {
               titleStyle={styles.navText}
               backButtonTextStyle={styles.navText}
               barButtonIconStyle={styles.tintColor}
-              rightButtonStyle={styles.navText}>
-              <Scene key="cameraSnap" component={CameraSnap} title="CameraSnap" hideNavBar hideTabBar initial={true} style={{ backgroundColor: Colors.darkMain}}/>
-              <Scene key="cameraPreview" component={CameraPreview} title="Preview" style={{ backgroundColor: Colors.darkMain}}/>
-              <Scene key="cameraWaiting" component={CameraWaiting} title="Waiting" style={{ backgroundColor: Colors.greenMain}}/>
+              rightButtonStyle={styles.navText}
+            >
+              <Scene
+                key="cameraSnap"
+                component={CameraSnap}
+                title="CameraSnap"
+                hideNavBar
+                hideTabBar
+                initial
+                style={{ backgroundColor: Colors.darkMain }}
+              />
+              <Scene
+                key="cameraPreview"
+                component={CameraPreview}
+                title="Preview"
+                style={{ backgroundColor: Colors.darkMain }}
+              />
+              <Scene
+                key="cameraWaiting"
+                component={CameraWaiting}
+                title="Waiting"
+                style={{ backgroundColor: Colors.greenMain }}
+              />
             </Scene>
 
             <Scene
@@ -107,34 +153,33 @@ export default class LeafMgrApp extends Component {
               titleStyle={styles.navText}
               backButtonTextStyle={styles.navText}
               barButtonIconStyle={styles.tintColor}
-              rightButtonStyle={styles.navText}>
-
+              rightButtonStyle={styles.navText}
+            >
               <Scene
                 key="profile_detail"
                 component={Profile}
                 title="Profile"
-                style={{ backgroundColor: Colors.darkMain}}/>
-
+                style={{ backgroundColor: Colors.darkMain }}
+              />
               <Scene
                 key="feedback"
                 component={Form}
                 title="Leave a feedback"
-                style={{ backgroundColor: Colors.darkMain}}/>
-
+                style={{ backgroundColor: Colors.darkMain }}
+              />
               <Scene
                 key="bug"
                 component={Form}
-                style={{ backgroundColor: Colors.darkMain}}
-                title="Report a bug"/>
-
+                style={{ backgroundColor: Colors.darkMain }}
+                title="Report a bug"
+              />
             </Scene>
           </Scene>
-
         </Scene>
       );
 
       return (
-        <Router scenes={scenes} />
+        <Router scenes={scenes}/>
       );
     } else {
       return null;

@@ -1,8 +1,4 @@
-/**
- * @class Home
- */
-
-import React, {Component} from "react";
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -10,13 +6,9 @@ import {
   ScrollView,
   Image
 } from "react-native";
-import * as firebase from "firebase";
-
 import Database from "../../firebase/database";
-import Colors from '../../config/colors';
 import LeafDetailItem from '../../components/leaf-detail-item';
 import Gallery from '../../components/gallery';
-
 
 export default class LeafDetail extends Component {
   constructor(props) {
@@ -33,7 +25,7 @@ export default class LeafDetail extends Component {
 
   async componentDidMount() {
     try {
-      this.setState({loading: true});
+      this.setState({ loading: true });
       Database.getTreeDetail(this.props.leaf.id, (tree) => {
         console.log(tree);
 

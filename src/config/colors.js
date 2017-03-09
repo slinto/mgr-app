@@ -8,4 +8,4 @@ export default {
   greenSub: '#2DDE98',
   whiteMain: '#fff',
   warning: '#2DDE98'
-}
+};

@@ -7,14 +7,12 @@ import {
   TouchableWithoutFeedback,
   Image,
   ScrollView
-} from "react-native";
-import React, {Component} from "react";
-import * as firebase from "firebase";
-import {Actions} from 'react-native-router-flux';
-import {Button} from 'react-native-elements';
-
+} from 'react-native';
+import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
+import { Button } from 'react-native-elements';
 import Colors from '../../config/colors';
-
 
 export default class Login extends Component {
   constructor(props) {
@@ -54,7 +52,7 @@ export default class Login extends Component {
       });
 
       setTimeout(() => {
-        Actions.account({type: 'reset'});
+        Actions.account({ type: 'reset' });
       }, 1500);
 
     } catch (error) {
@@ -87,7 +85,7 @@ export default class Login extends Component {
               buttonStyle={styles.button}
               title='Login with facebook'
               backgroundColor='#3b5998'
-              icon={{name: 'facebook', type: 'font-awesome'}}>
+              icon={{ name: 'facebook', type: 'font-awesome' }}>
             </Button>
 
             <Text style={styles.divider}>- or -</Text>
@@ -97,7 +95,7 @@ export default class Login extends Component {
               placeholder="E-mail"
               placeholderTextColor="rgba(255,255,255,0.8)"
               value={this.state.email}
-              onChangeText={(email) => this.setState({email})}
+              onChangeText={(email) => this.setState({ email })}
             />
 
             <TextInput
@@ -106,7 +104,7 @@ export default class Login extends Component {
               placeholderTextColor="rgba(255,255,255,0.8)"
               secureTextEntry={true}
               value={this.state.password}
-              onChangeText={(password) => this.setState({password})}
+              onChangeText={(password) => this.setState({ password })}
             />
 
             <Button

@@ -1,17 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
-  AppRegistry,
   Dimensions,
   StyleSheet,
   Text,
   TouchableHighlight,
-  TouchableWithoutFeedback,
   View
 } from 'react-native';
 import Camera from 'react-native-camera';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import Colors from '../../config/colors';
-
 
 export default class CameraSnap extends Component {
   constructor(props) {
@@ -53,7 +50,7 @@ export default class CameraSnap extends Component {
             <Text style={styles.closeButton} onPress={this.goBack}>CLOSE</Text>
 
             <TouchableHighlight style={styles.captureWrapper} onPress={this.takePicture}>
-              <View style={styles.capture} />
+              <View style={styles.capture}/>
             </TouchableHighlight>
           </View>
         </Camera>
@@ -109,5 +106,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: 'transparent'
   }
-
 });

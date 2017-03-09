@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -6,15 +6,13 @@ import {
   Text,
   View
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import Colors from '../../config/colors';
-
 
 export default class CameraPreview extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
 
     this.goBack = this.goBack.bind(this);
     this.sendToAnalyze = this.sendToAnalyze.bind(this);
@@ -31,7 +29,7 @@ export default class CameraPreview extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={{uri: this.props.cameraData.path}} style={styles.image}>
+        <Image source={{ uri: this.props.cameraData.path }} style={styles.image}>
           <View style={styles.buttonsWrapper}>
             <Text style={styles.button} onPress={this.goBack}>RETAKE</Text>
             <Text style={styles.button} onPress={this.sendToAnalyze}>ANALYZE!</Text>

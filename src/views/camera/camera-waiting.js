@@ -1,15 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   ActivityIndicator,
-  Dimensions,
   StyleSheet,
   Image,
   Text,
   View
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
-import RNFetchBlob from 'react-native-fetch-blob'
-import firebase from 'firebase'
 import Colors from '../../config/colors';
 import FirebaseStorage from '../../firebase/storage';
 
@@ -25,12 +21,11 @@ export default class CameraWaiting extends Component {
   componentWillMount() {
     FirebaseStorage.uploadImage(this.props.imgUri)
       .then(url => {
-        this.setState({uploadedURL: url, uploading: false});
+        this.setState({ uploadedURL: url, uploading: false });
       })
       .catch(error => {
-          console.log(error);
-        }
-      )
+        console.log(error);
+      })
   }
 
   render() {
@@ -53,7 +48,7 @@ export default class CameraWaiting extends Component {
         <View style={styles.loadingContainer}>
           <Text style={styles.loadingH1}>DONE!</Text>
           <Text style={styles.loadingH2}>url: {this.state.uploadedURL}</Text>
-          <Image source={{uri: this.state.uploadedURL}} style={{width: 300, height: 300}}/>
+          <Image source={{ uri: this.state.uploadedURL }} style={{ width: 300, height: 300 }}/>
         </View>
         }
       </View>

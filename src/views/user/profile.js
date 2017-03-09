@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -10,10 +10,9 @@ import {
 } from 'react-native';
 const RNAppInfo = NativeModules.RNAppInfo;
 import * as firebase from 'firebase';
-import {Actions} from 'react-native-router-flux';
-import {ListItem} from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
+import { ListItem } from 'react-native-elements';
 import ReactNativeI18n from 'react-native-i18n';
-
 import Database from '../../firebase/database';
 import Colors from '../../config/colors';
 
@@ -148,14 +147,14 @@ export default class Profile extends Component {
         {/*<Text style={styles.heading}>Hello UserId: {this.state.uid}</Text>*/}
         {/*<Text style={styles.heading}>Mobile Number (From Database): {this.state.mobile}</Text>*/}
         {/*<View style={styles.form}>*/}
-          {/*<TextInput*/}
-            {/*style={{height: 40, borderColor: 'gray', borderWidth: 1}}*/}
-            {/*onChangeText={(mobileForm) => this.setState({mobileForm})}*/}
-            {/*value={this.state.mobileForm}*/}
-            {/*placeholder="Mobile Number"*/}
-          {/*/>*/}
+        {/*<TextInput*/}
+        {/*style={{height: 40, borderColor: 'gray', borderWidth: 1}}*/}
+        {/*onChangeText={(mobileForm) => this.setState({mobileForm})}*/}
+        {/*value={this.state.mobileForm}*/}
+        {/*placeholder="Mobile Number"*/}
+        {/*/>*/}
 
-          {/*<Button onPress={this.saveMobile} title="save"/>*/}
+        {/*<Button onPress={this.saveMobile} title="save"/>*/}
         {/*</View>*/}
 
       </ScrollView>
@@ -229,4 +228,3 @@ const styles = StyleSheet.create({
   }
 
 });
-
