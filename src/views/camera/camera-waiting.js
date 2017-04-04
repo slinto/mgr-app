@@ -6,32 +6,50 @@ import {
   Text,
   View
 } from 'react-native';
+import RNFetchBlob from 'react-native-fetch-blob';
 import Colors from '../../config/colors';
+import Api from '../../config/api';
 import FirebaseStorage from '../../firebase/storage';
+
 
 export default class CameraWaiting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uploading: true,
+      processing: true,
       uploadedURL: ''
     };
+  }
+
+  getPrediction(url) {
+    RNFetchBlob.fetch('POST', `${Api.tensorflow}/photo-prediction-mock`, {
+      'Content-Type': 'multipart/form-data'
+    }, [{ name : 'image_data', data : url }])
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        this.setState({ processing: false });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   componentWillMount() {
     FirebaseStorage.uploadImage(this.props.imgUri)
       .then(url => {
-        this.setState({ uploadedURL: url, uploading: false });
+        this.setState({ uploadedURL: url });
+        this.getPrediction(url);
       })
       .catch(error => {
         console.log(error);
-      })
+      });
   }
 
   render() {
     return (
       <View style={styles.loadingContainer}>
-        { this.state.uploading &&
+        { this.state.processing &&
         <View style={styles.loadingContainer}>
           <ActivityIndicator
             animating={this.state.uploading}
@@ -44,7 +62,7 @@ export default class CameraWaiting extends Component {
         </View>
         }
 
-        { !this.state.uploading &&
+        { !this.state.processing &&
         <View style={styles.loadingContainer}>
           <Text style={styles.loadingH1}>DONE!</Text>
           <Text style={styles.loadingH2}>url: {this.state.uploadedURL}</Text>
