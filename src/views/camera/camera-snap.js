@@ -4,17 +4,24 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
+  Image,
   View
 } from 'react-native';
 import Camera from 'react-native-camera';
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../../config/colors';
 
 export default class CameraSnap extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      camera: {
+        flashMode: Camera.constants.FlashMode.auto
+      }
+    };
     this.camera;
 
     this.takePicture = this.takePicture.bind(this);
@@ -34,6 +41,41 @@ export default class CameraSnap extends Component {
     Actions.leaf();
   }
 
+  switchFlash = () => {
+    let newFlashMode;
+    const { auto, on, off } = Camera.constants.FlashMode;
+
+    if (this.state.camera.flashMode === auto) {
+      newFlashMode = on;
+    } else if (this.state.camera.flashMode === on) {
+      newFlashMode = off;
+    } else if (this.state.camera.flashMode === off) {
+      newFlashMode = auto;
+    }
+
+    this.setState({
+      camera: {
+        ...this.state.camera,
+        flashMode: newFlashMode,
+      },
+    });
+  }
+
+  get flashIconName() {
+    let iconName;
+    const { auto, on, off } = Camera.constants.FlashMode;
+
+    if (this.state.camera.flashMode === auto) {
+      iconName = 'flash-auto';
+    } else if (this.state.camera.flashMode === on) {
+      iconName = 'flash-on';
+    } else if (this.state.camera.flashMode === off) {
+      iconName = 'flash-off';
+    }
+
+    return iconName;
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -43,15 +85,30 @@ export default class CameraSnap extends Component {
             this.camera = cam;
           }}
           captureTarget={Camera.constants.CaptureTarget.temp}
+          flashMode={this.state.camera.flashMode}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
 
-          <View style={styles.controlsWrapper}>
-            <Text style={styles.closeButton} onPress={this.goBack}>CLOSE</Text>
+          <View style={styles.controlsTopWrapper}>
+            <TouchableOpacity
+              style={styles.flashButtonWrapper}
+              onPress={this.switchFlash}
+            >
+              <Icon
+                style={styles.flashButton}
+                name={this.flashIconName}
+              />
+            </TouchableOpacity>
+          </View>
 
-            <TouchableHighlight style={styles.captureWrapper} onPress={this.takePicture}>
+          <View style={styles.controlsWrapper}>
+            <TouchableOpacity>
+              <Text style={styles.closeButton} onPress={this.goBack}>CLOSE</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.captureWrapper} onPress={this.takePicture}>
               <View style={styles.capture}/>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </Camera>
       </View>
@@ -66,7 +123,8 @@ const styles = StyleSheet.create({
 
   preview: {
     flex: 1,
-    justifyContent: 'flex-end',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     alignItems: 'center',
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width
@@ -105,5 +163,21 @@ const styles = StyleSheet.create({
     color: Colors.greenMain,
     fontSize: 16,
     backgroundColor: 'transparent'
+  },
+
+  controlsTopWrapper: {
+    flex: 0
+  },
+
+  flashButtonWrapper: {
+    position: 'absolute',
+    top: 45,
+    left: -((Dimensions.get('window').width / 2) - 30),
+    backgroundColor: 'transparent'
+  },
+
+  flashButton: {
+    fontSize: 30,
+    color: Colors.greenMain
   }
 });
