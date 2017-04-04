@@ -21,20 +21,6 @@ export default class CameraWaiting extends Component {
     };
   }
 
-  getPrediction(url) {
-    RNFetchBlob.fetch('POST', `${Api.tensorflow}/photo-prediction-mock`, {
-      'Content-Type': 'multipart/form-data'
-    }, [{ name : 'image_data', data : url }])
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        this.setState({ processing: false });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   componentWillMount() {
     FirebaseStorage.uploadImage(this.props.imgUri)
       .then(url => {
@@ -42,6 +28,30 @@ export default class CameraWaiting extends Component {
         this.getPrediction(url);
       })
       .catch(error => {
+        console.log(error);
+      });
+  }
+
+  getPrediction(url) {
+    RNFetchBlob.fetch('POST', `${Api.tensorflow}/photo-prediction-mock`, {
+      'Content-Type': 'multipart/form-data'
+    }, [{ name: 'image_data', data: url }])
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        this.setState({ processing: false });
+
+        /**
+         * TODO:
+         *    1. Porovnanie hodnot v JSON API
+         *    2. Podla kluca predkladat view:
+         *          A) DETAIL STROMU (priradenie novej fotky z stromu v DB uzivatela)
+         *          B) ROZHODNUTIE MEDZI STROMOM -> A)
+         *          C) NIE JE V DB/ROZPOZNANY
+         */
+
+      })
+      .catch((error) => {
         console.log(error);
       });
   }
