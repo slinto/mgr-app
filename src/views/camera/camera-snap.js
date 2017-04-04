@@ -11,6 +11,7 @@ import {
 import Camera from 'react-native-camera';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import ImagePicker from 'react-native-image-picker';
 import Colors from '../../config/colors';
 
 export default class CameraSnap extends Component {
@@ -32,7 +33,7 @@ export default class CameraSnap extends Component {
     this.camera.capture()
       .then((data) => {
         console.log(data)
-        Actions.cameraPreview({ cameraData: data });
+        Actions.cameraPreview({ imagePath: data.path });
       })
       .catch(err => console.error(err));
   }
@@ -41,7 +42,14 @@ export default class CameraSnap extends Component {
     Actions.leaf();
   }
 
-  switchFlash = () => {
+  selectFromGallery() {
+    ImagePicker.launchImageLibrary({}, (res)  => {
+      console.log(res.uri);
+      Actions.cameraPreview({ imagePath: res.uri });
+    });
+  }
+
+  switchFlash() {
     let newFlashMode;
     const { auto, on, off } = Camera.constants.FlashMode;
 
@@ -109,6 +117,16 @@ export default class CameraSnap extends Component {
             <TouchableOpacity style={styles.captureWrapper} onPress={this.takePicture}>
               <View style={styles.capture}/>
             </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.galleryIconWrapper}
+              onPress={this.selectFromGallery}
+            >
+              <Icon
+                style={styles.galleryIcon}
+                name='perm-media'
+              />
+            </TouchableOpacity>
           </View>
         </Camera>
       </View>
@@ -163,6 +181,18 @@ const styles = StyleSheet.create({
     color: Colors.greenMain,
     fontSize: 16,
     backgroundColor: 'transparent'
+  },
+
+  galleryIconWrapper: {
+    position: 'absolute',
+    top: 15,
+    right: -((Dimensions.get('window').width / 2) - 60),
+    backgroundColor: 'transparent'
+  },
+
+  galleryIcon: {
+    fontSize: 30,
+    color: Colors.greenMain
   },
 
   controlsTopWrapper: {

@@ -23,13 +23,13 @@ export default class CameraPreview extends Component {
   }
 
   sendToAnalyze() {
-    Actions.cameraWaiting({ imgUri: this.props.cameraData.path });
+    Actions.cameraWaiting({ imgUri: this.props.imagePath });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Image source={{ uri: this.props.cameraData.path }} style={styles.image}>
+        <Image source={{ uri: this.props.imagePath }} style={styles.image}>
           <View style={styles.buttonsWrapper}>
             <Text style={styles.button} onPress={this.goBack}>RETAKE</Text>
             <Text style={styles.button} onPress={this.sendToAnalyze}>ANALYZE!</Text>
