@@ -49,7 +49,7 @@ export default class CameraSnap extends Component {
     });
   }
 
-  switchFlash() {
+  switchFlash = () => {
     let newFlashMode;
     const { auto, on, off } = Camera.constants.FlashMode;
 
