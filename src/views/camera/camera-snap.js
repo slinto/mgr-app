@@ -32,7 +32,6 @@ export default class CameraSnap extends Component {
   takePicture() {
     this.camera.capture()
       .then((data) => {
-        console.log(data)
         Actions.cameraPreview({ imagePath: data.path });
       })
       .catch(err => console.error(err));

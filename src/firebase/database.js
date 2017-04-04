@@ -33,7 +33,7 @@ export default class Database {
 
   //---------------------
   static getUserLeafList(userId, callback) {
-    const path = `/user/${userId}/leafs`;
+    const path = `/user/${userId}/trees`;
 
     firebase.database().ref(path).on('value', (snapshot) => {
       callback(snapshot.val());
@@ -42,6 +42,7 @@ export default class Database {
 
   //--------------------
   static getTreeDetail(leafId, callback) {
+    console.log(leafId)
     const path = `/tree/${leafId}`;
 
     firebase.database().ref(path).on('value', (snapshot) => {

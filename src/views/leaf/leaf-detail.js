@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   StyleSheet,
-  ScrollView,
-  Image
+  ScrollView
 } from "react-native";
+import * as firebase from 'firebase';
 import Database from "../../firebase/database";
 import LeafDetailItem from '../../components/leaf-detail-item';
 import Gallery from '../../components/gallery';
@@ -19,26 +18,42 @@ export default class LeafDetail extends Component {
       loading: false,
       loaded: false
     };
-
-    // this.logout = this.logout.bind(this);
   }
 
   async componentDidMount() {
-    try {
-      this.setState({ loading: true });
-      Database.getTreeDetail(this.props.leaf.id, (tree) => {
-        console.log(tree);
-
-        this.setState({
-          tree: tree,
-          loaded: true,
-          loading: false
+    if (typeof this.props.leaf !== 'undefined') {
+      try {
+        this.setState({ loading: true });
+        Database.getTreeDetail(this.props.leaf.id, (tree) => {
+          this.setState({
+            tree: tree,
+            treePhotos: this.props.leaf.photos,
+            loaded: true,
+            loading: false
+          });
         });
 
-      });
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (typeof this.props.tree !== 'undefined') {
+      try {
+        let user = await firebase.auth().currentUser;
 
-    } catch (error) {
-      console.log(error);
+        Database.getUserLeafList(user.uid, (leafs) => {
+          let userTreeData = leafs[`${this.props.tree.id}`];
+
+          this.setState({
+            tree: this.props.tree,
+            treePhotos: userTreeData.photos,
+            loaded: true,
+            loading: false
+          });
+        });
+
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
@@ -69,9 +84,7 @@ export default class LeafDetail extends Component {
             <LeafDetailItem left="OCCURANCE"
                             right={this.state.tree.occurance}/>
           </View>
-
-          <Gallery title='YOUR PHOTOS' photos={this.props.leaf.photos}/>
-
+          <Gallery title='YOUR PHOTOS' photos={this.state.treePhotos}/>
         </View>
         }
 

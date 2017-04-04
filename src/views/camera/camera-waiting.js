@@ -6,7 +6,10 @@ import {
   Text,
   View
 } from 'react-native';
+import * as firebase from 'firebase';
 import RNFetchBlob from 'react-native-fetch-blob';
+import { Actions } from 'react-native-router-flux';
+import Database from '../../firebase/database';
 import Colors from '../../config/colors';
 import Api from '../../config/api';
 import FirebaseStorage from '../../firebase/storage';
@@ -17,8 +20,15 @@ export default class CameraWaiting extends Component {
     super(props);
     this.state = {
       processing: true,
-      uploadedURL: ''
+      uploadedURL: '',
+      user: {}
     };
+  }
+
+  async componentDidMount() {
+    let user = await
+    firebase.auth().currentUser;
+    this.setState({ user: user });
   }
 
   componentWillMount() {
@@ -50,10 +60,44 @@ export default class CameraWaiting extends Component {
          *          C) NIE JE V DB/ROZPOZNANY
          */
 
+        this.analyzePredictionData(res);
+
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  analyzePredictionData(data) {
+    const validResults = [];
+
+    data.results.forEach(item => {
+      console.log(item);
+      if (item.value >= 0.80) {
+        validResults.push(item);
+      }
+    });
+    console.log('TF_Results:', validResults);
+
+    if (validResults.length === 1) {
+      // TODO: zapis fotky do spravnej DB uzivatela
+
+      firebase.database().ref(`user/${this.state.user.uid}/leafs`).once('value').then(function(snapshot) {
+        console.log(snapshot.val());
+      });
+
+      Database.getTreeDetail(validResults[0].name, (tree) => {
+        console.log(tree);
+        console.log(tree.name);
+
+        Actions.detail({ tree: tree, title: tree.name });
+      });
+
+    } else if (validResults > 1) {
+
+    } else {
+
+    }
   }
 
   render() {

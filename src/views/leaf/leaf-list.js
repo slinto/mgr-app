@@ -3,9 +3,7 @@ import {
   Text,
   View,
   StyleSheet,
-  TextInput,
-  ScrollView,
-  Dimensions
+  ScrollView
 } from 'react-native';
 import * as firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
@@ -31,7 +29,6 @@ export default class LeafList extends Component {
       this.setState({ loading: true });
       let user = await firebase.auth().currentUser;
       Database.getUserLeafList(user.uid, (leafs) => {
-        console.log(leafs);
         this.setState({
           leafs: leafs,
           loading: false,
@@ -58,6 +55,7 @@ export default class LeafList extends Component {
         );
       }
     });
+    let leafItemsLength = Object.keys(this.state.leafs).length;
 
     return (
       <ScrollView style={styles.container}>
@@ -65,14 +63,14 @@ export default class LeafList extends Component {
         <Text style={styles.textLoading}>LOADING...</Text>
         }
 
-        { !this.state.loading && this.state.loaded && this.state.leafs.length === 0 &&
+        { !this.state.loading && this.state.loaded && leafItemsLength === 0 &&
         <View>
           <Text style={styles.textBlank}>CAMERA LOGO / BUTTON</Text>
           <Text style={styles.textBlank}>ANALYZE YOUR FIRST LEAF</Text>
         </View>
         }
         {
-          this.state.loaded && this.state.leafs.length > 0 &&
+          this.state.loaded && leafItemsLength > 0 &&
           <View style={styles.itemsWrapper}>
             {leafItems}
           </View>
