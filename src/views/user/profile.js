@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import {
   Text,
-  View,
   StyleSheet,
-  TouchableWithoutFeedback,
-  TextInput,
   ScrollView,
   NativeModules
 } from 'react-native';
-const RNAppInfo = NativeModules.RNAppInfo;
 import * as firebase from 'firebase';
+import DeviceInfo from 'react-native-device-info';
 import { Actions } from 'react-native-router-flux';
 import { ListItem } from 'react-native-elements';
 import ReactNativeI18n from 'react-native-i18n';
@@ -141,7 +138,7 @@ export default class Profile extends Component {
           onPress={this.logout}
         />
 
-        <Text style={styles.version}>Version {RNAppInfo.shortVersion}</Text>
+        <Text style={styles.version}>Version {DeviceInfo.getVersion()}</Text>
 
         {/* TODO: REMOVE THIS */}
         {/*<Text style={styles.heading}>Hello UserId: {this.state.uid}</Text>*/}
@@ -170,7 +167,7 @@ const styles = StyleSheet.create({
   },
 
   heading: {
-    textAlign: "center",
+    textAlign: 'center',
     color: Colors.whiteMain
   },
 
@@ -226,5 +223,4 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginLeft: 15
   }
-
 });
