@@ -10,10 +10,8 @@ import Colors from '../config/colors';
 
 export default class Gallery extends React.Component {
   render() {
-    console.log(this.props.photos);
-    let images = this.props.photos.map((photoUri) => {
-      // TODO: KEY
-      return <Image key={Math.random()} style={styles.image} source={{ uri: photoUri }}/>;
+    let images = this.props.photos.map((photo) => {
+      return <Image key={photo.id} style={styles.image} source={{ uri: photo.url }}/>;
     });
 
     return (
@@ -34,7 +32,8 @@ const styles = StyleSheet.create({
   },
 
   scrollView: {
-    paddingTop: 10
+    paddingTop: 10,
+    paddingHorizontal: 10
   },
 
   title: {
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: 125,
     height: 125,
-    marginLeft: 20
+    marginLeft: 10,
+    marginRight: 10
   },
 });
