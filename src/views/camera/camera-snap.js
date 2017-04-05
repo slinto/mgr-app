@@ -42,9 +42,10 @@ export default class CameraSnap extends Component {
   }
 
   selectFromGallery() {
-    ImagePicker.launchImageLibrary({}, (res)  => {
-      console.log(res.uri);
-      Actions.cameraPreview({ imagePath: res.uri });
+    ImagePicker.launchImageLibrary({}, (res) => {
+      if (typeof res.uri !== 'undefined') {
+        Actions.cameraPreview({ imagePath: res.uri });
+      }
     });
   }
 
