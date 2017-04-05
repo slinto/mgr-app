@@ -48,20 +48,8 @@ export default class CameraWaiting extends Component {
     }, [{ name: 'image_data', data: url }])
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         this.setState({ processing: false });
-
-        /**
-         * TODO:
-         *    1. Porovnanie hodnot v JSON API
-         *    2. Podla kluca predkladat view:
-         *          A) DETAIL STROMU (priradenie novej fotky z stromu v DB uzivatela)
-         *          B) ROZHODNUTIE MEDZI STROMOM -> A)
-         *          C) NIE JE V DB/ROZPOZNANY
-         */
-
         this.analyzePredictionData(res);
-
       })
       .catch((error) => {
         console.log(error);
@@ -71,28 +59,39 @@ export default class CameraWaiting extends Component {
   analyzePredictionData(data) {
     const validResults = [];
 
+    console.log('TF_ApiResults: ', data.results);
+
     data.results.forEach(item => {
-      console.log(item);
       if (item.value >= 0.80) {
         validResults.push(item);
       }
     });
-    console.log('TF_Results:', validResults);
+
+    console.log('TF_ValidResults: ', validResults);
 
     if (validResults.length === 1) {
-      // TODO: zapis fotky do spravnej DB uzivatela
+      let userLeafRef = `user/${this.state.user.uid}/trees/${validResults[0].id}`;
 
-      firebase.database().ref(`user/${this.state.user.uid}/leafs`).once('value').then(function(snapshot) {
-        console.log(snapshot.val());
+      // TODO: pridat GPS
+      firebase.database().ref(userLeafRef).once('value').then((snapshot) => {
+        let leafData = snapshot.val();
+        let date = new Date();
+
+        let newPhoto = {
+          id: date.valueOf(),
+          url: this.state.uploadedURL,
+          date: date.toString(),
+          gps: false
+        }
+
+        leafData.photos.unshift(newPhoto);
+
+        firebase.database().ref(userLeafRef).set(leafData).then(() => {
+          Database.getTreeDetail(validResults[0].id, (tree) => {
+            Actions.detail({ tree: tree, title: tree.name });
+          });
+        });
       });
-
-      Database.getTreeDetail(validResults[0].name, (tree) => {
-        console.log(tree);
-        console.log(tree.name);
-
-        Actions.detail({ tree: tree, title: tree.name });
-      });
-
     } else if (validResults > 1) {
 
     } else {
