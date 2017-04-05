@@ -42,7 +42,6 @@ export default class Database {
 
   //--------------------
   static getTreeDetail(leafId, callback) {
-    console.log(leafId)
     const path = `/tree/${leafId}`;
 
     firebase.database().ref(path).on('value', (snapshot) => {
