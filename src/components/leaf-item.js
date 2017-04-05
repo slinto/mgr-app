@@ -22,14 +22,13 @@ export default class LeafItem extends React.Component {
     return (
       <TouchableHighlight style={[styles.wrapper, { width: this.SIZE, height: this.SIZE }]}
                           onPress={this.props.onPress}>
-        <Image style={[styles.image, { width: this.SIZE, height: this.SIZE }]} source={{ uri: leaf.photos[0] }}>
+        <Image style={[styles.image, { width: this.SIZE, height: this.SIZE }]} source={{ uri: leaf.photos[0].url }}>
           <View style={[styles.imageOverlay, { width: this.SIZE, height: this.SIZE }]}>
             <Text style={styles.heading}>{leaf.name}</Text>
             <Text style={styles.text}>{leaf.photos.length} PHOTOS</Text>
           </View>
         </Image>
       </TouchableHighlight>
-
     );
   }
 }
