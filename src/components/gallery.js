@@ -1,17 +1,25 @@
 import React from 'react';
 import {
-  Image,
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 import Colors from '../config/colors';
+import GalleryItem from './gallery-item';
 
 export default class Gallery extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      images: {}
+    };
+  }
+
   render() {
     let images = this.props.photos.map((photo) => {
-      return <Image key={photo.id} style={styles.image} source={{ uri: photo.url }}/>;
+      return <GalleryItem key={photo.id} photo={photo} />
     });
 
     return (
