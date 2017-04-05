@@ -36,7 +36,8 @@ export default class LeafItem extends React.Component {
 const styles = StyleSheet.create({
   wrapper: {
     margin: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    backgroundColor: Colors.greyMain
   },
 
   image: {
