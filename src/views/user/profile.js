@@ -162,7 +162,7 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
+    paddingVertical: 60,
     backgroundColor: Colors.darkMain
   },
 
