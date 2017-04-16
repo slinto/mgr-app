@@ -12,7 +12,6 @@ export default class FirebaseStorage {
 
   static uploadImage(uri, mime = 'application/octet-stream') {
     const storage = firebase.storage();
-
     return new Promise((resolve, reject) => {
       const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
       const sessionId = new Date().getTime();

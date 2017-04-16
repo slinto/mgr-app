@@ -7,7 +7,10 @@ import {
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { Button } from 'react-native-elements';
+import RNFetchBlob from 'react-native-fetch-blob';
 import Colors from '../../config/colors';
+import Api from '../../config/api';
+
 
 export default class Form extends Component {
   constructor(props) {
@@ -25,9 +28,22 @@ export default class Form extends Component {
       response: 'Thank you, for your feedback!'
     });
 
-    setTimeout(() => {
-      Actions.pop();
-    }, 1500);
+    // TODO
+    RNFetchBlob.fetch('POST', `${Api.server.test}/send-email`, {
+      'Content-Type': 'multipart/form-data'
+    }, [{ email: 'TODO', subject: 'TODO', text: 'TODO' }])
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        Actions.pop();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // setTimeout(() => {
+    //   Actions.pop();
+    // }, 1500);
   }
 
   render() {
@@ -35,19 +51,21 @@ export default class Form extends Component {
       <ScrollView style={styles.container}>
         <TextInput
           style={styles.textInput}
-          multiline={true}
-          editable={true}
+          multiline
+          editable
           placeholder={this.props.msg}
           placeholderTextColor={Colors.greySub}
           onChangeText={(text) => this.setState({ text })}
-          value={this.state.text}/>
+          value={this.state.text}
+        />
 
         <Button
-          title='SEND'
+          title="SEND"
           onPress={this.sendEmail}
           buttonStyle={styles.button}
           backgroundColor={Colors.greenMain}
-          color={Colors.darkMain}/>
+          color={Colors.darkMain}
+        />
 
         <Text style={styles.response}>{this.state.response}</Text>
 

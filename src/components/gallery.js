@@ -19,7 +19,7 @@ export default class Gallery extends React.Component {
 
   render() {
     let images = this.props.photos.map((photo) => {
-      return <GalleryItem key={photo.id} photo={photo} />
+      return <GalleryItem key={photo.id} photo={photo} />;
     });
 
     return (
