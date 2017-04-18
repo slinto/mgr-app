@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  ActivityIndicator,
   Text,
   View,
   StyleSheet,
@@ -44,6 +45,10 @@ export default class LeafList extends Component {
     Actions.detail({ leaf: leaf, title: leaf.name });
   }
 
+  goToUnknown() {
+    Actions.leafUnknown();
+  }
+
   render() {
     let leafItems = Object.keys(this.state.leafs).map((key) => {
       if (this.state.leafs) {
@@ -58,9 +63,18 @@ export default class LeafList extends Component {
     let leafItemsLength = Object.keys(this.state.leafs).length;
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.container}>
         { this.state.loading &&
-        <Text style={styles.textLoading}>LOADING...</Text>
+        <View style={{flex: 1, justifyContent: 'center', marginTop: -50}}>
+          <ActivityIndicator
+            animating={true}
+            style={styles.preloader}
+            size="large"
+            color="#fff"
+          />
+          <Text style={styles.textLoading}>Please wait!</Text>
+          <Text style={styles.textLoading}>We preparing your herbal list.</Text>
+        </View>
         }
 
         { !this.state.loading && this.state.loaded && leafItemsLength === 0 &&
@@ -75,6 +89,8 @@ export default class LeafList extends Component {
             {leafItems}
           </View>
         }
+
+        <Text style={styles.textLoading} onPress={this.goToUnknown}>UNKNOWN</Text>
       </ScrollView>
     );
   }
@@ -89,7 +105,9 @@ const styles = StyleSheet.create({
 
   textLoading: {
     color: '#fff',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: 16
   },
 
   textBlank: {
@@ -103,5 +121,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 10
   },
 
-  leafItem: {}
+  preloader: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50
+  },
 });
