@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Text,
   StyleSheet,
   ScrollView,
@@ -17,33 +18,38 @@ export default class Form extends Component {
     super(props);
     this.state = {
       text: '',
-      response: ''
+      response: '',
+      sending: false
     };
-
     this.sendEmail = this.sendEmail.bind(this);
   }
 
   sendEmail() {
-    this.setState({
-      response: 'Thank you, for your feedback!'
-    });
+    this.setState({ sending: true });
 
-    // TODO
     RNFetchBlob.fetch('POST', `${Api.server.test}/send-email`, {
       'Content-Type': 'multipart/form-data'
-    }, [{ email: 'TODO', subject: 'TODO', text: 'TODO' }])
+    }, [{
+      name: 'email', data: JSON.stringify({
+        email: this.props.user.email,
+        subject: `LeafProject: ${this.props.emailTitle}`,
+        text: this.text
+      })
+    }])
       .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        Actions.pop();
+      .then(res => {
+        this.setState({
+          response: 'Thank you, for your feedback!',
+          sending: false
+        });
+
+        setTimeout(() => {
+          Actions.pop();
+        }, 1500);
       })
       .catch((error) => {
         console.log(error);
       });
-
-    // setTimeout(() => {
-    //   Actions.pop();
-    // }, 1500);
   }
 
   render() {
@@ -59,6 +65,7 @@ export default class Form extends Component {
           value={this.state.text}
         />
 
+        { !this.state.sending && this.state.response === '' &&
         <Button
           title="SEND"
           onPress={this.sendEmail}
@@ -66,9 +73,18 @@ export default class Form extends Component {
           backgroundColor={Colors.greenMain}
           color={Colors.darkMain}
         />
+        }
+
+        { this.state.sending &&
+        <ActivityIndicator
+          animating={true}
+          style={styles.preloader}
+          size="large"
+          color="#fff"
+        />
+        }
 
         <Text style={styles.response}>{this.state.response}</Text>
-
       </ScrollView>
     );
   }
@@ -107,5 +123,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: 'center',
     fontWeight: '500'
-  }
+  },
+
+  preloader: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50
+  },
 });

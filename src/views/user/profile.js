@@ -14,16 +14,16 @@ import Colors from '../../config/colors';
 
 const deviceLocale = ReactNativeI18n.currentLocale();
 
-export default class Profile extends Component {
 
+export default class Profile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      uid: "",
+      uid: '',
       user: '',
-      mobile: "",
-      mobileForm: ""
+      mobile: '',
+      mobileForm: ''
     };
 
     this.logout = this.logout.bind(this);
@@ -33,19 +33,10 @@ export default class Profile extends Component {
   async componentDidMount() {
     try {
       let user = await firebase.auth().currentUser;
-      //
-      // Database.listenUserMobile(user.uid, (mobileNumber) => {
-      //   this.setState({
-      //     mobile: mobileNumber,
-      //     mobileForm: mobileNumber
-      //   });
-      // });
-
       this.setState({
         uid: user.uid,
         user: user
       });
-
     } catch (error) {
       console.log(error);
     }
@@ -60,12 +51,12 @@ export default class Profile extends Component {
     }
   }
 
-  goToFeedback() {
-    Actions.feedback({ msg: 'Write your message here...' });
+  goToFeedback = () => {
+    Actions.feedback({ user: this.state.user, emailTitle: 'User feedback', msg: 'Write your message here...' });
   }
 
   goToBug() {
-    Actions.bug({ msg: 'Write your bug here...' });
+    Actions.bug({ user: this.state.user, emailTitle: 'Bug report', msg: 'Write your bug here...' });
   }
 
   saveMobile() {
@@ -138,21 +129,6 @@ export default class Profile extends Component {
         />
 
         <Text style={styles.version}>Version {DeviceInfo.getVersion()}</Text>
-
-        {/* TODO: REMOVE THIS */}
-        {/*<Text style={styles.heading}>Hello UserId: {this.state.uid}</Text>*/}
-        {/*<Text style={styles.heading}>Mobile Number (From Database): {this.state.mobile}</Text>*/}
-        {/*<View style={styles.form}>*/}
-        {/*<TextInput*/}
-        {/*style={{height: 40, borderColor: 'gray', borderWidth: 1}}*/}
-        {/*onChangeText={(mobileForm) => this.setState({mobileForm})}*/}
-        {/*value={this.state.mobileForm}*/}
-        {/*placeholder="Mobile Number"*/}
-        {/*/>*/}
-
-        {/*<Button onPress={this.saveMobile} title="save"/>*/}
-        {/*</View>*/}
-
       </ScrollView>
     );
   }
