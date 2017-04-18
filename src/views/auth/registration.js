@@ -35,14 +35,7 @@ export default class Registration extends Component {
   async signup() {
     try {
       await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
-      this.setState({
-        response: "account created"
-      });
-
-      setTimeout(() => {
-        Actions.account();
-      }, 1500);
-
+      Actions.account();
     } catch (error) {
       this.setState({
         response: error.toString()

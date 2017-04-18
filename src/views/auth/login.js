@@ -46,15 +46,7 @@ export default class Login extends Component {
   async login() {
     try {
       await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
-
-      this.setState({
-        response: "Logged In!"
-      });
-
-      setTimeout(() => {
-        Actions.account({ type: 'reset' });
-      }, 1500);
-
+      Actions.account({ type: 'reset' });
     } catch (error) {
       this.setState({
         response: error.toString()
