@@ -11,7 +11,7 @@ export default class TabIcon extends React.Component {
 
   getIconName() {
     if (this.props.name === 'leaf') {
-      return 'list';
+      return 'folder-alt';
     } else if (this.props.name === 'profile') {
       return 'user';
     } else if (this.props.name === 'camera') {

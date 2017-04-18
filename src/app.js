@@ -90,7 +90,7 @@ export default class LeafMgrApp extends Component {
             <Scene
               key="leaf"
               initial
-              title="Leaf List"
+              title="Herbarium"
               icon={TabIcon}
               navigationBarStyle={styles.navBar}
               titleStyle={styles.navText}
@@ -101,7 +101,7 @@ export default class LeafMgrApp extends Component {
               <Scene
                 key="list"
                 component={LeafList}
-                title="Leaf List"
+                title="My Herbarium"
                 initial
                 style={{ backgroundColor: Colors.darkMain }}
               />

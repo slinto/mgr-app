@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   textLoading: {
     color: '#fff',
     textAlign: 'center',
-    fontWeight: '600',
+    fontWeight: '300',
     fontSize: 16
   },
 
