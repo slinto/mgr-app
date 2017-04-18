@@ -51,7 +51,6 @@ export default class PasswordReset extends Component {
         response: error.toString()
       })
     }
-
   }
 
   render() {

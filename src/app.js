@@ -13,6 +13,7 @@ import TabIcon from './components/tab-icon';
 import Profile from './views/user/profile';
 import LeafList from './views/leaf/leaf-list';
 import LeafDetail from './views/leaf/leaf-detail';
+import LeafUnknown from './views/leaf/leaf-unknown';
 import Login from './views/auth/login';
 import PasswordReset from './views/auth/password-reset';
 import Welcome from './views/auth/welcome';
@@ -108,6 +109,12 @@ export default class LeafMgrApp extends Component {
                 key="detail"
                 component={LeafDetail}
                 title="Leaf Detail"
+                style={{ backgroundColor: Colors.darkMain }}
+              />
+              <Scene
+                key="leafUnknown"
+                component={LeafUnknown}
+                title="Unknown Leaf"
                 style={{ backgroundColor: Colors.darkMain }}
               />
             </Scene>

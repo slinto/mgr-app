@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
   Text,
   StyleSheet,
-  ScrollView,
-  NativeModules
+  ScrollView
 } from 'react-native';
 import * as firebase from 'firebase';
 import DeviceInfo from 'react-native-device-info';
