@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 
   h1: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: '500',
     marginTop: 10,
     marginBottom: 15,
     color: '#fff',

@@ -72,8 +72,8 @@ export default class LeafList extends Component {
             size="large"
             color="#fff"
           />
-          <Text style={styles.textLoading}>Please wait!</Text>
-          <Text style={styles.textLoading}>We preparing your herbal list.</Text>
+          <Text style={styles.textLoadingH1}>Please wait!</Text>
+          <Text style={styles.textLoadingH2}>We preparing your herbal list.</Text>
         </View>
         }
 
@@ -103,11 +103,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#070709'
   },
 
-  textLoading: {
+  textLoadingH1: {
     color: '#fff',
     textAlign: 'center',
-    fontWeight: '300',
     fontSize: 16
+  },
+
+  textLoadingH2: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 14
   },
 
   textBlank: {

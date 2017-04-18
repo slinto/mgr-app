@@ -32,10 +32,13 @@ const styles = StyleSheet.create({
 
   h1: {
     color: Colors.whiteMain,
-    fontSize: 18
+    fontSize: 20,
+    fontWeight: '500',
   },
 
   h2: {
+    fontSize: 16,
+    fontStyle: 'italic',
     color: Colors.whiteMain
   }
 });
