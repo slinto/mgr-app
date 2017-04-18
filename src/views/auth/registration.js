@@ -67,12 +67,6 @@ export default class Registration extends Component {
         <ScrollView>
           <View style={styles.logoWrapper}>
             <Image style={styles.logo} source={require('../../../assets/img/logo.png')}/>
-            <Text style={styles.h1}>
-              LEAF PROJECT
-            </Text>
-            <Text style={styles.h2}>
-              Learn nature.
-            </Text>
           </View>
 
           <View style={styles.buttonsWrapper}>
@@ -149,19 +143,6 @@ const styles = StyleSheet.create({
   logo: {
     marginTop: 30,
     marginBottom: 15
-  },
-
-  h1: {
-    fontSize: 25,
-    fontWeight: '700',
-    marginTop: 10,
-    color: '#fff'
-  },
-
-  h2: {
-    fontSize: 20,
-    fontStyle: 'italic',
-    color: '#fff'
   },
 
   button: {
