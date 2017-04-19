@@ -55,7 +55,7 @@ export default class Profile extends Component {
     Actions.feedback({ user: this.state.user, emailTitle: 'User feedback', msg: 'Write your message here...' });
   }
 
-  goToBug() {
+  goToBug = () => {
     Actions.bug({ user: this.state.user, emailTitle: 'Bug report', msg: 'Write your bug here...' });
   }
 
