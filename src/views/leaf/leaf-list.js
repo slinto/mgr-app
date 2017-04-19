@@ -65,7 +65,7 @@ export default class LeafList extends Component {
     return (
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.container}>
         { this.state.loading &&
-        <View style={{flex: 1, justifyContent: 'center', marginTop: -50}}>
+        <View style={{ flex: 1, justifyContent: 'center', marginTop: -50 }}>
           <ActivityIndicator
             animating={true}
             style={styles.preloader}
@@ -90,7 +90,10 @@ export default class LeafList extends Component {
           </View>
         }
 
-        <Text style={styles.textLoading} onPress={this.goToUnknown}>UNKNOWN</Text>
+        <View style={styles.itemsWrapper}>
+          <Text style={styles.textLoadingH1} onPress={this.goToUnknown}>UNKNOWN</Text>
+        </View>
+
       </ScrollView>
     );
   }
@@ -104,15 +107,18 @@ const styles = StyleSheet.create({
   },
 
   textLoadingH1: {
+    fontSize: 20,
+    fontWeight: '500',
     color: '#fff',
     textAlign: 'center',
-    fontSize: 16
+    marginBottom: 5,
   },
 
   textLoadingH2: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 14
+    fontSize: 16,
+    fontStyle: 'italic',
   },
 
   textBlank: {

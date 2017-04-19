@@ -111,7 +111,7 @@ export default class CameraWaiting extends Component {
             color="#000"
           />
           <Text style={styles.loadingH1}>Please wait!</Text>
-          <Text style={styles.loadingH2}>We're analyze your leaf.</Text>
+          <Text style={styles.loadingH2}>We're analyzing your leaf.</Text>
         </View>
         }
 
@@ -136,12 +136,18 @@ const styles = StyleSheet.create({
   },
 
   loadingH1: {
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: '500',
+    marginTop: 10,
+    marginBottom: 5,
     color: '#000',
     textAlign: 'center'
   },
 
   loadingH2: {
+    fontSize: 16,
+    marginBottom: 15,
+    fontStyle: 'italic',
     color: '#000',
     textAlign: 'center'
   },
@@ -149,7 +155,6 @@ const styles = StyleSheet.create({
   preloader: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 8,
-    height: 100
+    height: 50
   },
 });
