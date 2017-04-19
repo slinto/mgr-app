@@ -6,10 +6,11 @@ import {
   ScrollView
 } from 'react-native';
 import { Button } from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
 import Colors from '../../config/colors';
 
 
-export default class leafUnknown extends Component {
+export default class LeafUnknown extends Component {
   constructor(props) {
     super(props);
 
@@ -17,7 +18,7 @@ export default class leafUnknown extends Component {
   }
 
   goToHome() {
-
+    Actions.list({ type: 'reset' });
   }
 
   render() {
@@ -28,7 +29,7 @@ export default class leafUnknown extends Component {
           <Text style={styles.h2}>You can try analyze another photo or leaf.</Text>
 
           <Button
-            title="Go to herbal list"
+            title="Go to my herbarium"
             onPress={this.goToHome}
             buttonStyle={styles.button}
             backgroundColor={Colors.greenMain}

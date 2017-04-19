@@ -16,9 +16,9 @@ export default class LeafList extends Component {
     super(props);
 
     this.state = {
-      uid: "",
-      mobile: "",
-      mobileForm: "",
+      uid: '',
+      mobile: '',
+      mobileForm: '',
       leafs: [],
       loading: false,
       loaded: false
@@ -43,10 +43,6 @@ export default class LeafList extends Component {
 
   goToDetail(leaf) {
     Actions.detail({ leaf: leaf, title: leaf.name });
-  }
-
-  goToUnknown() {
-    Actions.leafUnknown();
   }
 
   render() {
@@ -89,11 +85,6 @@ export default class LeafList extends Component {
             {leafItems}
           </View>
         }
-
-        <View style={styles.itemsWrapper}>
-          <Text style={styles.textLoadingH1} onPress={this.goToUnknown}>UNKNOWN</Text>
-        </View>
-
       </ScrollView>
     );
   }

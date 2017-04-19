@@ -26,8 +26,7 @@ export default class CameraWaiting extends Component {
   }
 
   async componentDidMount() {
-    let user = await
-    firebase.auth().currentUser;
+    let user = await firebase.auth().currentUser;
     this.setState({ user: user });
   }
 
@@ -43,7 +42,7 @@ export default class CameraWaiting extends Component {
   }
 
   getPrediction(url) {
-    RNFetchBlob.fetch('POST', `${Api.tensorflow.test}/photo-prediction-mock`, {
+    RNFetchBlob.fetch('POST', `${Api.tensorflow.test}/photo-prediction-mock-2`, {
       'Content-Type': 'multipart/form-data'
     }, [{ name: 'image_data', data: url }])
       .then((res) => res.json())
@@ -56,9 +55,9 @@ export default class CameraWaiting extends Component {
       });
   }
 
+
   analyzePredictionData(data) {
     const validResults = [];
-
     console.log('TF_ApiResults: ', data.results);
 
     data.results.forEach(item => {
@@ -66,62 +65,28 @@ export default class CameraWaiting extends Component {
         validResults.push(item);
       }
     });
-
     console.log('TF_ValidResults: ', validResults);
 
     if (validResults.length === 1) {
-      let userLeafRef = `user/${this.state.user.uid}/trees/${validResults[0].id}`;
-
-      // TODO: pridat GPS
-      firebase.database().ref(userLeafRef).once('value').then((snapshot) => {
-        let leafData = snapshot.val();
-        let date = new Date();
-
-        let newPhoto = {
-          id: date.valueOf(),
-          url: this.state.uploadedURL,
-          date: date.toString(),
-          gps: false
-        }
-
-        leafData.photos.unshift(newPhoto);
-
-        firebase.database().ref(userLeafRef).set(leafData).then(() => {
-          Database.getTreeDetail(validResults[0].id, (tree) => {
-            Actions.detail({ tree: tree, title: tree.name });
-          });
-        });
-      });
-    } else if (validResults > 1) {
-
+      Database.saveAndGoToLeafDetail(this.state.user, this.state.uploadedURL, validResults[0]);
+    } else if (validResults.length > 1) {
+      Actions.leafSelection({ type: 'reset', results: validResults, userLeafPhoto: this.state.uploadedURL });
     } else {
-
+      Actions.leafUnknown({ type: 'reset' });
     }
   }
 
   render() {
     return (
       <View style={styles.loadingContainer}>
-        { this.state.processing &&
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator
-            animating={this.state.uploading}
-            style={styles.preloader}
-            size="large"
-            color="#000"
-          />
-          <Text style={styles.loadingH1}>Please wait!</Text>
-          <Text style={styles.loadingH2}>We're analyzing your leaf.</Text>
-        </View>
-        }
-
-        { !this.state.processing &&
-        <View style={styles.loadingContainer}>
-          <Text style={styles.loadingH1}>DONE!</Text>
-          <Text style={styles.loadingH2}>url: {this.state.uploadedURL}</Text>
-          <Image source={{ uri: this.state.uploadedURL }} style={{ width: 300, height: 300 }}/>
-        </View>
-        }
+        <ActivityIndicator
+          animating
+          style={styles.preloader}
+          size="large"
+          color="#000"
+        />
+        <Text style={styles.loadingH1}>Please wait!</Text>
+        <Text style={styles.loadingH2}>We're analyzing your leaf.</Text>
       </View>
     );
   }

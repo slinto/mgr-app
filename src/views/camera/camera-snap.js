@@ -3,9 +3,7 @@ import {
   Dimensions,
   StyleSheet,
   Text,
-  TouchableHighlight,
   TouchableOpacity,
-  Image,
   View
 } from 'react-native';
 import Camera from 'react-native-camera';
@@ -67,7 +65,7 @@ export default class CameraSnap extends Component {
         flashMode: newFlashMode,
       },
     });
-  }
+  };
 
   get flashIconName() {
     let iconName;

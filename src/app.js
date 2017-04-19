@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 
 import * as firebase from 'firebase';
-import { Actions, Scene, Router } from 'react-native-router-flux';
+import { Actions, ActionConst, Scene, Router } from 'react-native-router-flux';
 
 import Colors from './config/colors';
 import Firebase from './firebase/firebase';
@@ -14,6 +14,7 @@ import Profile from './views/user/profile';
 import LeafList from './views/leaf/leaf-list';
 import LeafDetail from './views/leaf/leaf-detail';
 import LeafUnknown from './views/leaf/leaf-unknown';
+import LeafSelection from './views/leaf/leaf-selection';
 import Login from './views/auth/login';
 import PasswordReset from './views/auth/password-reset';
 import Welcome from './views/auth/welcome';
@@ -22,6 +23,7 @@ import Form from './views/user/form';
 import CameraSnap from './views/camera/camera-snap';
 import CameraPreview from './views/camera/camera-preview';
 import CameraWaiting from './views/camera/camera-waiting';
+
 
 export default class LeafMgrApp extends Component {
   constructor(props) {
@@ -112,10 +114,22 @@ export default class LeafMgrApp extends Component {
                 style={{ backgroundColor: Colors.darkMain }}
               />
               <Scene
+                key="leafSelection"
+                component={LeafSelection}
+                title="Leaf Selection"
+                style={{ backgroundColor: Colors.darkMain }}
+                type={ActionConst.RESET}
+                hideNavBar
+                hideTabBar
+              />
+              <Scene
                 key="leafUnknown"
                 component={LeafUnknown}
                 title="Unknown Leaf"
                 style={{ backgroundColor: Colors.darkMain }}
+                type={ActionConst.RESET}
+                hideNavBar
+                hideTabBar
               />
             </Scene>
 
@@ -133,22 +147,28 @@ export default class LeafMgrApp extends Component {
                 key="cameraSnap"
                 component={CameraSnap}
                 title="CameraSnap"
-                hideNavBar
-                hideTabBar
                 initial
                 style={{ backgroundColor: Colors.darkMain }}
+                hideNavBar
+                hideTabBar
               />
               <Scene
                 key="cameraPreview"
                 component={CameraPreview}
                 title="Preview"
                 style={{ backgroundColor: Colors.darkMain }}
+                type={ActionConst.RESET}
+                hideNavBar
+                hideTabBar
               />
               <Scene
                 key="cameraWaiting"
                 component={CameraWaiting}
                 title="Waiting"
                 style={{ backgroundColor: Colors.greenMain }}
+                type={ActionConst.RESET}
+                hideNavBar
+                hideTabBar
               />
             </Scene>
 

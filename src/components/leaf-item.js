@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {
+  Dimensions,
   Text,
   Image,
   View,
   StyleSheet,
-  TouchableHighlight,
-  Dimensions
+  TouchableHighlight
 } from 'react-native';
 
 import Colors from '../config/colors';
+
 
 export default class LeafItem extends React.Component {
   SIZE;

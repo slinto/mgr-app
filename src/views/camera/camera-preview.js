@@ -19,7 +19,7 @@ export default class CameraPreview extends Component {
   }
 
   goBack() {
-    Actions.pop();
+    Actions.cameraSnap({ type: 'reset' });
   }
 
   sendToAnalyze() {
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    marginHorizontal: 20,
-    marginBottom: 20
+    marginHorizontal: 25,
+    marginBottom: 48
   },
 
   button: {
