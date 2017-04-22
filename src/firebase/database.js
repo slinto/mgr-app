@@ -74,13 +74,13 @@ export default class Database {
         url: photoURL,
         date: date.toString(),
         gps: false
-      }
+      };
 
       leafData.photos.unshift(newPhoto);
 
       firebase.database().ref(userLeafRef).set(leafData).then(() => {
         Database.getTreeDetail(leaf.id, (tree) => {
-          Actions.detail({ tree: tree, title: tree.name, type: ActionConst.RESET });
+          Actions.detail({ tree: tree, title: tree.name });
         });
       });
     });

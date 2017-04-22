@@ -113,22 +113,6 @@ export default class LeafMgrApp extends Component {
                 title="Leaf Detail"
                 style={{ backgroundColor: Colors.darkMain }}
               />
-              <Scene
-                key="leafSelection"
-                component={LeafSelection}
-                title="Leaf Selection"
-                style={{ backgroundColor: Colors.darkMain }}
-                hideNavBar
-                hideTabBar
-              />
-              <Scene
-                key="leafUnknown"
-                component={LeafUnknown}
-                title="Unknown Leaf"
-                style={{ backgroundColor: Colors.darkMain }}
-                hideNavBar
-                hideTabBar
-              />
             </Scene>
 
             <Scene
@@ -165,6 +149,22 @@ export default class LeafMgrApp extends Component {
                 title="Waiting"
                 style={{ backgroundColor: Colors.greenMain }}
                 //type={ActionConst.RESET}
+                hideNavBar
+                hideTabBar
+              />
+              <Scene
+                key="leafSelection"
+                component={LeafSelection}
+                title="Leaf Selection"
+                style={{ backgroundColor: Colors.darkMain }}
+                hideNavBar
+                hideTabBar
+              />
+              <Scene
+                key="leafUnknown"
+                component={LeafUnknown}
+                title="Unknown Leaf"
+                style={{ backgroundColor: Colors.darkMain }}
                 hideNavBar
                 hideTabBar
               />

@@ -18,7 +18,7 @@ export default class LeafUnknown extends Component {
   }
 
   goToHome() {
-    Actions.list({ type: 'reset' });
+    Actions.leaf();
   }
 
   render() {

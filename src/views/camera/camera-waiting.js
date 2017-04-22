@@ -42,7 +42,7 @@ export default class CameraWaiting extends Component {
   }
 
   getPrediction(url) {
-    RNFetchBlob.fetch('POST', `${Api.tensorflow.test}/photo-prediction-mock-2`, {
+    RNFetchBlob.fetch('POST', `${Api.tensorflow.test}/photo-prediction-mock-3`, {
       'Content-Type': 'multipart/form-data'
     }, [{ name: 'image_data', data: url }])
       .then((res) => res.json())
@@ -70,9 +70,9 @@ export default class CameraWaiting extends Component {
     if (validResults.length === 1) {
       Database.saveAndGoToLeafDetail(this.state.user, this.state.uploadedURL, validResults[0]);
     } else if (validResults.length > 1) {
-      Actions.leafSelection({ type: 'reset', results: validResults, userLeafPhoto: this.state.uploadedURL });
+      Actions.leafSelection({ results: validResults, userLeafPhoto: this.state.uploadedURL });
     } else {
-      Actions.leafUnknown({ type: 'reset' });
+      Actions.leafUnknown();
     }
   }
 

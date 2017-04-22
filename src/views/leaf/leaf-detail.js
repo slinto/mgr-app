@@ -15,7 +15,7 @@ export default class LeafDetail extends Component {
 
     this.state = {
       tree: {},
-      loading: false,
+      loading: true,
       loaded: false
     };
   }
@@ -23,7 +23,7 @@ export default class LeafDetail extends Component {
   async componentDidMount() {
     if (typeof this.props.leaf !== 'undefined') {
       try {
-        this.setState({ loading: true });
+        //this.setState({ loading: true });
         Database.getTreeDetail(this.props.leaf.id, (tree) => {
           this.setState({
             tree: tree,
