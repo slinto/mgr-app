@@ -10,6 +10,8 @@ import * as firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import Database from '../../firebase/database';
 import LeafItem from '../../components/leaf-item';
+import Colors from '../../config/colors';
+
 
 export default class LeafList extends Component {
   constructor(props) {
@@ -94,26 +96,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 80,
-    backgroundColor: '#070709'
+    backgroundColor: Colors.darkMain
   },
 
   textLoadingH1: {
     fontSize: 20,
     fontWeight: '500',
-    color: '#fff',
+    color: Colors.whiteMain,
     textAlign: 'center',
     marginBottom: 5,
   },
 
   textLoadingH2: {
-    color: '#fff',
+    color: Colors.whiteMain,
     textAlign: 'center',
     fontSize: 16,
     fontStyle: 'italic',
   },
 
   textBlank: {
-    color: '#fff',
+    color: Colors.whiteMain,
     textAlign: 'center'
   },
 

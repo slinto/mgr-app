@@ -118,7 +118,6 @@ export default class LeafMgrApp extends Component {
                 component={LeafSelection}
                 title="Leaf Selection"
                 style={{ backgroundColor: Colors.darkMain }}
-                type={ActionConst.RESET}
                 hideNavBar
                 hideTabBar
               />
@@ -127,7 +126,6 @@ export default class LeafMgrApp extends Component {
                 component={LeafUnknown}
                 title="Unknown Leaf"
                 style={{ backgroundColor: Colors.darkMain }}
-                type={ActionConst.RESET}
                 hideNavBar
                 hideTabBar
               />
@@ -157,7 +155,7 @@ export default class LeafMgrApp extends Component {
                 component={CameraPreview}
                 title="Preview"
                 style={{ backgroundColor: Colors.darkMain }}
-                type={ActionConst.RESET}
+                //type={ActionConst.RESET}
                 hideNavBar
                 hideTabBar
               />
@@ -166,7 +164,7 @@ export default class LeafMgrApp extends Component {
                 component={CameraWaiting}
                 title="Waiting"
                 style={{ backgroundColor: Colors.greenMain }}
-                type={ActionConst.RESET}
+                //type={ActionConst.RESET}
                 hideNavBar
                 hideTabBar
               />

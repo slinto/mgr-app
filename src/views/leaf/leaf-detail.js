@@ -3,9 +3,9 @@ import {
   View,
   StyleSheet,
   ScrollView
-} from "react-native";
+} from 'react-native';
 import * as firebase from 'firebase';
-import Database from "../../firebase/database";
+import Database from '../../firebase/database';
 import LeafDetailItem from '../../components/leaf-detail-item';
 import Gallery from '../../components/gallery';
 

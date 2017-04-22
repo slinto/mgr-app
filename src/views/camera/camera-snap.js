@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Dimensions,
   StyleSheet,
+  Image,
   Text,
   TouchableOpacity,
   View
@@ -19,12 +20,19 @@ export default class CameraSnap extends Component {
     this.state = {
       camera: {
         flashMode: Camera.constants.FlashMode.auto
-      }
+      },
+      isInfoTextVisible: true
     };
     this.camera;
 
     this.takePicture = this.takePicture.bind(this);
     this.goBack = this.goBack.bind(this);
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isInfoTextVisible: false });
+    }, 1500);
   }
 
   takePicture() {
@@ -107,6 +115,15 @@ export default class CameraSnap extends Component {
             </TouchableOpacity>
           </View>
 
+          <View style={styles.cameraOverlayWrapper}>
+            <Image
+              source={require('../../../assets/img/camera-overlay.png')}
+              style={styles.cameraOverlay}/>
+            { this.state.isInfoTextVisible &&
+            <Text style={styles.cameraOverlayText}>Please, hold leaf in this position.</Text>
+            }
+          </View>
+
           <View style={styles.controlsWrapper}>
             <TouchableOpacity>
               <Text style={styles.closeButton} onPress={this.goBack}>CLOSE</Text>
@@ -144,6 +161,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width
+  },
+
+  cameraOverlayWrapper: {
+    flex: 1,
+  },
+
+  cameraOverlay: {
+    flex: 1,
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
+    opacity: 0.3
+  },
+
+  cameraOverlayText: {
+    position: 'absolute',
+    top: (Dimensions.get('window').height / 2) - 40,
+    width: Dimensions.get('window').width,
+    color: Colors.whiteMain,
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    fontWeight: '500',
+    opacity: 0.7
   },
 
   controlsWrapper: {
