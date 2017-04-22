@@ -4,10 +4,12 @@ import {
   Text,
   View,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import * as firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Database from '../../firebase/database';
 import LeafItem from '../../components/leaf-item';
 import Colors from '../../config/colors';
@@ -81,9 +83,17 @@ export default class LeafList extends Component {
         }
 
         { !this.state.loading && this.state.loaded && leafItemsLength === 0 &&
-        <View>
-          <Text style={styles.textBlank}>CAMERA LOGO / BUTTON</Text>
-          <Text style={styles.textBlank}>ANALYZE YOUR FIRST LEAF</Text>
+        <View style={{ flex: 1, justifyContent: 'center', marginTop: -50 }}>
+          <TouchableOpacity
+            onPress={() => {
+            Actions.camera();
+          }}>
+            <Icon
+              name="camera"
+              style={styles.cameraIcon}
+            />
+            <Text style={styles.textLoadingH2}>Let's analyze your first leaf!</Text>
+          </TouchableOpacity>
         </View>
         }
         {
@@ -117,6 +127,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontStyle: 'italic',
+  },
+
+  cameraIcon: {
+    color: Colors.whiteMain,
+    fontSize: 50,
+    textAlign: 'center',
+    marginBottom: 5,
   },
 
   textBlank: {
