@@ -19,7 +19,7 @@ export default class CameraPreview extends Component {
   }
 
   goBack() {
-    Actions.cameraSnap({ type: 'reset' });
+    Actions.cameraSnap();
   }
 
   sendToAnalyze() {

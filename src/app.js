@@ -139,7 +139,6 @@ export default class LeafMgrApp extends Component {
                 component={CameraPreview}
                 title="Preview"
                 style={{ backgroundColor: Colors.darkMain }}
-                //type={ActionConst.RESET}
                 hideNavBar
                 hideTabBar
               />
@@ -148,7 +147,6 @@ export default class LeafMgrApp extends Component {
                 component={CameraWaiting}
                 title="Waiting"
                 style={{ backgroundColor: Colors.greenMain }}
-                //type={ActionConst.RESET}
                 hideNavBar
                 hideTabBar
               />
