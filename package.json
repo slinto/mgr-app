@@ -1,11 +1,12 @@
 {
   "name": "LeafProjectApp",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.4",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "lint": "./node_modules/.bin/eslint --fix *.js"
+    "lint": "./node_modules/.bin/eslint --fix *.js",
+    "version-bump": "./version-bump-ios.sh"
   },
   "dependencies": {
     "firebase": "^3.8.0",

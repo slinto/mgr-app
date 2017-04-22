@@ -99,17 +99,17 @@ export default class Profile extends Component {
           </View>
           }
 
-          <Text style={styles.divider}>APPLICATION</Text>
+          {/*<Text style={styles.divider}>APPLICATION</Text>*/}
 
-          <ListItem
-            title="Language"
-            rightTitle={deviceLocale}
-            chevronColor={Colors.greenMain}
-            containerStyle={[styles.listItem, styles.rightWithChevron]}
-            titleStyle={styles.listItemTitle}
-            underlayColor={Colors.darkActive}
-            rightTitleStyle={styles.listItemRightTitle}
-          />
+          {/*<ListItem*/}
+            {/*title="Language"*/}
+            {/*rightTitle={deviceLocale}*/}
+            {/*chevronColor={Colors.greenMain}*/}
+            {/*containerStyle={[styles.listItem, styles.rightWithChevron]}*/}
+            {/*titleStyle={styles.listItemTitle}*/}
+            {/*underlayColor={Colors.darkActive}*/}
+            {/*rightTitleStyle={styles.listItemRightTitle}*/}
+          {/*/>*/}
 
           <ListItem
             title="Leave a feedback"
