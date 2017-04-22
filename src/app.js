@@ -119,7 +119,6 @@ export default class LeafMgrApp extends Component {
                 component={LeafPhoto}
                 title="Leaf Photo"
                 hideTabBar
-                //schema="modal"
                 style={{ backgroundColor: Colors.darkMain }}
               />
             </Scene>

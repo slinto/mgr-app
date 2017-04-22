@@ -115,6 +115,7 @@ export default class Form extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 65,
+    marginBottom: 50,
     backgroundColor: Colors.darkMain
   },
 

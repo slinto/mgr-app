@@ -15,6 +15,8 @@ export default class Gallery extends React.Component {
     this.state = {
       images: {}
     };
+
+    console.log(props);
   }
 
   render() {
@@ -36,6 +38,7 @@ export default class Gallery extends React.Component {
 const styles = StyleSheet.create({
   wrapper: {
     paddingVertical: 10,
+    marginBottom: 30,
     backgroundColor: '#15141a'
   },
 

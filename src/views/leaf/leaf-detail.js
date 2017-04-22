@@ -27,7 +27,7 @@ export default class LeafDetail extends Component {
         Database.getTreeDetail(this.props.leaf.id, (tree) => {
           this.setState({
             tree: tree,
-            treePhotos: this.props.leaf.photos,
+            leafPhotos: this.props.leaf.photos,
             loaded: true,
             loading: false
           });
@@ -62,7 +62,7 @@ export default class LeafDetail extends Component {
       <ScrollView style={styles.container}>
 
         { this.state.loaded &&
-        <View>
+        <View style={styles.innerContainer}>
           <View style={styles.textWrapper}>
             <LeafDetailItem left="LATIN. NAME"
                             right={this.state.tree.name}/>
@@ -84,7 +84,9 @@ export default class LeafDetail extends Component {
             <LeafDetailItem left="OCCURANCE"
                             right={this.state.tree.occurance}/>
           </View>
-          <Gallery title='YOUR PHOTOS' photos={this.state.treePhotos}/>
+          <Gallery title="YOUR PHOTOS" photos={this.state.leafPhotos}/>
+
+          <Gallery title="TREE PHOTOS" photos={this.state.tree.treePhotos}/>
         </View>
         }
 
@@ -98,6 +100,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 90,
     backgroundColor: '#070709'
+  },
+
+  innerContainer: {
+    paddingBottom: 50,
   },
 
   textWrapper: {

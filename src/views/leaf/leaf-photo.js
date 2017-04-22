@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet
 } from 'react-native';
+import FitImage from 'react-native-fit-image';
 
 
 export default class LeafPhoto extends Component {
@@ -20,16 +21,18 @@ export default class LeafPhoto extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image key={this.props.photo.id}
-               style={styles.image}
-               source={{ uri: this.props.photo.url }}
-               onLoadEnd={() => {
-                 this.setState({ isLoading: false });
-               }}
-        >
-          <ActivityIndicator style={[styles.loader, { height: 80 }]}
-                             animating={this.state.isLoading} size="large"/>
-        </Image>
+        <FitImage
+          key={this.props.photo.id}
+          style={styles.image}
+          source={{ uri: this.props.photo.url }}
+          onLoadEnd={() => {
+            this.setState({ isLoading: false });
+          }}
+          resizeMode="contain"
+          indicator
+          indicatorColor="white"
+          indicatorSize="large"
+        />
       </View>
     );
   }
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    height: Dimensions.get('window').height
+    //height: Dimensions.get('window').height
   },
 
   loader: {
