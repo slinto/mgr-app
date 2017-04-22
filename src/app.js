@@ -13,6 +13,7 @@ import TabIcon from './components/tab-icon';
 import Profile from './views/user/profile';
 import LeafList from './views/leaf/leaf-list';
 import LeafDetail from './views/leaf/leaf-detail';
+import LeafPhoto from './views/leaf/leaf-photo';
 import LeafUnknown from './views/leaf/leaf-unknown';
 import LeafSelection from './views/leaf/leaf-selection';
 import Login from './views/auth/login';
@@ -111,6 +112,14 @@ export default class LeafMgrApp extends Component {
                 key="detail"
                 component={LeafDetail}
                 title="Leaf Detail"
+                style={{ backgroundColor: Colors.darkMain }}
+              />
+              <Scene
+                key="leafPhoto"
+                component={LeafPhoto}
+                title="Leaf Photo"
+                hideTabBar
+                //schema="modal"
                 style={{ backgroundColor: Colors.darkMain }}
               />
             </Scene>
