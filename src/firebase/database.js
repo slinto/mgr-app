@@ -1,39 +1,9 @@
 import * as firebase from 'firebase';
-import { Actions, ActionConst } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 
 
 export default class Database {
 
-  /**
-   * Sets a users mobile number
-   * @param userId
-   * @param mobile
-   * @returns {firebase.Promise<any>|!firebase.Promise.<void>}
-   */
-  static setUserMobile(userId, mobile) {
-    const userMobilePath = `/user/${userId}/details`;
-
-    return firebase.database().ref(userMobilePath).set({ mobile });
-  }
-
-  /**
-   * Listen for changes to a users mobile number
-   * @param userId
-   * @param callback Users mobile number
-   */
-  static listenUserMobile(userId, callback) {
-    const userMobilePath = `/user/${userId}/details`;
-
-    firebase.database().ref(userMobilePath).on('value', (snapshot) => {
-      let mobile = '';
-      if (snapshot.val()) {
-        mobile = snapshot.val().mobile;
-      }
-      callback(mobile);
-    });
-  }
-
-  //---------------------
   static getUserLeafList(userId, callback) {
     const path = `/user/${userId}/trees`;
 
@@ -42,7 +12,6 @@ export default class Database {
     });
   }
 
-  //--------------------
   static getTreeDetail(leafId, callback) {
     const path = `/tree/${leafId}`;
 
@@ -51,7 +20,6 @@ export default class Database {
     });
   }
 
-  //--------------------
   static getTreeList(callback) {
     const path = `/tree`;
 
@@ -60,7 +28,6 @@ export default class Database {
     });
   }
 
-  //--------------------
   static saveAndGoToLeafDetail(user, photoURL, leaf) {
     let userLeafRef = `user/${user.uid}/trees/${leaf.id}`;
 

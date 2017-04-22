@@ -10,7 +10,6 @@ import DeviceInfo from 'react-native-device-info';
 import { Actions } from 'react-native-router-flux';
 import { ListItem } from 'react-native-elements';
 import ReactNativeI18n from 'react-native-i18n';
-import Database from '../../firebase/database';
 import Colors from '../../config/colors';
 
 const deviceLocale = ReactNativeI18n.currentLocale();
@@ -21,21 +20,16 @@ export default class Profile extends Component {
     super(props);
 
     this.state = {
-      uid: '',
-      user: '',
-      mobile: '',
-      mobileForm: ''
+      uid: null,
+      user: null
     };
 
     this.logout = this.logout.bind(this);
-    this.saveMobile = this.saveMobile.bind(this);
   }
 
   async componentDidMount() {
     try {
       let user = await firebase.auth().currentUser;
-
-      console.log(user);
 
       this.setState({
         uid: user.uid,
@@ -57,17 +51,11 @@ export default class Profile extends Component {
 
   goToFeedback = () => {
     Actions.feedback({ user: this.state.user, emailTitle: 'User feedback', msg: 'Write your message here...' });
-  }
+  };
 
   goToBug = () => {
     Actions.bug({ user: this.state.user, emailTitle: 'Bug report', msg: 'Write your bug here...' });
-  }
-
-  saveMobile() {
-    if (this.state.uid && this.state.mobileForm) {
-      Database.setUserMobile(this.state.uid, this.state.mobileForm);
-    }
-  }
+  };
 
   render() {
     return (
@@ -76,28 +64,45 @@ export default class Profile extends Component {
 
           <Text style={styles.divider}>USER</Text>
 
-          <ListItem
-            title='E-mail'
-            rightTitle={this.state.user.email}
-            hideChevron={true}
-            containerStyle={styles.listItem}
-            titleStyle={styles.listItemTitle}
-            rightTitleStyle={styles.listItemRightTitle}
-          />
+          { this.state.user && this.state.user.providerData[0].providerId === 'password' &&
+          <View>
+            <ListItem
+              title="E-mail"
+              rightTitle={this.state.user.email}
+              hideChevron={true}
+              containerStyle={styles.listItem}
+              titleStyle={styles.listItemTitle}
+              rightTitleStyle={styles.listItemRightTitle}
+            />
 
-          <ListItem
-            title='Password'
-            rightTitle='****'
-            hideChevron={true}
-            containerStyle={styles.listItem}
-            titleStyle={styles.listItemTitle}
-            rightTitleStyle={styles.listItemRightTitle}
-          />
+            <ListItem
+              title="Password"
+              rightTitle="****"
+              hideChevron={true}
+              containerStyle={styles.listItem}
+              titleStyle={styles.listItemTitle}
+              rightTitleStyle={styles.listItemRightTitle}
+            />
+          </View>
+          }
+
+          { this.state.user && this.state.user.providerData[0].providerId === 'facebook.com' &&
+          <View>
+            <ListItem
+              title="Name"
+              rightTitle={this.state.user.displayName}
+              hideChevron={true}
+              containerStyle={styles.listItem}
+              titleStyle={styles.listItemTitle}
+              rightTitleStyle={styles.listItemRightTitle}
+            />
+          </View>
+          }
 
           <Text style={styles.divider}>APPLICATION</Text>
 
           <ListItem
-            title='Language'
+            title="Language"
             rightTitle={deviceLocale}
             chevronColor={Colors.greenMain}
             containerStyle={[styles.listItem, styles.rightWithChevron]}
@@ -107,7 +112,7 @@ export default class Profile extends Component {
           />
 
           <ListItem
-            title='Leave a feedback'
+            title="Leave a feedback"
             containerStyle={[styles.listItem, styles.marginTop]}
             titleStyle={styles.listItemTitleGreen}
             chevronColor={Colors.greenMain}
@@ -116,7 +121,7 @@ export default class Profile extends Component {
           />
 
           <ListItem
-            title='Report a bug'
+            title="Report a bug"
             containerStyle={styles.listItem}
             titleStyle={styles.listItemTitleGreen}
             chevronColor={Colors.greenMain}
@@ -125,7 +130,7 @@ export default class Profile extends Component {
           />
 
           <ListItem
-            title='Log out'
+            title="Log out"
             containerStyle={[styles.listItem, styles.marginTop]}
             titleStyle={styles.listItemTitleGreen}
             chevronColor={Colors.greenMain}
