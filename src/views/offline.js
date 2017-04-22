@@ -31,14 +31,17 @@ const styles = StyleSheet.create({
   },
 
   h1: {
-    color: Colors.whiteMain,
     fontSize: 20,
     fontWeight: '500',
+    color: Colors.whiteMain,
+    textAlign: 'center',
+    marginBottom: 5,
   },
 
   h2: {
+    color: Colors.whiteMain,
+    textAlign: 'center',
     fontSize: 16,
     fontStyle: 'italic',
-    color: Colors.whiteMain
   }
 });
