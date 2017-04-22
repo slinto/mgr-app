@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Text,
   View,
   StyleSheet,
   ScrollView
@@ -8,6 +9,8 @@ import * as firebase from 'firebase';
 import Database from '../../firebase/database';
 import LeafDetailItem from '../../components/leaf-detail-item';
 import Gallery from '../../components/gallery';
+import Colors from '../../config/colors';
+
 
 export default class LeafDetail extends Component {
   constructor(props) {
@@ -84,6 +87,11 @@ export default class LeafDetail extends Component {
             <LeafDetailItem left="OCCURANCE"
                             right={this.state.tree.occurance}/>
           </View>
+
+          <View style={styles.textWrapper}>
+            <Text style={styles.textHeading}>DESCRIPTION</Text>
+            <Text style={styles.textStyle}>{this.state.tree.description}</Text>
+          </View>
           <Gallery title="YOUR PHOTOS" photos={this.state.leafPhotos}/>
 
           <Gallery title="TREE PHOTOS" photos={this.state.tree.treePhotos}/>
@@ -99,7 +107,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 90,
-    backgroundColor: '#070709'
+    backgroundColor: Colors.darkMain
   },
 
   innerContainer: {
@@ -110,6 +118,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginBottom: 30,
-    backgroundColor: '#15141a',
+    backgroundColor: Colors.darkSub,
+  },
+
+  textHeading: {
+    color: Colors.whiteMain,
+    marginBottom: 5
+  },
+
+  textStyle: {
+    color: Colors.greySub,
+    fontSize: 14,
+    lineHeight: 19,
+    textAlign: 'justify'
   },
 });

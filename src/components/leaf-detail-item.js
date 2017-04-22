@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet
 } from 'react-native';
-
 import Colors from '../config/colors';
 
 export default class LeafDetailItem extends React.Component {
