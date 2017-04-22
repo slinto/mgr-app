@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Text,
   StyleSheet,
+  View,
   ScrollView
 } from 'react-native';
 import * as firebase from 'firebase';
@@ -33,6 +34,9 @@ export default class Profile extends Component {
   async componentDidMount() {
     try {
       let user = await firebase.auth().currentUser;
+
+      console.log(user);
+
       this.setState({
         uid: user.uid,
         user: user
@@ -68,67 +72,69 @@ export default class Profile extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <View style={styles.innerContainer}>
 
-        <Text style={styles.divider}>USER</Text>
+          <Text style={styles.divider}>USER</Text>
 
-        <ListItem
-          title='E-mail'
-          rightTitle={this.state.user.email}
-          hideChevron={true}
-          containerStyle={styles.listItem}
-          titleStyle={styles.listItemTitle}
-          rightTitleStyle={styles.listItemRightTitle}
-        />
+          <ListItem
+            title='E-mail'
+            rightTitle={this.state.user.email}
+            hideChevron={true}
+            containerStyle={styles.listItem}
+            titleStyle={styles.listItemTitle}
+            rightTitleStyle={styles.listItemRightTitle}
+          />
 
-        <ListItem
-          title='Password'
-          rightTitle='****'
-          hideChevron={true}
-          containerStyle={styles.listItem}
-          titleStyle={styles.listItemTitle}
-          rightTitleStyle={styles.listItemRightTitle}
-        />
+          <ListItem
+            title='Password'
+            rightTitle='****'
+            hideChevron={true}
+            containerStyle={styles.listItem}
+            titleStyle={styles.listItemTitle}
+            rightTitleStyle={styles.listItemRightTitle}
+          />
 
-        <Text style={styles.divider}>APPLICATION</Text>
+          <Text style={styles.divider}>APPLICATION</Text>
 
-        <ListItem
-          title='Language'
-          rightTitle={deviceLocale}
-          chevronColor={Colors.greenMain}
-          containerStyle={[styles.listItem, styles.rightWithChevron]}
-          titleStyle={styles.listItemTitle}
-          underlayColor={Colors.darkActive}
-          rightTitleStyle={styles.listItemRightTitle}
-        />
+          <ListItem
+            title='Language'
+            rightTitle={deviceLocale}
+            chevronColor={Colors.greenMain}
+            containerStyle={[styles.listItem, styles.rightWithChevron]}
+            titleStyle={styles.listItemTitle}
+            underlayColor={Colors.darkActive}
+            rightTitleStyle={styles.listItemRightTitle}
+          />
 
-        <ListItem
-          title='Leave a feedback'
-          containerStyle={[styles.listItem, styles.marginTop]}
-          titleStyle={styles.listItemTitleGreen}
-          chevronColor={Colors.greenMain}
-          underlayColor={Colors.darkActive}
-          onPress={this.goToFeedback}
-        />
+          <ListItem
+            title='Leave a feedback'
+            containerStyle={[styles.listItem, styles.marginTop]}
+            titleStyle={styles.listItemTitleGreen}
+            chevronColor={Colors.greenMain}
+            underlayColor={Colors.darkActive}
+            onPress={this.goToFeedback}
+          />
 
-        <ListItem
-          title='Report a bug'
-          containerStyle={styles.listItem}
-          titleStyle={styles.listItemTitleGreen}
-          chevronColor={Colors.greenMain}
-          underlayColor={Colors.darkActive}
-          onPress={this.goToBug}
-        />
+          <ListItem
+            title='Report a bug'
+            containerStyle={styles.listItem}
+            titleStyle={styles.listItemTitleGreen}
+            chevronColor={Colors.greenMain}
+            underlayColor={Colors.darkActive}
+            onPress={this.goToBug}
+          />
 
-        <ListItem
-          title='Log out'
-          containerStyle={[styles.listItem, styles.marginTop]}
-          titleStyle={styles.listItemTitleGreen}
-          chevronColor={Colors.greenMain}
-          underlayColor={Colors.darkActive}
-          onPress={this.logout}
-        />
+          <ListItem
+            title='Log out'
+            containerStyle={[styles.listItem, styles.marginTop]}
+            titleStyle={styles.listItemTitleGreen}
+            chevronColor={Colors.greenMain}
+            underlayColor={Colors.darkActive}
+            onPress={this.logout}
+          />
 
-        <Text style={styles.version}>Version {DeviceInfo.getVersion()} ({DeviceInfo.getBuildNumber()})</Text>
+          <Text style={styles.version}>Version {DeviceInfo.getVersion()} ({DeviceInfo.getBuildNumber()})</Text>
+        </View>
       </ScrollView>
     );
   }
@@ -138,8 +144,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 60,
-    marginBottom: 50,
     backgroundColor: Colors.darkMain
+  },
+
+  innerContainer: {
+    paddingBottom: 50,
   },
 
   heading: {

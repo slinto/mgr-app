@@ -48,17 +48,22 @@ export default class LeafList extends Component {
   }
 
   render() {
-    let leafItems = Object.keys(this.state.leafs).map((key) => {
-      if (this.state.leafs) {
-        let leaf = this.state.leafs[key];
-        return (
-          <LeafItem key={leaf.name} data={leaf} onPress={() => {
-            this.goToDetail(leaf)
-          }}/>
-        );
-      }
-    });
-    let leafItemsLength = Object.keys(this.state.leafs).length;
+    let leafItems = false;
+    let leafItemsLength = 0;
+
+    if (this.state.leafs !== null) {
+      Object.keys(this.state.leafs).map((key) => {
+        if (this.state.leafs) {
+          let leaf = this.state.leafs[key];
+          return (
+            <LeafItem key={leaf.name} data={leaf} onPress={() => {
+              this.goToDetail(leaf)
+            }}/>
+          );
+        }
+      });
+      leafItemsLength = Object.keys(this.state.leafs).length;
+    }
 
     return (
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.container}>

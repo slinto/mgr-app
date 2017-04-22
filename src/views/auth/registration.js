@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { Actions } from 'react-native-router-flux';
 import { Button } from 'react-native-elements';
 import Colors from '../../config/colors';
@@ -24,6 +25,9 @@ export default class Registration extends Component {
       password2: '',
       response: ''
     };
+
+    this.auth = firebase.auth();
+    this.provider = firebase.auth.FacebookAuthProvider;
 
     this.signup = this.signup.bind(this);
   }
@@ -47,10 +51,28 @@ export default class Registration extends Component {
     Actions.pop();
   }
 
-  async loginWithFacebook() {
-    console.log('loginWithFacebook');
-  }
-
+  loginWithFacebook = () => {
+    LoginManager.logInWithReadPermissions(['public_profile'])
+      .then(loginResult => {
+        if (loginResult.isCancelled) {
+          return;
+        }
+        AccessToken.getCurrentAccessToken()
+          .then(accessTokenData => {
+            const credential = this.provider.credential(accessTokenData.accessToken);
+            return this.auth.signInWithCredential(credential);
+          })
+          .then(credData => {
+            console.log(credData);
+            Actions.account({ type: 'reset' });
+          })
+          .catch(error => {
+            this.setState({
+              response: error.toString()
+            });
+          });
+      });
+  };
 
   render() {
     return (
