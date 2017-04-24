@@ -42,7 +42,7 @@ export default class CameraWaiting extends Component {
   }
 
   getPrediction(url) {
-    RNFetchBlob.fetch('POST', `${Api.tensorflow.test}/photo-prediction-mock-3`, {
+    RNFetchBlob.fetch('POST', `${Api.tensorflow.test}/photo-prediction`, {
       'Content-Type': 'multipart/form-data'
     }, [{ name: 'image_data', data: url }])
       .then((res) => res.json())
