@@ -68,7 +68,7 @@ export default class LeafDetail extends Component {
         <View style={styles.innerContainer}>
           <View style={styles.textWrapper}>
             <LeafDetailItem left="LATIN. NAME"
-                            right={this.state.tree.name}/>
+                            right={this.state.tree.latinName}/>
 
             <LeafDetailItem left="NAME"
                             right={this.state.tree.name}/>
@@ -83,6 +83,9 @@ export default class LeafDetail extends Component {
             <LeafDetailItem left="LEAF SIZE"
                             right={this.state.tree.leafSize.value}
                             rightAddon={this.state.tree.leafSize.unit}/>
+
+            <LeafDetailItem left="FLOWERING"
+                            right={this.state.tree.flowering}/>
 
             <LeafDetailItem left="OCCURANCE"
                             right={this.state.tree.occurance}/>

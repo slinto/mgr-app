@@ -73,7 +73,7 @@ export default class LeafList extends Component {
             color="#fff"
           />
           <Text style={styles.textLoadingH1}>Please wait!</Text>
-          <Text style={styles.textLoadingH2}>We preparing your herbal list.</Text>
+          <Text style={styles.textLoadingH2}>We preparing your herbarium.</Text>
         </View>
         }
 
