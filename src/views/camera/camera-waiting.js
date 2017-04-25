@@ -48,7 +48,7 @@ export default class CameraWaiting extends Component {
         indicator: true
       })
       .fetch('POST', `${Api.tensorflow.test}/photo-prediction`, {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
       }, [{ name: 'image_data', data: url }])
       .then((res) => res.json())
       .then((res) => {
@@ -56,7 +56,9 @@ export default class CameraWaiting extends Component {
         this.analyzePredictionData(res);
       })
       .catch((error) => {
+        console.log('TODO: HANDLE!!');
         console.log(error);
+        Actions.leaf();
       });
   }
 

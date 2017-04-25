@@ -21,7 +21,7 @@ export default class Database {
   }
 
   static getTreeList(callback) {
-    const path = `/tree`;
+    const path = '/tree';
 
     firebase.database().ref(path).on('value', (snapshot) => {
       callback(snapshot);
@@ -36,6 +36,15 @@ export default class Database {
       let leafData = snapshot.val();
       let date = new Date();
 
+      if (leafData === null) {
+        // TODO: potrebne name atribut nahradit live datami pri nacitani listu
+        leafData = {
+          id: leaf.id,
+          name: '',
+          photos: []
+        };
+      }
+
       let newPhoto = {
         id: date.valueOf(),
         url: photoURL,
@@ -47,7 +56,7 @@ export default class Database {
 
       firebase.database().ref(userLeafRef).set(leafData).then(() => {
         Database.getTreeDetail(leaf.id, (tree) => {
-          Actions.detail({ tree: tree, title: tree.name });
+          Actions.detail({ tree: tree, leaf: leafData, title: tree.latinName });
         });
       });
     });

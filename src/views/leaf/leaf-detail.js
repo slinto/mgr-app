@@ -18,15 +18,16 @@ export default class LeafDetail extends Component {
 
     this.state = {
       tree: {},
+      leafPhotos: [],
+      treePhotos: [],
       loading: true,
       loaded: false
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (typeof this.props.leaf !== 'undefined') {
       try {
-        //this.setState({ loading: true });
         Database.getTreeDetail(this.props.leaf.id, (tree) => {
           this.setState({
             tree: tree,
@@ -41,7 +42,7 @@ export default class LeafDetail extends Component {
       }
     } else if (typeof this.props.tree !== 'undefined') {
       try {
-        let user = await firebase.auth().currentUser;
+        let user = firebase.auth().currentUser;
 
         Database.getUserLeafList(user.uid, (leafs) => {
           let userTreeData = leafs[`${this.props.tree.id}`];
