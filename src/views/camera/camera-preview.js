@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     marginHorizontal: 25,
-    marginBottom: 48
+    marginBottom: 30
   },
 
   button: {
