@@ -54,7 +54,7 @@ export default class LeafList extends Component {
       if (this.state.leafs) {
         let leaf = this.state.leafs[key];
         return (
-          <LeafItem key={leaf.name} data={leaf} onPress={() => {
+          <LeafItem key={leaf.id} data={leaf} onPress={() => {
             this.goToDetail(leaf)
           }}/>
         );
@@ -81,8 +81,8 @@ export default class LeafList extends Component {
         <View style={{ flex: 1, justifyContent: 'center', marginTop: -50 }}>
           <TouchableOpacity
             onPress={() => {
-            Actions.camera();
-          }}>
+              Actions.camera();
+            }}>
             <Icon
               name="camera"
               style={styles.cameraIcon}
@@ -137,9 +137,10 @@ const styles = StyleSheet.create({
   },
 
   itemsWrapper: {
-    flex: 1,
+    marginHorizontal: 8,
+    justifyContent: 'space-between',
     flexDirection: 'row',
-    marginHorizontal: 10
+    flexWrap: 'wrap'
   },
 
   preloader: {
