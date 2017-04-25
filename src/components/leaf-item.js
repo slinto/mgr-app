@@ -18,6 +18,14 @@ export default class LeafItem extends React.Component {
     this.SIZE = (Dimensions.get('window').width - 60) / 2;
   }
 
+  getPhotoText(len) {
+    if (len > 1) {
+      return 'PHOTOS';
+    } else {
+      return 'PHOTO';
+    }
+  }
+
   render() {
     const leaf = this.props.data;
     return (
@@ -26,7 +34,7 @@ export default class LeafItem extends React.Component {
         <Image style={[styles.image, { width: this.SIZE, height: this.SIZE }]} source={{ uri: leaf.photos[0].url }}>
           <View style={[styles.imageOverlay, { width: this.SIZE, height: this.SIZE }]}>
             <Text style={styles.heading}>{leaf.name}</Text>
-            <Text style={styles.text}>{leaf.photos.length} PHOTOS</Text>
+            <Text style={styles.text}>{leaf.photos.length} {this.getPhotoText(leaf.photos.length)}</Text>
           </View>
         </Image>
       </TouchableHighlight>
