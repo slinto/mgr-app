@@ -15,8 +15,6 @@ export default class Gallery extends React.Component {
     this.state = {
       images: {}
     };
-
-    console.log(props);
   }
 
   render() {
