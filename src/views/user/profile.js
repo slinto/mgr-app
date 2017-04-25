@@ -138,7 +138,7 @@ export default class Profile extends Component {
             onPress={this.logout}
           />
 
-          <Text style={styles.version}>Version {DeviceInfo.getVersion()} ({DeviceInfo.getBuildNumber()})</Text>
+          <Text style={styles.version}>Version {DeviceInfo.getVersion()}</Text>
         </View>
       </ScrollView>
     );
