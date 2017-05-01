@@ -24,6 +24,7 @@ import Form from './views/user/form';
 import CameraSnap from './views/camera/camera-snap';
 import CameraPreview from './views/camera/camera-preview';
 import CameraWaiting from './views/camera/camera-waiting';
+import ErrorView from './views/error';
 
 
 export default class LeafMgrApp extends Component {
@@ -119,6 +120,12 @@ export default class LeafMgrApp extends Component {
                 component={LeafPhoto}
                 title="Leaf Photo"
                 hideTabBar
+                style={{ backgroundColor: Colors.darkMain }}
+              />
+              <Scene
+                key="error"
+                component={ErrorView}
+                title="Application Error"
                 style={{ backgroundColor: Colors.darkMain }}
               />
             </Scene>

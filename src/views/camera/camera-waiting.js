@@ -70,9 +70,8 @@ export default class CameraWaiting extends Component {
         this.analyzePredictionData(res);
       })
       .catch((error) => {
-        console.log('TODO: HANDLE!!');
-        console.log(error);
-        Actions.leaf();
+        console.log('Error handle:', error);
+        Actions.error({ errorMessage: error })
       });
   }
 
