@@ -76,6 +76,6 @@ export default class Database {
       results: predictionData
     };
 
-    firebase.database().ref(ref).set(log);
+    firebase.database().ref(ref).push().set(log);
   }
 }

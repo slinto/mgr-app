@@ -60,7 +60,7 @@ export default class CameraWaiting extends Component {
       })
       .catch((error) => {
         console.log('Error handle:', error);
-        Actions.error({ errorMessage: error });
+        Actions.error({ errorMessage: 'Error while uploading.' });
       });
   }
 
