@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
-  Image,
   Text,
   View
 } from 'react-native';
@@ -25,12 +24,10 @@ export default class CameraWaiting extends Component {
     };
   }
 
-  async componentDidMount() {
-    let user = await firebase.auth().currentUser;
-    this.setState({ user: user });
-  }
-
   componentWillMount() {
+    let user = firebase.auth().currentUser;
+    this.setState({ user: user });
+
     FirebaseStorage.uploadImage(this.props.imgUri)
       .then(url => {
         this.setState({ uploadedURL: url });
@@ -50,22 +47,26 @@ export default class CameraWaiting extends Component {
         name: 'image_data',
         data: url,
       }, {
-        name : 'upload_preset', data: 'jrkbliez'
+        name: 'upload_preset', data: 'jrkbliez'
       }])
-      .uploadProgress({ interval : 200 }, (written, total) => {
+      .uploadProgress({ interval: 200 }, (written, total) => {
         console.log('uploaded', written / total);
       })
       .then((res) => res.json())
       .then((res) => {
         this.setState({ processing: false });
+        this.savePredictionLog(res);
         this.analyzePredictionData(res);
       })
       .catch((error) => {
         console.log('Error handle:', error);
-        Actions.error({ errorMessage: error })
+        Actions.error({ errorMessage: error });
       });
   }
 
+  savePredictionLog(data) {
+    Database.savePredictionLog(data.results, this.state.user, this.state.uploadedURL);
+  }
 
   analyzePredictionData(data) {
     const validResults = [];

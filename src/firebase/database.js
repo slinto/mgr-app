@@ -61,4 +61,17 @@ export default class Database {
       });
     });
   }
+
+  static savePredictionLog(predictionData, user, url) {
+    let ref = 'predictionLog';
+
+    let log = {
+      date: new Date().toString(),
+      user: user.uid,
+      url: url,
+      results: predictionData
+    };
+
+    firebase.database().ref(ref).set(log);
+  }
 }
