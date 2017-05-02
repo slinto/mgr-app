@@ -26,6 +26,11 @@ export default class LeafItem extends React.Component {
     }
   }
 
+  getReadableName(id) {
+    let name = id.replace('-',' ');
+    return name.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
   render() {
     const leaf = this.props.data;
     return (
@@ -33,8 +38,8 @@ export default class LeafItem extends React.Component {
                           onPress={this.props.onPress}>
         <Image style={[styles.image, { width: this.SIZE, height: this.SIZE }]} source={{ uri: leaf.photos[0].url }}>
           <View style={[styles.imageOverlay, { width: this.SIZE, height: this.SIZE }]}>
-            <Text style={styles.heading}>{leaf.name}</Text>
-            <Text style={styles.text}>{leaf.photos.length} {this.getPhotoText(leaf.photos.length)}</Text>
+            <Text style={styles.heading}>{ this.getReadableName(leaf.id) }</Text>
+            <Text style={styles.text}>{leaf.photos.length} { this.getPhotoText(leaf.photos.length) }</Text>
           </View>
         </Image>
       </TouchableHighlight>
