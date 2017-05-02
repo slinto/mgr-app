@@ -12,6 +12,8 @@ export default class ErrorView extends Component {
   }
 
   render() {
+    console.log(this.props.errorMessage);
+
     return (
       <View style={styles.container}>
         <Text style={styles.h1}>Whooops 😞</Text>

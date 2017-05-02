@@ -7,8 +7,13 @@ export default class Database {
   static getUserLeafList(userId, callback) {
     const path = `/user/${userId}/trees`;
 
-    firebase.database().ref(path).on('value', (snapshot) => {
-      callback(snapshot.val());
+    firebase.database().ref(path).orderByChild('updated').on('value', (snapshot) => {
+      let leafs = [];
+      snapshot.forEach((child) => {
+        leafs.unshift(child.val());
+      });
+
+      callback(leafs);
     });
   }
 
@@ -37,10 +42,8 @@ export default class Database {
       let date = new Date();
 
       if (leafData === null) {
-        // TODO: potrebne name atribut nahradit live datami pri nacitani listu
         leafData = {
           id: leaf.id,
-          name: '',
           photos: []
         };
       }
@@ -53,6 +56,7 @@ export default class Database {
       };
 
       leafData.photos.unshift(newPhoto);
+      leafData.updated = date.toString();
 
       firebase.database().ref(userLeafRef).set(leafData).then(() => {
         Database.getTreeDetail(leaf.id, (tree) => {
