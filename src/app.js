@@ -5,7 +5,8 @@ import {
 } from 'react-native';
 
 import * as firebase from 'firebase';
-import { Actions, ActionConst, Scene, Router } from 'react-native-router-flux';
+import { Actions, Scene, Router } from 'react-native-router-flux';
+import I18n from 'react-native-i18n';
 
 import Colors from './config/colors';
 import Firebase from './firebase/firebase';
@@ -32,6 +33,7 @@ export default class LeafMgrApp extends Component {
     super(props);
     Firebase.initialize();
     StatusBar.setBarStyle('light-content', true);
+    I18n.locale = 'sk';
     this.getInitialView();
     this.state = {
       userLoaded: false,
