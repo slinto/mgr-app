@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  ActivityIndicator,
   Image,
   Text,
   View,
@@ -86,9 +87,17 @@ export default class LeafDetail extends Component {
 
           <Image
             style={[styles.headerImage]}
-            source={{ uri: (this.state.leafPhotos) ? this.state.leafPhotos[0].url : '' }}>
+            source={{ uri: (this.state.leafPhotos) ? this.state.leafPhotos[0].url : '' }}
+            onLoadEnd={() => {
+              this.setState({ headerIsLoading: false });
+            }}>
             <View style={[styles.headerImageOverlay]}>
-              <Text style={styles.headerText}>{this.state.tree.latinName}</Text>
+              <ActivityIndicator style={[styles.loader]}
+                                 size="large"
+                                 animating={this.state.headerIsLoading}/>
+              { !this.state.headerIsLoading &&
+                <Text style={styles.headerText}>{this.state.tree.latinName}</Text>
+              }
             </View>
           </Image>
 
@@ -184,4 +193,11 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: 'justify'
   },
+
+  loader: {
+    position: 'absolute',
+    top: 80,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
