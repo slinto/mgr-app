@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {
+  Image,
   Text,
   View,
   StyleSheet,
   ScrollView
 } from 'react-native';
 import * as firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 import Database from '../../firebase/database';
 import LeafDetailItem from '../../components/leaf-detail-item';
 import Gallery from '../../components/gallery';
@@ -21,7 +23,9 @@ export default class LeafDetail extends Component {
       leafPhotos: [],
       treePhotos: [],
       loading: true,
-      loaded: false
+      loaded: false,
+      headerIsLoading: true,
+      viewRef: null
     };
   }
 
@@ -61,12 +65,33 @@ export default class LeafDetail extends Component {
     }
   }
 
+  handleScroll = (event) => {
+    if (this.state.loaded) {
+      if (event.nativeEvent.contentOffset.y > 100) {
+        Actions.refresh({ title: this.state.tree.latinName });
+      } else {
+        Actions.refresh({ title: '' });
+      }
+    }
+  };
+
   render() {
     return (
-      <ScrollView style={styles.container}>
-
+      <ScrollView style={styles.container}
+        // onScroll={this.handleScroll}
+        // scrollEventThrottle={8}
+      >
         { this.state.loaded &&
         <View style={styles.innerContainer}>
+
+          <Image
+            style={[styles.headerImage]}
+            source={{ uri: (this.state.leafPhotos) ? this.state.leafPhotos[0].url : '' }}>
+            <View style={[styles.headerImageOverlay]}>
+              <Text style={styles.headerText}>{this.state.tree.latinName}</Text>
+            </View>
+          </Image>
+
           <View style={styles.textWrapper}>
             <LeafDetailItem left="LATIN. NAME"
                             right={this.state.tree.latinName}/>
@@ -103,15 +128,38 @@ export default class LeafDetail extends Component {
         }
 
       </ScrollView>
-    );
+    )
+      ;
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 90,
+    paddingTop: 60,
     backgroundColor: Colors.darkMain
+  },
+
+  headerImage: {
+    marginBottom: 40,
+    height: 200,
+  },
+
+  headerImageOverlay: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+
+  headerText: {
+    color: Colors.whiteMain,
+    textAlign: 'center',
+    fontWeight: '700',
+    fontSize: 30,
+    marginHorizontal: 10,
+    marginBottom: 5
   },
 
   innerContainer: {
