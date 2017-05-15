@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   },
 
   innerContainer: {
-    paddingBottom: 50,
+    paddingBottom: 90,
   },
 
   textWrapper: {
