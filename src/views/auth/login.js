@@ -50,7 +50,6 @@ export default class Login extends Component {
             return this.auth.signInWithCredential(credential);
           })
           .then(credData => {
-            console.log(credData);
             Actions.account({ type: 'reset' });
           })
           .catch(error => {

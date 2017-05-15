@@ -102,7 +102,6 @@ export default class Database {
 
   static getUserPoints(userUID) {
     let ref = `user/${userUID}/points`;
-    console.log(userUID);
     return firebase.database().ref(ref).once('value');
   }
 
