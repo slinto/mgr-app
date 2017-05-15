@@ -24,41 +24,35 @@ export default class Profile extends Component {
       uid: null,
       user: null,
       userPoints: {
-        explorer: -1,
-        contributor: -1
+        explorer: 0,
+        contributor: 0
       }
     };
-
-    this.logout = this.logout.bind(this);
   }
 
-  async componentDidMount() {
-    try {
-      let user = await firebase.auth().currentUser;
-      let userPoints;
+  componentDidMount() {
+    let user = firebase.auth().currentUser;
+    let userPoints;
 
-      Database.getUserPoints(user.uid).then((snapshot) => {
-        userPoints = snapshot.val();
+    Database.getUserPoints(user.uid).then((snapshot) => {
+      userPoints = snapshot.val();
 
-        this.setState({
-          uid: user.uid,
-          user,
-          userPoints
-        });
+      this.setState({
+        uid: user.uid,
+        user,
+        userPoints
       });
-    } catch (error) {
-      console.log(error);
-    }
+    });
   }
 
-  async logout() {
+  logout = () => {
     try {
-      await firebase.auth().signOut();
+      firebase.auth().signOut();
       Actions.auth();
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   goToFeedback = () => {
     Actions.feedback({ user: this.state.user, emailTitle: 'User feedback', msg: 'Write your message here...' });
@@ -128,29 +122,33 @@ export default class Profile extends Component {
 
           <Text style={styles.divider}>STATS</Text>
 
-          <ListItem
-            title="Explorer"
-            rightTitle={
-              this.state.userPoints.explorer.toString()
-              + this.getPointTitle(this.state.userPoints.explorer)
-            }
-            hideChevron={true}
-            containerStyle={styles.listItem}
-            titleStyle={styles.listItemTitle}
-            rightTitleStyle={styles.listItemRightTitle}
-          />
+          { this.state.user &&
+          <View>
+            <ListItem
+              title="Explorer"
+              rightTitle={
+                this.state.userPoints.explorer.toString()
+                + this.getPointTitle(this.state.userPoints.explorer)
+              }
+              hideChevron={true}
+              containerStyle={styles.listItem}
+              titleStyle={styles.listItemTitle}
+              rightTitleStyle={styles.listItemRightTitle}
+            />
 
-          <ListItem
-            title="Contributor"
-            rightTitle={
-              this.state.userPoints.contributor.toString()
-              + this.getPointTitle(this.state.userPoints.contributor)
-            }
-            hideChevron={true}
-            containerStyle={styles.listItem}
-            titleStyle={styles.listItemTitle}
-            rightTitleStyle={styles.listItemRightTitle}
-          />
+            <ListItem
+              title="Contributor"
+              rightTitle={
+                this.state.userPoints.contributor.toString()
+                + this.getPointTitle(this.state.userPoints.contributor)
+              }
+              hideChevron={true}
+              containerStyle={styles.listItem}
+              titleStyle={styles.listItemTitle}
+              rightTitleStyle={styles.listItemRightTitle}
+            />
+          </View>
+          }
 
 
           <ListItem
