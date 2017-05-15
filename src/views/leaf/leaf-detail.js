@@ -8,7 +8,6 @@ import {
   ScrollView
 } from 'react-native';
 import * as firebase from 'firebase';
-import { Actions } from 'react-native-router-flux';
 import Database from '../../firebase/database';
 import LeafDetailItem from '../../components/leaf-detail-item';
 import Gallery from '../../components/gallery';
@@ -66,28 +65,18 @@ export default class LeafDetail extends Component {
     }
   }
 
-  handleScroll = (event) => {
-    if (this.state.loaded) {
-      if (event.nativeEvent.contentOffset.y > 100) {
-        Actions.refresh({ title: this.state.tree.latinName });
-      } else {
-        Actions.refresh({ title: '' });
-      }
-    }
-  };
-
   render() {
     return (
-      <ScrollView style={styles.container}
-        // onScroll={this.handleScroll}
-        // scrollEventThrottle={8}
-      >
+      <ScrollView style={styles.container}>
         { this.state.loaded &&
         <View style={styles.innerContainer}>
 
           <Image
+            key={this.state.tree.id}
             style={[styles.headerImage]}
-            source={{ uri: (this.state.leafPhotos) ? this.state.leafPhotos[0].url : '' }}
+            source={{
+              uri: (this.state.leafPhotos) ? this.state.leafPhotos[0].url : ''
+            }}
             onLoadEnd={() => {
               this.setState({ headerIsLoading: false });
             }}>
@@ -96,7 +85,7 @@ export default class LeafDetail extends Component {
                                  size="large"
                                  animating={this.state.headerIsLoading}/>
               { !this.state.headerIsLoading &&
-                <Text style={styles.headerText}>{this.state.tree.latinName}</Text>
+              <Text style={styles.headerText}>{this.state.tree.latinName}</Text>
               }
             </View>
           </Image>
@@ -135,10 +124,8 @@ export default class LeafDetail extends Component {
           <Gallery title="TREE PHOTOS" photos={this.state.tree.treePhotos}/>
         </View>
         }
-
       </ScrollView>
-    )
-      ;
+    );
   }
 }
 
