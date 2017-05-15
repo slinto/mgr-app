@@ -46,7 +46,7 @@ export default class LeafList extends Component {
   }
 
   goToDetail(leaf) {
-    Actions.detail({ leaf: leaf, title: leaf.name });
+    Actions.detail({ leaf: leaf, title: '' });
   }
 
   render() {
@@ -55,7 +55,7 @@ export default class LeafList extends Component {
         let leaf = this.state.leafs[key];
         return (
           <LeafItem key={leaf.id} data={leaf} onPress={() => {
-            this.goToDetail(leaf)
+            this.goToDetail(leaf);
           }}/>
         );
       }
