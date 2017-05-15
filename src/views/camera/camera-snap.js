@@ -23,7 +23,6 @@ export default class CameraSnap extends Component {
       },
       isInfoTextVisible: true
     };
-    this.camera;
 
     this.takePicture = this.takePicture.bind(this);
     this.goBack = this.goBack.bind(this);
@@ -100,8 +99,8 @@ export default class CameraSnap extends Component {
           }}
           captureTarget={Camera.constants.CaptureTarget.temp}
           flashMode={this.state.camera.flashMode}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
+          aspect={Camera.constants.Aspect.fill}
+          style={styles.preview}>
 
           <View style={styles.controlsTopWrapper}>
             <TouchableOpacity
@@ -139,7 +138,7 @@ export default class CameraSnap extends Component {
             >
               <Icon
                 style={styles.galleryIcon}
-                name='perm-media'
+                name="perm-media"
               />
             </TouchableOpacity>
           </View>
@@ -151,7 +150,8 @@ export default class CameraSnap extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Colors.darkActive
   },
 
   preview: {

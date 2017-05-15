@@ -16,8 +16,18 @@ export default class TabIcon extends React.Component {
       return 'user';
     } else if (this.props.name === 'camera') {
       return 'camera';
+    } else if (this.props.name === 'contributor') {
+      return 'plus';
     }
     return '';
+  }
+
+  getIconColor() {
+    if (this.props.name === 'contributor') {
+      return Colors.helpMain;
+    } else {
+      return this.props.selected ? Colors.greenMain : Colors.greyMain;
+    }
   }
 
   render() {
@@ -25,10 +35,10 @@ export default class TabIcon extends React.Component {
       <View>
         <Icon
           name={this.getIconName()}
-          style={[styles.icon, { color: this.props.selected ? Colors.greenMain : Colors.greyMain }]}
+          style={[styles.icon, { color: this.getIconColor() }]}
         />
         <Text
-          style={[styles.text, { color: this.props.selected ? Colors.greenMain : Colors.greyMain }]}
+          style={[styles.text, { color: this.getIconColor() }]}
         >
           {this.props.title}
         </Text>

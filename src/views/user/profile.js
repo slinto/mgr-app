@@ -11,6 +11,7 @@ import { Actions } from 'react-native-router-flux';
 import { ListItem } from 'react-native-elements';
 import ReactNativeI18n from 'react-native-i18n';
 import Colors from '../../config/colors';
+import Database from '../../firebase/database';
 
 const deviceLocale = ReactNativeI18n.currentLocale();
 
@@ -21,7 +22,11 @@ export default class Profile extends Component {
 
     this.state = {
       uid: null,
-      user: null
+      user: null,
+      userPoints: {
+        explorer: -1,
+        contributor: -1
+      }
     };
 
     this.logout = this.logout.bind(this);
@@ -30,10 +35,16 @@ export default class Profile extends Component {
   async componentDidMount() {
     try {
       let user = await firebase.auth().currentUser;
+      let userPoints;
 
-      this.setState({
-        uid: user.uid,
-        user: user
+      Database.getUserPoints(user.uid).then((snapshot) => {
+        userPoints = snapshot.val();
+
+        this.setState({
+          uid: user.uid,
+          user,
+          userPoints
+        });
       });
     } catch (error) {
       console.log(error);
@@ -55,6 +66,10 @@ export default class Profile extends Component {
 
   goToBug = () => {
     Actions.bug({ user: this.state.user, emailTitle: 'Bug report', msg: 'Write your bug here...' });
+  };
+
+  getPointTitle = (val) => {
+    return (val > 1) ? ' points' : ' point';
   };
 
   render() {
@@ -102,14 +117,41 @@ export default class Profile extends Component {
           {/*<Text style={styles.divider}>APPLICATION</Text>*/}
 
           {/*<ListItem*/}
-            {/*title="Language"*/}
-            {/*rightTitle={deviceLocale}*/}
-            {/*chevronColor={Colors.greenMain}*/}
-            {/*containerStyle={[styles.listItem, styles.rightWithChevron]}*/}
-            {/*titleStyle={styles.listItemTitle}*/}
-            {/*underlayColor={Colors.darkActive}*/}
-            {/*rightTitleStyle={styles.listItemRightTitle}*/}
+          {/*title="Language"*/}
+          {/*rightTitle={deviceLocale}*/}
+          {/*chevronColor={Colors.greenMain}*/}
+          {/*containerStyle={[styles.listItem, styles.rightWithChevron]}*/}
+          {/*titleStyle={styles.listItemTitle}*/}
+          {/*underlayColor={Colors.darkActive}*/}
+          {/*rightTitleStyle={styles.listItemRightTitle}*/}
           {/*/>*/}
+
+          <Text style={styles.divider}>STATS</Text>
+
+          <ListItem
+            title="Explorer"
+            rightTitle={
+              this.state.userPoints.explorer.toString()
+              + this.getPointTitle(this.state.userPoints.explorer)
+            }
+            hideChevron={true}
+            containerStyle={styles.listItem}
+            titleStyle={styles.listItemTitle}
+            rightTitleStyle={styles.listItemRightTitle}
+          />
+
+          <ListItem
+            title="Contributor"
+            rightTitle={
+              this.state.userPoints.contributor.toString()
+              + this.getPointTitle(this.state.userPoints.contributor)
+            }
+            hideChevron={true}
+            containerStyle={styles.listItem}
+            titleStyle={styles.listItemTitle}
+            rightTitleStyle={styles.listItemRightTitle}
+          />
+
 
           <ListItem
             title="Leave a feedback"

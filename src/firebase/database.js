@@ -5,9 +5,9 @@ import { Actions } from 'react-native-router-flux';
 export default class Database {
 
   static getUserLeafList(userId, callback) {
-    const path = `/user/${userId}/trees`;
+    const ref = `/user/${userId}/trees`;
 
-    firebase.database().ref(path).orderByChild('updated').on('value', (snapshot) => {
+    firebase.database().ref(ref).orderByChild('updated').on('value', (snapshot) => {
       let leafs = [];
       snapshot.forEach((child) => {
         leafs.unshift(child.val());
@@ -18,26 +18,26 @@ export default class Database {
   }
 
   static getTreeDetail(leafId, callback) {
-    const path = `/tree/${leafId}`;
+    const ref = `/tree/${leafId}`;
 
-    firebase.database().ref(path).on('value', (snapshot) => {
+    firebase.database().ref(ref).on('value', (snapshot) => {
       callback(snapshot.val());
     });
   }
 
   static getTreeList(callback) {
-    const path = '/tree';
+    const ref = '/tree';
 
-    firebase.database().ref(path).on('value', (snapshot) => {
+    firebase.database().ref(ref).on('value', (snapshot) => {
       callback(snapshot);
     });
   }
 
   static saveAndGoToLeafDetail(user, photoURL, leaf) {
-    let userLeafRef = `user/${user.uid}/trees/${leaf.id}`;
+    let ref = `user/${user.uid}/trees/${leaf.id}`;
 
     // TODO: pridat GPS
-    firebase.database().ref(userLeafRef).once('value').then((snapshot) => {
+    firebase.database().ref(ref).once('value').then((snapshot) => {
       let leafData = snapshot.val();
       let date = new Date();
 
@@ -58,7 +58,7 @@ export default class Database {
       leafData.photos.unshift(newPhoto);
       leafData.updated = date.toString();
 
-      firebase.database().ref(userLeafRef).set(leafData).then(() => {
+      firebase.database().ref(ref).set(leafData).then(() => {
         Database.getTreeDetail(leaf.id, (tree) => {
           Actions.detail({ tree: tree, leaf: leafData, title: tree.latinName });
         });
@@ -78,4 +78,32 @@ export default class Database {
 
     firebase.database().ref(ref).push().set(log);
   }
+
+  static saveUnknownPhotoUrl(userUID, url) {
+    let ref = 'unknownPhoto';
+
+    let photo = {
+      date: new Date().toString(),
+      user: userUID,
+      url
+    };
+
+    firebase.database().ref(ref).push().set(photo);
+  }
+
+  static increaseUserPoint(userUID, pointType) {
+    let ref = `user/${userUID}/points/${pointType}`;
+
+    firebase.database().ref(ref).once('value').then((snapshot) => {
+      let val = snapshot.val() + 1;
+      firebase.database().ref(ref).set(val);
+    });
+  }
+
+  static getUserPoints(userUID) {
+    let ref = `user/${userUID}/points`;
+    console.log(userUID);
+    return firebase.database().ref(ref).once('value');
+  }
+
 }

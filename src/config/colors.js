@@ -7,5 +7,6 @@ export default {
   greenMain: '#a3eeae',
   greenSub: '#2DDE98',
   whiteMain: '#fff',
-  warning: '#2DDE98'
+  warning: '#2DDE98',
+  helpMain: '#FFE1A8'
 };

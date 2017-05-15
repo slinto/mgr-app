@@ -11,6 +11,7 @@ import I18n from 'react-native-i18n';
 import Colors from './config/colors';
 import Firebase from './firebase/firebase';
 import TabIcon from './components/tab-icon';
+import ErrorView from './views/error';
 import Profile from './views/user/profile';
 import LeafList from './views/leaf/leaf-list';
 import LeafDetail from './views/leaf/leaf-detail';
@@ -25,7 +26,6 @@ import Form from './views/user/form';
 import CameraSnap from './views/camera/camera-snap';
 import CameraPreview from './views/camera/camera-preview';
 import CameraWaiting from './views/camera/camera-waiting';
-import ErrorView from './views/error';
 
 
 export default class LeafMgrApp extends Component {
@@ -46,7 +46,6 @@ export default class LeafMgrApp extends Component {
   getInitialView() {
     firebase.auth().onAuthStateChanged((user) => {
       const initialView = user ? 'account' : 'auth';
-
       this.setState({
         userLoaded: true,
         initialView
@@ -90,12 +89,11 @@ export default class LeafMgrApp extends Component {
           <Scene
             key="account"
             initial={this.state.initialView === 'account'}
-            tabs
             tabBarStyle={styles.tabBarStyle}
+            tabs
           >
             <Scene
               key="leaf"
-              initial
               title="Herbarium"
               icon={TabIcon}
               navigationBarStyle={styles.navBar}
@@ -103,13 +101,14 @@ export default class LeafMgrApp extends Component {
               backButtonTextStyle={styles.navText}
               barButtonIconStyle={styles.tintColor}
               rightButtonStyle={styles.navText}
+              initial
             >
               <Scene
                 key="list"
                 component={LeafList}
                 title="My Herbarium"
-                initial
                 style={{ backgroundColor: Colors.darkMain }}
+                initial
               />
               <Scene
                 key="detail"
@@ -121,8 +120,8 @@ export default class LeafMgrApp extends Component {
                 key="leafPhoto"
                 component={LeafPhoto}
                 title="Leaf Photo"
-                hideTabBar
                 style={{ backgroundColor: Colors.darkMain }}
+                hideTabBar
               />
               <Scene
                 key="error"
@@ -146,10 +145,10 @@ export default class LeafMgrApp extends Component {
                 key="cameraSnap"
                 component={CameraSnap}
                 title="CameraSnap"
-                initial
                 style={{ backgroundColor: Colors.darkMain }}
                 hideNavBar
                 hideTabBar
+                initial
               />
               <Scene
                 key="cameraPreview"
@@ -200,6 +199,7 @@ export default class LeafMgrApp extends Component {
                 component={Profile}
                 title="Profile"
                 style={{ backgroundColor: Colors.darkMain }}
+                initial
               />
               <Scene
                 key="feedback"

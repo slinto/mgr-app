@@ -33,15 +33,15 @@ export default class CameraWaiting extends Component {
         this.setState({ uploadedURL: url });
         this.getPrediction(url);
       })
-      .catch(error => {
-        console.log(error);
+      .catch((error) => {
+        Actions.error({ errorMessage: 'Error while uploading.' });
       });
   }
 
   getPrediction(url) {
     RNFetchBlob.fetch(
       'POST',
-      `${Api.tensorflow.test}/photo-prediction`,
+      `${Api.tensorflow.test}/photo-prediction-mock-3`,
       {},
       [{
         name: 'image_data',
@@ -49,9 +49,6 @@ export default class CameraWaiting extends Component {
       }, {
         name: 'upload_preset', data: 'jrkbliez'
       }])
-      .uploadProgress({ interval: 200 }, (written, total) => {
-        console.log('uploaded', written / total);
-      })
       .then((res) => res.json())
       .then((res) => {
         this.setState({ processing: false });
@@ -59,7 +56,6 @@ export default class CameraWaiting extends Component {
         this.analyzePredictionData(res);
       })
       .catch((error) => {
-        console.log('Error handle:', error);
         Actions.error({ errorMessage: 'Error while uploading.' });
       });
   }
@@ -70,21 +66,21 @@ export default class CameraWaiting extends Component {
 
   analyzePredictionData(data) {
     const validResults = [];
-    console.log('TF_ApiResults: ', data.results);
 
     data.results.forEach(item => {
       if (item.value >= 0.80) {
         validResults.push(item);
       }
     });
-    console.log('TF_ValidResults: ', validResults);
 
     if (validResults.length === 1) {
       Database.saveAndGoToLeafDetail(this.state.user, this.state.uploadedURL, validResults[0]);
+      Database.increaseUserPoint(this.state.user.uid, 'explorer');
     } else if (validResults.length > 1) {
       Actions.leafSelection({ results: validResults, userLeafPhoto: this.state.uploadedURL });
+      Database.increaseUserPoint(this.state.user.uid, 'explorer');
     } else {
-      Actions.leafUnknown();
+      Actions.leafUnknown({ userLeafPhoto: this.state.uploadedURL, userUID: this.state.user.uid });
     }
   }
 

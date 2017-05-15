@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
+import Database from '../../firebase/database';
 import Colors from '../../config/colors';
 
 
@@ -15,6 +16,11 @@ export default class LeafUnknown extends Component {
     super(props);
 
     this.state = {};
+  }
+
+  componentDidMount() {
+    Database.saveUnknownPhotoUrl(this.props.userUID, this.props.userLeafPhoto);
+    Database.increaseUserPoint(this.props.userUID, 'contributor');
   }
 
   goToHome() {
@@ -27,6 +33,10 @@ export default class LeafUnknown extends Component {
         <View style={styles.textWrapper}>
           <Text style={styles.h1}>Sorry, we can't recognize your leaf.</Text>
           <Text style={styles.h2}>You can try analyze another photo or leaf.</Text>
+
+          <Text style={styles.h3}>🎉 Your CONTRIBUTOR point is +1 🎉</Text>
+          <Text style={styles.h4}>When You analyze unknown leaf, You help us to build bigger database. Your CONTRIBUTOR
+            points is increasing with every unknown photo.</Text>
 
           <Button
             title="Go to my herbarium"
@@ -43,7 +53,7 @@ export default class LeafUnknown extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#070709'
+    backgroundColor: Colors.darkMain
   },
 
   textWrapper: {
@@ -59,7 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginTop: 10,
     marginBottom: 5,
-    color: '#fff',
+    color: Colors.whiteMain,
     textAlign: 'center'
   },
 
@@ -67,7 +77,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 15,
     fontStyle: 'italic',
-    color: '#fff',
+    color: Colors.whiteMain,
+    textAlign: 'center'
+  },
+
+  h3: {
+    fontSize: 14,
+    marginTop: 15,
+    marginBottom: 15,
+    color: Colors.greenMain,
+    textAlign: 'center'
+  },
+
+  h4: {
+    fontSize: 14,
+    marginTop: 15,
+    marginBottom: 30,
+    fontStyle: 'italic',
+    color: Colors.greenMain,
     textAlign: 'center'
   },
 
