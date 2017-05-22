@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Image,
   View,
   Text,
   StyleSheet,
@@ -29,31 +30,43 @@ export default class LeafUnknown extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.container}>
-        <View style={styles.textWrapper}>
-          <Text style={styles.h1}>Sorry, we can't recognize your leaf.</Text>
-          <Text style={styles.h2}>You can try analyze another photo or leaf.</Text>
+      <Image
+        source={require('../../../assets/img/background.png')}
+        style={styles.background}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.container}>
+          <View style={styles.textWrapper}>
+            <Text style={styles.h1}>Sorry, we can't recognize your leaf.</Text>
+            <Text style={styles.h2}>You can try analyze another photo or leaf.</Text>
 
-          <Text style={styles.h3}>🎉 Your CONTRIBUTOR point is +1 🎉</Text>
-          <Text style={styles.h4}>When You analyze unknown leaf, You help us to build bigger database. Your CONTRIBUTOR
-            points is increasing with every unknown photo.</Text>
+            <Text style={styles.h3}>🎉 Your CONTRIBUTOR point is +1 🎉</Text>
+            <Text style={styles.h4}>When You analyze unknown leaf, You help us to build bigger database. Your
+              CONTRIBUTOR
+              points is increasing with every unknown photo.</Text>
 
-          <Button
-            title="Go to my herbarium"
-            onPress={this.goToHome}
-            buttonStyle={styles.button}
-            backgroundColor={Colors.greenMain}
-            color={Colors.darkMain}
-          />
-        </View>
-      </ScrollView>
+            <Button
+              title="Go to my herbarium"
+              onPress={this.goToHome}
+              buttonStyle={styles.button}
+              backgroundColor={Colors.greenMain}
+              color={Colors.darkMain}
+            />
+          </View>
+        </ScrollView>
+      </Image>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
   container: {
-    backgroundColor: Colors.darkMain
+    backgroundColor: 'transparent'
   },
 
   textWrapper: {

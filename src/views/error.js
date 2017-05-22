@@ -1,7 +1,7 @@
 import {
+  Image,
   Text,
-  StyleSheet,
-  View
+  StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
 import Colors from '../config/colors';
@@ -13,10 +13,12 @@ export default class ErrorView extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Image
+        source={require('../../assets/img/background.png')}
+        style={styles.container}>
         <Text style={styles.h1}>Whooops 😞</Text>
         <Text style={styles.h2}>{ this.props.errorMessage }</Text>
-      </View>
+      </Image>
     );
   }
 }
@@ -26,8 +28,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.darkMain
+    alignItems: 'center'
   },
 
   h1: {
