@@ -1,6 +1,6 @@
 {
-  "name": "LeafProjectApp",
-  "version": "1.0.0-alpha.5",
+  "name": "Botanista",
+  "version": "1.0.0-alpha.6",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
