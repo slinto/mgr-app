@@ -57,6 +57,7 @@
 		F84C199D1EAB97E800E581BE /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F84C19991EAB97E800E581BE /* FBSDKCoreKit.framework */; };
 		F84C199E1EAB97E800E581BE /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F84C199A1EAB97E800E581BE /* FBSDKLoginKit.framework */; };
 		F84C199F1EAB97E800E581BE /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F84C199B1EAB97E800E581BE /* FBSDKShareKit.framework */; };
+		F8D1040E1ED420F200BBE130 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8D1040D1ED420F200BBE130 /* Images-2.xcassets */; };
 		FDB0DC01D33F46F19AE79A8D /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D085D1948A64F41B89CA030 /* libRNVectorIcons.a */; };
 /* End PBXBuildFile section */
 
@@ -378,6 +379,7 @@
 		F84C19991EAB97E800E581BE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		F84C199A1EAB97E800E581BE /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		F84C199B1EAB97E800E581BE /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		F8D1040D1ED420F200BBE130 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "LeafProjectApp/Images-2.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -534,6 +536,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				F8D1040D1ED420F200BBE130 /* Images-2.xcassets */,
 			);
 			name = LeafProjectApp;
 			sourceTree = "<group>";
@@ -1193,6 +1196,7 @@
 				C5C4D3C52638440EA2738737 /* FontAwesome.ttf in Resources */,
 				CB341E844F7A4ED4BC4231FB /* Foundation.ttf in Resources */,
 				90BBB0895636447EA2EF022B /* MaterialIcons.ttf in Resources */,
+				F8D1040E1ED420F200BBE130 /* Images-2.xcassets in Resources */,
 				7B2E7CDA81364885B8E8F4F4 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1407,7 +1411,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1435,6 +1439,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sk.slinto.LeafProjectApp;
 				PRODUCT_NAME = LeafProjectApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1443,7 +1448,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1470,6 +1475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sk.slinto.LeafProjectApp;
 				PRODUCT_NAME = LeafProjectApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

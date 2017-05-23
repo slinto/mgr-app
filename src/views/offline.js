@@ -1,7 +1,9 @@
 import {
+  Dimensions,
   Image,
   Text,
-  StyleSheet
+  StyleSheet,
+  View
 } from 'react-native';
 import React, { Component } from 'react';
 import Colors from '../config/colors';
@@ -28,7 +30,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    width: Dimensions.get('window').width
   },
 
   h1: {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Dimensions,
   Image,
   View,
   Text,
@@ -62,7 +63,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    width: Dimensions.get('window').width
   },
 
   container: {

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {
-  ActivityIndicator,
   Dimensions,
-  Image,
   View,
   StyleSheet
 } from 'react-native';

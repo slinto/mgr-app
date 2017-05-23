@@ -1,5 +1,5 @@
 import {
-  Text,
+  Dimensions,
   View,
   StyleSheet,
   Image
